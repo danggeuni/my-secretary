@@ -1,0 +1,110 @@
+/* 상단 메뉴 기본 CSS */
+.top_bar {
+  box-sizing: border-box;
+  height: 44px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid transparent;
+  background-color: black;
+  transition: height 0.2s ease-in;
+  padding-left: 18px;
+  padding-right: 16px;
+  font-size: 13px;
+}
+
+.left_control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.left_menu_toggle {
+  margin-left: -2px;
+  margin-right: 4px;
+}
+
+.top_bar_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 3px;
+  color: #ffffff;
+  height: 28px;
+  min-width: 28px;
+}
+
+/* 기존 버튼 CSS 제거 */
+button {
+  font-family: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick_find {
+  width: 218px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 6px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 돋보기 아이콘 */
+.search_icon {
+  position: absolute;
+  color: #ffffff;
+  cursor: text;
+  left: 5px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.search_wrapper {
+  width: 100%;
+}
+
+.quick_find:hover > .search_icon {
+  color: black;
+}
+
+/* 상단 메뉴 좌측 검색창 */
+.search_input {
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  width: 100%;
+  box-sizing: border-box;
+  outline: 0;
+  color: #ffffff;
+  padding: 5px 0 5px 34px;
+  background: hsla(0, 0%, 100%, 0.2);
+  transition: width 0.2s ease-in, background 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search_input::placeholder {
+  color: #ffffff;
+}
+
+/* hover시 색상 변경 */
+.search_input:hover {
+  background-color: #ffffff;
+  color: black;
+}
+
+.search_input:hover::placeholder {
+  color: #202020;
+}
+
+.search_input:focus {
+  width: 450px;
+}
