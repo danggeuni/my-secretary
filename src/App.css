@@ -134,3 +134,16 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 13px;
 }
+
+.app_holder {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
