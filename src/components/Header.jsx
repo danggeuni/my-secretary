@@ -3,18 +3,15 @@
 import styles from "./Header.module.css";
 import cx from "clsx";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-export default function Header() {
-  const [search, setSearch] = useState("");
-  const [menuToggle, setMenuToggle] = useState(false);
+import { btnClickContext, stateContext } from "../App";
 
-  // 클릭 시 메뉴 토글 state를 변경
-  const btnClick = () => {
-    setMenuToggle(!menuToggle);
-    console.log("클림됨");
-  };
+export default function Header() {
+  let myValue = useContext(btnClickContext);
+
+  const [search, setSearch] = useState("");
 
   return (
     <header className={styles.top_bar}>
@@ -25,12 +22,9 @@ export default function Header() {
           <div>
             {/* 전체메뉴 버튼 및 아이콘 */}
             <button
-              className={cx(
-                `${styles.left_menu_toggle} ${styles.top_bar_btn}`,
-                { [styles.menu_click]: menuToggle }
-              )}
+              className={cx(`${styles.left_menu_toggle} ${styles.top_bar_btn}`)}
               type={"button"}
-              onClick={btnClick}
+              onClick={myValue}
             >
               <svg
                 className={styles.menu_icon}
