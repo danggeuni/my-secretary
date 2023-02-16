@@ -6,7 +6,7 @@ import cx from "clsx";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { btnClickContext, stateContext } from "../App";
+import { btnClickContext } from "../App";
 
 export default function Header() {
   let myValue = useContext(btnClickContext);
