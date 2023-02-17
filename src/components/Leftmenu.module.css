@@ -45,7 +45,6 @@
   list-style: none;
   margin-block-start: 0.6em;
   margin-block-end: 1em;
-  padding-inline-start: 35px;
 }
 
 .filter_inbox {
@@ -81,8 +80,8 @@
   max-width: 100%;
   border-radius: 5px;
   display: flex;
-  align-items: center;
-  flex-direction: row;
+
+  flex-direction: column;
   flex-grow: 1;
 
   box-sizing: border-box;
@@ -94,4 +93,42 @@
   vertical-align: baseline;
   background-color: transparent;
   list-style: none;
+}
+
+.item_link {
+  width: 88%;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 3px;
+  height: 34px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.item_link:hover {
+  background-color: #ececec;
+}
+
+.single_item_content {
+  width: 24px;
+  height: 24px;
+}
+
+.item_today_svg {
+  color: #058527;
+  margin-right: 5px;
+}
+
+.item_next_svg {
+  color: #692fc2;
+}
+
+.single_item_align {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
