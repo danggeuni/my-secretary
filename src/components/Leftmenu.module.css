@@ -14,13 +14,13 @@
   -ms-user-select: none !important;
   user-select: none !important;
   transform: translateX(-300px);
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn_toggle {
   display: block;
   transform: translateX(0px);
-  transition: all 0.3s ease-in;
+  transition: all 0.21s ease-in;
 }
 
 .left_menu_inner {
@@ -57,7 +57,6 @@
 }
 
 .sidebar_list_item {
-  --menu-button-width: 24px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -66,33 +65,20 @@
   border: 0;
   margin: 0;
   padding: 0;
-  font-size: 14px;
+
   font-family: inherit;
   vertical-align: baseline;
   background-color: transparent;
   list-style: none;
-
-  text-align: -webkit-match-parent;
 }
 
 .single_item_wrapper {
-  padding-right: 2px;
-  max-width: 100%;
   border-radius: 5px;
   display: flex;
-
   flex-direction: column;
   flex-grow: 1;
-
   box-sizing: border-box;
-  border: 0;
-  margin: 0;
-  padding: 0;
   font-size: 14px;
-  font-family: inherit;
-  vertical-align: baseline;
-  background-color: transparent;
-  list-style: none;
 }
 
 .item_link {
@@ -104,7 +90,7 @@
   justify-content: space-around;
   border-radius: 3px;
   height: 34px;
-  padding-left: 10px;
+  padding-left: 5px;
   padding-right: 10px;
   box-sizing: border-box;
 }
@@ -118,6 +104,13 @@
   height: 24px;
 }
 
+.single_item_align {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* 아이콘 색상 및 마진 */
 .item_today_svg {
   color: #058527;
   margin-right: 5px;
@@ -125,10 +118,42 @@
 
 .item_next_svg {
   color: #692fc2;
+  margin-right: 5px;
 }
 
-.single_item_align {
-  width: 100%;
+.item_quantity {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.project_item_wrapper {
+  width: 88%;
+  height: 34px;
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  border: 5px;
+
+  padding-left: 7px;
+  margin-top: 80px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.56);
+}
+
+.project_item_wrapper:hover {
+  background-color: #ececec;
+}
+
+.project_icon {
+  width: 15px;
+  height: 15px;
+  padding-top: 7px;
+  padding-right: 5px;
+  padding-bottom: 3px;
+  padding-left: 5px;
 }
