@@ -4,18 +4,17 @@ import styles from "./Leftmenu.module.css";
 import cx from "clsx";
 
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { stateContext } from "../App";
+import { useGlobalContext } from "../context";
 
 export default function Leftmenu() {
-  const btnState = useContext(stateContext);
+  const { isClick } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
   const date = new Date();
   const day = date.getDate();
 
   return (
-    <div className={cx(styles.left_menu, { [styles.btn_toggle]: btnState })}>
+    <div className={cx(styles.left_menu, { [styles.btn_toggle]: isClick })}>
       <div className={styles.left_menu_inner} role={"navigation"}>
         <div className={styles.sidebar_list_item}>
           <div className={styles.single_item_wrapper}>

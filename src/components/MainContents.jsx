@@ -3,13 +3,12 @@
 import styles from "./MainContents.module.css";
 import cx from "clsx";
 
-import { useContext } from "react";
-import { stateContext, taskAddContext, taskAddStateContext } from "../App";
+import { useGlobalContext } from "../context";
 
 export default function MainContents() {
-  const btnState = useContext(stateContext);
-  const taskAddBtn = useContext(taskAddContext);
-  const taskAddState = useContext(taskAddStateContext);
+  const { isClick, taskAdd, taskAddClick, setTodoForm } = useGlobalContext();
+  // const [date, setDate] = useState(new Date());
+  // const { id, done, todo, desc, priority, deadline } = todoForm;
 
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
@@ -21,9 +20,16 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
+  const onChange = (e) => {
+    setTodoForm((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div
-      className={cx(styles.main_contents, { [styles.btn_toggle]: !btnState })}
+      className={cx(styles.main_contents, { [styles.btn_toggle]: !isClick })}
     >
       <div className={styles.editor}>
         <div className={styles.header}>
@@ -58,7 +64,7 @@ export default function MainContents() {
           <div className={styles.view_content}>
             <div className={styles.list_hold}>
               {/* 작업 추가 버튼, 클릭 시 .empty_state_holder: display none */}
-              <button className={styles.plus_add_button} onClick={taskAddBtn}>
+              <button className={styles.plus_add_button} onClick={taskAddClick}>
                 <span className={styles.icon_add}>
                   <svg width="13" height="13">
                     <path
@@ -73,7 +79,7 @@ export default function MainContents() {
             </div>
             <div
               className={cx(styles.empty_state_holder, {
-                [styles.task_btn_click]: taskAddState,
+                [styles.task_btn_click]: taskAdd,
               })}
             >
               <div className={styles.img_box}>
@@ -82,6 +88,7 @@ export default function MainContents() {
                   alt={"대충 고양이가 커피 마시는 짤"}
                 />
               </div>
+
               <div className={styles.empty_state}>
                 <div className={styles.empty_state_message}>
                   축하합니다! 오늘 작업을 모두 마쳤습니다!
@@ -102,10 +109,16 @@ export default function MainContents() {
                       <input
                         className={styles.task_editor_contents_name_input}
                         placeholder={"작업 이름"}
+                        name="todo"
+                        // value={todo}
+                        onChange={onChange}
                       ></input>
                       <input
                         className={styles.task_editor_contents_desc_input}
                         placeholder={"설명"}
+                        name="desc"
+                        // value={desc}
+                        onChange={onChange}
                       ></input>
                     </div>
                   </div>

@@ -3,13 +3,13 @@
 import styles from "./Header.module.css";
 import cx from "clsx";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import { btnClickContext } from "../App";
+import { useGlobalContext } from "../context";
 
 export default function Header() {
-  let myValue = useContext(btnClickContext);
+  const { btnClick } = useGlobalContext();
 
   const [search, setSearch] = useState("");
 
@@ -24,7 +24,7 @@ export default function Header() {
             <button
               className={cx(`${styles.left_menu_toggle} ${styles.top_bar_btn}`)}
               type={"button"}
-              onClick={myValue}
+              onClick={btnClick}
             >
               <svg
                 className={styles.menu_icon}
