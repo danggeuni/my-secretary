@@ -20,12 +20,12 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
-  const onChange = (e) => {
-    setTodoForm((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  // const onChange = (e) => {
+  //   setTodoForm((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }));
+  // };
 
   return (
     <div
@@ -111,19 +111,19 @@ export default function MainContents() {
                         placeholder={"작업 이름"}
                         name="todo"
                         // value={todo}
-                        onChange={onChange}
+                        // onChange={onChange}
                       ></input>
                       <input
                         className={styles.task_editor_contents_desc_input}
                         placeholder={"설명"}
                         name="desc"
                         // value={desc}
-                        onChange={onChange}
+                        // onChange={onChange}
                       ></input>
                     </div>
                   </div>
                 </div>
-                <div className={styles.task_editor_button_area}>
+                <div className={styles.task_editor_button_area} role={"button"}>
                   <div className={styles.seperate}>
                     <div className={styles.due_date}>
                       <svg
@@ -138,9 +138,56 @@ export default function MainContents() {
                           d="M12 2a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2h8zm0 1H4a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1zm-1.25 7a.75.75 0 110 1.5.75.75 0 010-1.5zm.75-5a.5.5 0 110 1h-7a.5.5 0 010-1h7z"
                         ></path>
                       </svg>
-                      <div>마감 날짜</div>
+                      <div className={styles.due_date_text}>오늘</div>
+                      <button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          className={styles.due_date_cancel_svg}
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M11.854 11.854a.5.5 0 000-.708L8.707 8l3.147-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708 0z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                    <div className={styles.due_date}>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={styles.due_date_priority_svg}
+                        data-icon-name="priority-icon"
+                        data-priority="4"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M2 3a.5.5 0 01.276-.447C3.025 2.179 4.096 2 5.5 2c.901 0 1.485.135 2.658.526C9.235 2.885 9.735 3 10.5 3c1.263 0 2.192-.155 2.776-.447A.5.5 0 0114 3v6.5a.5.5 0 01-.276.447c-.749.375-1.82.553-3.224.553-.901 0-1.485-.135-2.658-.526C6.765 9.615 6.265 9.5 5.5 9.5c-1.08 0-1.915.113-2.5.329V13.5a.5.5 0 01-1 0V3zm1 5.779v-5.45C3.585 3.113 4.42 3 5.5 3c.765 0 1.265.115 2.342.474C9.015 3.865 9.599 4 10.5 4c1.002 0 1.834-.09 2.5-.279v5.45c-.585.216-1.42.329-2.5.329-.765 0-1.265-.115-2.342-.474C6.985 8.635 6.401 8.5 5.5 8.5c-1.001 0-1.834.09-2.5.279z"
+                          fill="currentColor"
+                        ></path>
+                      </svg>
+                      <div className={styles.due_priority_text}>우선 순위</div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div className={styles.task_editor_footer}>
+                <div className={styles.task_button_wrapper}>
+                  <button className={styles.task_cancel_button}>
+                    <span>취소</span>
+                  </button>
+                  <button className={styles.task_add_button}>
+                    <span>작업 추가</span>
+                  </button>
                 </div>
               </div>
             </form>
