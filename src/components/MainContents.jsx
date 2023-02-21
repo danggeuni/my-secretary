@@ -4,9 +4,29 @@ import styles from "./MainContents.module.css";
 import cx from "clsx";
 
 import { useGlobalContext } from "../context";
+import { useEffect } from "react";
 
 export default function MainContents() {
-  const { isClick, taskAdd, taskAddClick, setTodoForm } = useGlobalContext();
+  const {
+    isClick,
+    taskAdd,
+    taskAddClick,
+    taskName,
+    setTaskName,
+    taskDesc,
+    setTaskDesc,
+    taskBtnActive,
+    setTaskBtnActive,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    if (taskName.length > 0) {
+      setTaskBtnActive(true);
+    } else {
+      setTaskBtnActive(false);
+    }
+  }, [taskName, taskBtnActive]);
+
   // const [date, setDate] = useState(new Date());
   // const { id, done, todo, desc, priority, deadline } = todoForm;
 
@@ -20,12 +40,21 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
-  // const onChange = (e) => {
-  //   setTodoForm((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  // 작업 취소 펑션
+  const handleTaskCancel = () => {
+    taskAddClick();
+    setTaskName("");
+    setTaskDesc("");
+  };
+
+  // 테스터기
+  // useEffect(() => {
+  //   console.log(taskDesc);
+  // }, [taskDesc]);
 
   return (
     <div
@@ -64,7 +93,12 @@ export default function MainContents() {
           <div className={styles.view_content}>
             <div className={styles.list_hold}>
               {/* 작업 추가 버튼, 클릭 시 .empty_state_holder: display none */}
-              <button className={styles.plus_add_button} onClick={taskAddClick}>
+              <button
+                className={cx(styles.plus_add_button, {
+                  [styles.task_btn_click]: taskAdd,
+                })}
+                onClick={taskAddClick}
+              >
                 <span className={styles.icon_add}>
                   <svg width="13" height="13">
                     <path
@@ -101,7 +135,12 @@ export default function MainContents() {
                 </div>
               </div>
             </div>
-            <form className={styles.task_editor}>
+            <form
+              className={cx(styles.task_editor, {
+                [styles.task_btn_click]: !taskAdd,
+              })}
+              onSubmit={handleSubmit}
+            >
               <div className={styles.task_editor_editing_area}>
                 <div className={styles.task_editor_input_fields}>
                   <div className={styles.task_editor_contents_field}>
@@ -109,6 +148,8 @@ export default function MainContents() {
                       <input
                         className={styles.task_editor_contents_name_input}
                         placeholder={"작업 이름"}
+                        value={taskName}
+                        onChange={(e) => setTaskName(e.target.value)}
                         name="todo"
                         // value={todo}
                         // onChange={onChange}
@@ -116,6 +157,8 @@ export default function MainContents() {
                       <input
                         className={styles.task_editor_contents_desc_input}
                         placeholder={"설명"}
+                        value={taskDesc}
+                        onChange={(e) => setTaskDesc(e.target.value)}
                         name="desc"
                         // value={desc}
                         // onChange={onChange}
@@ -182,10 +225,18 @@ export default function MainContents() {
               </div>
               <div className={styles.task_editor_footer}>
                 <div className={styles.task_button_wrapper}>
-                  <button className={styles.task_cancel_button}>
+                  {/* 작업 취소 버튼 */}
+                  <button
+                    className={styles.task_cancel_button}
+                    onClick={handleTaskCancel}
+                  >
                     <span>취소</span>
                   </button>
-                  <button className={styles.task_add_button}>
+                  <button
+                    className={cx(styles.task_add_button, {
+                      [styles.is_task_btn_active]: taskBtnActive,
+                    })}
+                  >
                     <span>작업 추가</span>
                   </button>
                 </div>

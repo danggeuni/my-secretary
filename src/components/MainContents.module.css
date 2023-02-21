@@ -6,7 +6,6 @@
   margin-left: 306px;
   min-height: 380px;
   background-color: #fff;
-  margin-left: 305px;
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.6, 1);
   position: relative;
   overflow-x: hidden;
@@ -33,20 +32,20 @@
   z-index: 2;
   padding-left: 55px;
   padding-right: 55px;
-  padding-top: 36px;
+  padding-top: 26px;
 }
 
 .view_header_content {
   display: flex;
   width: 100%;
   padding-bottom: 8px;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid #eeeeee;
   transition: border-bottom-color 0.3s;
   align-items: flex-start;
   word-break: break-word;
 
   max-width: 800px;
-  margin: 0 auto;
+  margin: 10px auto 5px auto;
 }
 
 .date_wrapper {
@@ -135,7 +134,6 @@
   padding: 0 0 8px;
   color: grey;
   font-size: 14px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .plus_add_button:hover {
@@ -235,6 +233,7 @@ img {
   background-color: #ffffff;
   border: 1px solid #eeeeee;
   border-radius: 10px;
+
   padding: 10px 10px 0;
   cursor: text;
 
@@ -245,6 +244,7 @@ img {
   max-height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
+
   margin-bottom: 10px;
 }
 
@@ -284,12 +284,21 @@ img {
   border: none;
   outline-style: none;
   font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.task_editor_contents_name_input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .task_editor_contents_desc_input {
   border: none;
   outline-style: none;
   font-size: 14px;
+}
+
+.task_editor_contents_desc_input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .task_editor_button_area {
@@ -341,6 +350,12 @@ img {
 
 .due_date_text {
   color: green;
+  font-size: 13px;
+}
+
+.due_priority_text {
+  font-size: 13px;
+  margin-left: 3px;
 }
 
 .due_date_cancel_svg {
@@ -375,6 +390,7 @@ img {
   margin-right: 5px;
 }
 
+/* 작업 추가 버튼 CSS */
 .task_add_button {
   width: 68px;
   height: 25px;
@@ -384,9 +400,17 @@ img {
   border-radius: 5px;
 
   font-weight: 600;
+
+  cursor: not-allowed;
 }
 
 .task_button_wrapper {
   display: flex;
   justify-content: flex-end;
+}
+
+/* 작업 추가 버튼 활성화 CSS */
+.is_task_btn_active {
+  background-color: tomato;
+  cursor: pointer;
 }

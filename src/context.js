@@ -1,4 +1,5 @@
-import { useState, useContext, createContext, useReducer } from "react";
+import { useState, useContext, createContext, useReducer, useRef } from "react";
+
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
@@ -43,11 +44,33 @@ const AppProvider = ({ children }) => {
   // 작업 추가 toggle state
   const [taskAdd, setTaskAdd] = useState(false);
 
-  const onCreate = () => {
-    dispatch({ type: "CREATE", data });
-  };
+  // 작업 이름 state
+  const [taskName, setTaskName] = useState("");
 
-  // const [todoForm, setTodoForm] = useState({
+  // 작업 설명 state
+  const [taskDesc, setTaskDesc] = useState("");
+
+  // 작업 추가 버튼 활성화  state
+  const [taskBtnActive, setTaskBtnActive] = useState(false);
+
+  // id 생성을 위한 useRef
+  const dataId = useRef(0);
+
+  // 리스트 생성 함수
+  const onCreate = (todo, desc, priority, date) => {
+    dispatch({
+      type: "CREATE",
+      data: {
+        id: dataId.current,
+        todo,
+        desc,
+        priority,
+        date,
+      },
+    });
+    dataId.current = dataId.current + 1;
+  };
+  // const [todoList, setTodoList] = useState({
   //   id: "",
   //   done: false,
   //   todo: "",
@@ -70,6 +93,7 @@ const AppProvider = ({ children }) => {
       value={{
         // dispatch 데이타
         data,
+        dispatch,
 
         // 좌측 메뉴 state
         isClick,
@@ -83,6 +107,21 @@ const AppProvider = ({ children }) => {
 
         // 작업 추가 클릭 함수
         taskAddClick,
+
+        // 작업 이름 state
+        taskName,
+        setTaskName,
+
+        // 작업 설명 state
+        taskDesc,
+        setTaskDesc,
+
+        // 리스트 생성 함수
+        onCreate,
+
+        // 작업 추가 버튼 활성화 state
+        taskBtnActive,
+        setTaskBtnActive,
       }}
     >
       {children}
