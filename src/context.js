@@ -56,8 +56,11 @@ const AppProvider = ({ children }) => {
   // id 생성을 위한 useRef
   const dataId = useRef(0);
 
+  // 우선 순위 wrapper state
+  const [showPriority, setShowPriority] = useState(false);
+
   // 리스트 생성 함수
-  const onCreate = (todo, desc, priority, date) => {
+  const addTodoList = (todo, desc, priority, date) => {
     dispatch({
       type: "CREATE",
       data: {
@@ -117,11 +120,15 @@ const AppProvider = ({ children }) => {
         setTaskDesc,
 
         // 리스트 생성 함수
-        onCreate,
+        addTodoList,
 
         // 작업 추가 버튼 활성화 state
         taskBtnActive,
         setTaskBtnActive,
+
+        // 우선 순위 state
+        showPriority,
+        setShowPriority,
       }}
     >
       {children}

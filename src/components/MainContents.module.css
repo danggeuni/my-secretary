@@ -313,7 +313,6 @@ img {
   vertical-align: baseline;
   background-color: transparent;
   list-style: none;
-  cursor: pointer;
 }
 
 .seperate {
@@ -346,6 +345,8 @@ img {
   padding-right: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
+
+  cursor: pointer;
 }
 
 .due_date_text {
@@ -356,6 +357,8 @@ img {
 .due_priority_text {
   font-size: 13px;
   margin-left: 3px;
+  position: relative;
+  cursor: pointer;
 }
 
 .due_date_cancel_svg {
@@ -413,4 +416,15 @@ img {
 .is_task_btn_active {
   background-color: tomato;
   cursor: pointer;
+}
+
+.priority_container {
+  width: 150px;
+  position: relative;
+
+  background-color: tomato;
+  border-radius: 5px;
+
+  z-index: 1;
+  display: none;
 }
