@@ -71,6 +71,7 @@ export default function MainContents() {
   return (
     <div
       className={cx(styles.main_contents, { [styles.btn_toggle]: !isClick })}
+      onClick={handleTaskWrapper}
     >
       <div className={styles.editor}>
         <div className={styles.header}>
