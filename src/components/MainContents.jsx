@@ -23,6 +23,7 @@ export default function MainContents() {
     data,
     showPriority,
     setShowPriority,
+    currentValue,
   } = useGlobalContext();
 
   // useEffect(() => {
@@ -48,7 +49,7 @@ export default function MainContents() {
 
   const addTask = (e) => {
     e.preventDefault();
-    addTodoList(taskName, taskDesc);
+    addTodoList(taskName, taskDesc, currentValue);
   };
 
   // 작업 취소 펑션
@@ -58,20 +59,19 @@ export default function MainContents() {
     setTaskDesc("");
   };
 
-  // 테스트 뻥션
+  // 우선순위 wrapper on/off
   const handleTaskWrapper = () => {
     setShowPriority(!showPriority);
   };
 
   // 테스터기;
   useEffect(() => {
-    console.log(showPriority);
-  }, [showPriority]);
+    console.log(data);
+  }, [data]);
 
   return (
     <div
       className={cx(styles.main_contents, { [styles.btn_toggle]: !isClick })}
-      onClick={handleTaskWrapper}
     >
       <div className={styles.editor}>
         <div className={styles.header}>
@@ -209,7 +209,10 @@ export default function MainContents() {
                         </svg>
                       </button>
                     </div>
-                    <div className={styles.due_date}>
+                    <div
+                      className={styles.due_date}
+                      onClick={handleTaskWrapper}
+                    >
                       <svg
                         width="16"
                         height="16"
@@ -225,12 +228,8 @@ export default function MainContents() {
                           fill="currentColor"
                         ></path>
                       </svg>
-                      <div
-                        className={styles.due_priority_text}
-                        role={"button"}
-                        onClick={handleTaskWrapper}
-                      >
-                        우선 순위
+                      <div className={styles.due_priority_text} role={"button"}>
+                        {currentValue}
                         {/* 우선순위 컨테이너 */}
                         <PriorityBox />
                       </div>

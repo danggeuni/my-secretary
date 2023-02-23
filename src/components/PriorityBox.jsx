@@ -1,16 +1,24 @@
 import styles from "./PriorityBox.module.css";
 import cx from "clsx";
 import { useGlobalContext } from "../context";
+import { useState } from "react";
 
 export default function PriorityBox() {
-  const { showPriority } = useGlobalContext();
+  const { showPriority, currentValue, setCurrentValue } = useGlobalContext();
+
+  // 현재 선택 확인
+  const PriorityFunction = (e) => {
+    const { innerText } = e.target;
+    setCurrentValue(innerText);
+    console.log(currentValue);
+  };
   return (
     <div
       className={cx(styles.priority_container, {
         [styles.priority_container_show]: showPriority,
       })}
     >
-      <div className={styles.due_date}>
+      <div className={styles.due_date} onClick={PriorityFunction}>
         <svg
           width="24"
           height="24"
@@ -28,7 +36,7 @@ export default function PriorityBox() {
         </svg>
         <div className={styles.due_priority_text}>우선 순위 1</div>
       </div>
-      <div className={styles.due_date}>
+      <div className={styles.due_date} onClick={PriorityFunction}>
         <svg
           width="24"
           height="24"
@@ -46,7 +54,7 @@ export default function PriorityBox() {
         </svg>
         <div className={styles.due_priority_text}>우선 순위 2</div>
       </div>
-      <div className={styles.due_date}>
+      <div className={styles.due_date} onClick={PriorityFunction}>
         <svg
           width="24"
           height="24"
@@ -64,7 +72,7 @@ export default function PriorityBox() {
         </svg>
         <div className={styles.due_priority_text}>우선 순위 3</div>
       </div>
-      <div className={styles.due_date}>
+      <div className={styles.due_date} onClick={PriorityFunction}>
         <svg
           width="24"
           height="24"

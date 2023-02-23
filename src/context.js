@@ -59,6 +59,9 @@ const AppProvider = ({ children }) => {
   // 우선 순위 wrapper state
   const [showPriority, setShowPriority] = useState(false);
 
+  // 우선 순위 값 지정
+  const [currentValue, setCurrentValue] = useState("우선 순위 4");
+
   // 리스트 생성 함수
   const addTodoList = (todo, desc, priority, date) => {
     dispatch({
@@ -129,6 +132,10 @@ const AppProvider = ({ children }) => {
         // 우선 순위 state
         showPriority,
         setShowPriority,
+
+        // 우선 순위 값 지정
+        currentValue,
+        setCurrentValue,
       }}
     >
       {children}

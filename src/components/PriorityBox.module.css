@@ -24,12 +24,16 @@
 
 .due_date {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
+  color: grey;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 
-  padding: 4px 8px;
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+
+  cursor: pointer;
 }
 
 .due_date_priority1_svg {
@@ -56,8 +60,17 @@
   text-overflow: ellipsis;
   height: 24px;
   line-height: 24px;
+
+  font-size: 13px;
+  margin-left: 3px;
+  position: relative;
+  cursor: pointer;
 }
 
 .priority_container_show {
   display: block;
+}
+
+.due_date_priority_svg {
+  color: #666666;
 }

@@ -368,10 +368,6 @@ img {
   fill: none;
 }
 
-.due_date_priority_svg {
-  color: #666666;
-}
-
 .task_editor_footer {
   box-sizing: border-box;
   border-top: 1px solid #eeeeee;
@@ -416,15 +412,4 @@ img {
 .is_task_btn_active {
   background-color: tomato;
   cursor: pointer;
-}
-
-.priority_container {
-  width: 150px;
-  position: relative;
-
-  background-color: tomato;
-  border-radius: 5px;
-
-  z-index: 1;
-  display: none;
 }
