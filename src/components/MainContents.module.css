@@ -337,6 +337,8 @@ img {
 
 .due_date {
   display: flex;
+  align-items: center;
+
   color: grey;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -354,18 +356,10 @@ img {
   font-size: 13px;
 }
 
-.due_priority_text {
-  font-size: 13px;
-  margin-left: 3px;
-  position: relative;
-  cursor: pointer;
-}
-
 .due_date_cancel_svg {
   color: #666666;
   width: 16px;
   height: 16px;
-  fill: none;
 }
 
 .task_editor_footer {
@@ -411,5 +405,14 @@ img {
 /* 작업 추가 버튼 활성화 CSS */
 .is_task_btn_active {
   background-color: tomato;
+  cursor: pointer;
+}
+
+.priority_box {
+  display: flex;
+  color: grey;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
   cursor: pointer;
 }

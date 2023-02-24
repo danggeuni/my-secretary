@@ -26,13 +26,13 @@ export default function MainContents() {
     currentValue,
   } = useGlobalContext();
 
-  // useEffect(() => {
-  //   if (taskName.length > 0) {
-  //     setTaskBtnActive(true);
-  //   } else {
-  //     setTaskBtnActive(false);
-  //   }
-  // }, [taskName, taskBtnActive]);
+  useEffect(() => {
+    if (taskName.length > 0) {
+      setTaskBtnActive(true);
+    } else {
+      setTaskBtnActive(false);
+    }
+  }, [taskName, taskBtnActive]);
 
   // const [date, setDate] = useState(new Date());
   // const { id, done, todo, desc, priority, deadline } = todoForm;
@@ -64,10 +64,10 @@ export default function MainContents() {
     setShowPriority(!showPriority);
   };
 
-  // 테스터기;
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // // 테스터기;
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   return (
     <div
@@ -79,7 +79,9 @@ export default function MainContents() {
             <div className={styles.date_wrapper}>
               <h1 className={styles.view_header_h1}>
                 <span>오늘</span>
-                <small className={styles.view_header_small}></small>
+                <small className={styles.view_header_small}>
+                  <Nowday />
+                </small>
               </h1>
             </div>
             <div className={styles.view_header_action}>
@@ -193,46 +195,27 @@ export default function MainContents() {
                         ></path>
                       </svg>
                       <div className={styles.due_date_text}>오늘</div>
-                      <button>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          className={styles.due_date_cancel_svg}
-                        >
-                          <path
-                            d="M11.854 11.854a.5.5 0 000-.708L8.707 8l3.147-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708 0z"
-                            fill="currentColor"
-                          ></path>
-                        </svg>
-                      </button>
-                    </div>
-                    <div
-                      className={styles.due_date}
-                      onClick={handleTaskWrapper}
-                    >
+
                       <svg
+                        xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"
                         viewBox="0 0 16 16"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={styles.due_date_priority_svg}
-                        data-icon-name="priority-icon"
-                        data-priority="4"
+                        className={styles.due_date_cancel_svg}
                       >
                         <path
-                          d="M2 3a.5.5 0 01.276-.447C3.025 2.179 4.096 2 5.5 2c.901 0 1.485.135 2.658.526C9.235 2.885 9.735 3 10.5 3c1.263 0 2.192-.155 2.776-.447A.5.5 0 0114 3v6.5a.5.5 0 01-.276.447c-.749.375-1.82.553-3.224.553-.901 0-1.485-.135-2.658-.526C6.765 9.615 6.265 9.5 5.5 9.5c-1.08 0-1.915.113-2.5.329V13.5a.5.5 0 01-1 0V3zm1 5.779v-5.45C3.585 3.113 4.42 3 5.5 3c.765 0 1.265.115 2.342.474C9.015 3.865 9.599 4 10.5 4c1.002 0 1.834-.09 2.5-.279v5.45c-.585.216-1.42.329-2.5.329-.765 0-1.265-.115-2.342-.474C6.985 8.635 6.401 8.5 5.5 8.5c-1.001 0-1.834.09-2.5.279z"
+                          d="M11.854 11.854a.5.5 0 000-.708L8.707 8l3.147-3.146a.5.5 0 00-.708-.708L8 7.293 4.854 4.146a.5.5 0 10-.708.708L7.293 8l-3.147 3.146a.5.5 0 00.708.708L8 8.707l3.146 3.147a.5.5 0 00.708 0z"
                           fill="currentColor"
                         ></path>
                       </svg>
-                      <div className={styles.due_priority_text} role={"button"}>
-                        {currentValue}
-                        {/* 우선순위 컨테이너 */}
-                        <PriorityBox />
-                      </div>
+                    </div>
+                    <div
+                      className={styles.priority_box}
+                      onClick={handleTaskWrapper}
+                    >
+                      {/* 우선순위 컨테이너 */}
+                      <PriorityBox />
                     </div>
                   </div>
                 </div>
