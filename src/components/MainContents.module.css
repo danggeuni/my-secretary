@@ -416,3 +416,76 @@ img {
 
   cursor: pointer;
 }
+
+.todo_list {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style-type: none;
+}
+
+.task_list_item {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+
+  border-top: 1px solid #f0f0f0;
+
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.task_list_item:nth-child(1) {
+  color: to;
+}
+
+.task_list_item_overflow_action {
+  position: absolute;
+  top: 7px;
+  left: -27px;
+  width: 27px;
+  padding-right: 3px;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.task_checkbox {
+  display: flex;
+  margin-right: 7px;
+}
+
+.task_checkbox_circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+
+  height: 16px;
+  width: 16px;
+  border: 1px solid grey;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* 리스트별 체크박스 mouse over시 디자인 */
+
+.task_checkbox_circle:hover > .task_checkbox_inner_circle {
+  border: 1px solid #f0f0f0;
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+  background-color: tomato;
+  transition: background-color 0.3s ease-out;
+}
+
+.task_name {
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+
+.task_desc {
+  font-size: 12px;
+  color: #666666;
+}

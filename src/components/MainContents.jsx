@@ -12,6 +12,7 @@ export default function MainContents() {
   const {
     isClick,
     taskAdd,
+    setTaskAdd,
     taskAddClick,
     taskName,
     setTaskName,
@@ -19,11 +20,9 @@ export default function MainContents() {
     setTaskDesc,
     taskBtnActive,
     setTaskBtnActive,
-    addTodoList,
     data,
     showPriority,
     setShowPriority,
-    currentValue,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -33,6 +32,16 @@ export default function MainContents() {
       setTaskBtnActive(false);
     }
   }, [taskName, taskBtnActive]);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setTaskAdd(true);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   // const [date, setDate] = useState(new Date());
   // const { id, done, todo, desc, priority, deadline } = todoForm;
@@ -49,7 +58,9 @@ export default function MainContents() {
 
   const addTask = (e) => {
     e.preventDefault();
-    addTodoList(taskName, taskDesc, currentValue);
+    // addTodoList(taskName, taskDesc, currentValue);
+    // setTaskName("");
+    // setTaskDesc("");
   };
 
   // 작업 취소 펑션
@@ -146,7 +157,26 @@ export default function MainContents() {
                 </div>
               </div>
             </div>
-            <div>이곳에 리스트가 들어갑니다</div>
+            {/* todo list 구현 화면 */}
+            <div className={styles.todo_list}>
+              <ul className={styles.task_list_items}>
+                {data.map((item) => (
+                  <li key={item.id} className={styles.task_list_item}>
+                    <button className={styles.task_checkbox}>
+                      <div className={styles.task_checkbox_circle}>
+                        <div
+                          className={styles.task_checkbox_inner_circle}
+                        ></div>
+                      </div>
+                    </button>
+                    <div>
+                      <div className={styles.task_name}>{item.todo}</div>
+                      <div className={styles.task_desc}>{item.desc}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <form
               className={cx(styles.task_editor, {
@@ -163,23 +193,17 @@ export default function MainContents() {
                         placeholder={"작업 이름"}
                         value={taskName}
                         onChange={(e) => setTaskName(e.target.value)}
-                        name="todo"
-                        // value={todo}
-                        // onChange={onChange}
                       ></input>
                       <input
                         className={styles.task_editor_contents_desc_input}
                         placeholder={"설명"}
                         value={taskDesc}
                         onChange={(e) => setTaskDesc(e.target.value)}
-                        name="desc"
-                        // value={desc}
-                        // onChange={onChange}
                       ></input>
                     </div>
                   </div>
                 </div>
-                <div className={styles.task_editor_button_area} role={"button"}>
+                <div className={styles.task_editor_button_area}>
                   <div className={styles.seperate}>
                     <div className={styles.due_date}>
                       <svg
@@ -233,7 +257,6 @@ export default function MainContents() {
                     className={cx(styles.task_add_button, {
                       [styles.is_task_btn_active]: taskBtnActive,
                     })}
-                    onClick={addTask}
                   >
                     <span>작업 추가</span>
                   </button>
