@@ -6,13 +6,12 @@ import cx from "clsx";
 import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function MainContents() {
   const {
     isClick,
     taskAdd,
-    setTaskAdd,
     taskAddClick,
     taskName,
     setTaskName,
@@ -23,6 +22,8 @@ export default function MainContents() {
     data,
     showPriority,
     setShowPriority,
+    addTodoList,
+    currentValue,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -33,18 +34,8 @@ export default function MainContents() {
     }
   }, [taskName, taskBtnActive]);
 
-  useEffect(() => {
-    if (data.length > 0) {
-      setTaskAdd(true);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  // const [date, setDate] = useState(new Date());
-  // const { id, done, todo, desc, priority, deadline } = todoForm;
+  // 빈칸일 경우 focus
+  const emptyData = useRef();
 
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
@@ -58,9 +49,15 @@ export default function MainContents() {
 
   const addTask = (e) => {
     e.preventDefault();
-    // addTodoList(taskName, taskDesc, currentValue);
-    // setTaskName("");
-    // setTaskDesc("");
+
+    if (taskName.length < 1) {
+      emptyData.current.focus();
+      return;
+    }
+
+    addTodoList(taskName, taskDesc, currentValue);
+    setTaskName("");
+    setTaskDesc("");
   };
 
   // 작업 취소 펑션
@@ -177,7 +174,6 @@ export default function MainContents() {
                 ))}
               </ul>
             </div>
-
             <form
               className={cx(styles.task_editor, {
                 [styles.task_btn_click]: !taskAdd,
@@ -189,6 +185,7 @@ export default function MainContents() {
                   <div className={styles.task_editor_contents_field}>
                     <div className={styles.task_editor_contents_name}>
                       <input
+                        ref={emptyData}
                         className={styles.task_editor_contents_name_input}
                         placeholder={"작업 이름"}
                         value={taskName}
@@ -200,6 +197,7 @@ export default function MainContents() {
                         value={taskDesc}
                         onChange={(e) => setTaskDesc(e.target.value)}
                       ></input>
+                      <button className={styles.hidden_button}></button>
                     </div>
                   </div>
                 </div>
@@ -244,25 +242,26 @@ export default function MainContents() {
                   </div>
                 </div>
               </div>
-              <div className={styles.task_editor_footer}>
-                <div className={styles.task_button_wrapper}>
-                  {/* 작업 취소 버튼 */}
-                  <button
-                    className={styles.task_cancel_button}
-                    onClick={handleTaskCancel}
-                  >
-                    <span>취소</span>
-                  </button>
-                  <button
-                    className={cx(styles.task_add_button, {
-                      [styles.is_task_btn_active]: taskBtnActive,
-                    })}
-                  >
-                    <span>작업 추가</span>
-                  </button>
-                </div>
-              </div>
             </form>
+            <div className={styles.task_editor_footer}>
+              <div className={styles.task_button_wrapper}>
+                {/* 작업 취소 버튼 */}
+                <button
+                  className={styles.task_cancel_button}
+                  onClick={handleTaskCancel}
+                >
+                  <span>취소</span>
+                </button>
+                <button
+                  className={cx(styles.task_add_button, {
+                    [styles.is_task_btn_active]: taskBtnActive,
+                  })}
+                  onClick={addTask}
+                >
+                  <span>작업 추가</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
