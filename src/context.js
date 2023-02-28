@@ -104,6 +104,7 @@ const AppProvider = ({ children }) => {
         // 좌측 메뉴 state
         isClick,
         setIsClick,
+
         // 작업 추가 state
         taskAdd,
         setTaskAdd,

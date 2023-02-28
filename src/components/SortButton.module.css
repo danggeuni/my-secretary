@@ -1,0 +1,32 @@
+.view_header_action {
+  color: #333333;
+  margin-left: auto;
+}
+
+.view_header_action_button {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  text-decoration: none;
+  color: grey;
+  border-radius: 3px;
+}
+
+.view_header_action_button:hover {
+  background-color: #e1e0e0;
+}
+
+.view_header_action_button:hover > .view_header_action_svg {
+  color: black;
+}
+
+.view_header_action_button:hover > .action_label {
+  color: black;
+}
+
+.action_label {
+  font-size: 12px;
+  margin-left: 3px;
+  margin-right: 6px;
+  word-break: normal;
+}
