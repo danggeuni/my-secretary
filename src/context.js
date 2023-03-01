@@ -41,6 +41,7 @@ const AppProvider = ({ children }) => {
 
   // 메뉴 클릭 toggle state
   const [isClick, setIsClick] = useState(false);
+
   // 작업 추가 toggle state
   const [taskAdd, setTaskAdd] = useState(false);
 
@@ -61,6 +62,43 @@ const AppProvider = ({ children }) => {
 
   // 우선 순위 값 지정
   const [currentValue, setCurrentValue] = useState("우선 순위 4");
+
+  // 작업 취소 state
+  const [initScreen, setInitScreen] = useState(true);
+
+  // 작업 추가 시 editor state
+  const [taskEditor, setTaskEditor] = useState(false);
+
+  // 작업 취소 버튼
+  const taskCancelButton = () => {
+    if (data.length === 0) {
+      setInitScreen(true);
+      setTaskAdd(false);
+      setTaskEditor(false);
+
+      setTaskName("");
+      setTaskDesc("");
+    } else {
+      setInitScreen(false);
+      setTaskAdd(false);
+      setTaskEditor(false);
+
+      setTaskName("");
+      setTaskDesc("");
+    }
+  };
+
+  // 메뉴 toggle 버튼
+  const btnClick = () => {
+    setIsClick(!isClick);
+  };
+
+  // 작업 추가 버튼
+  const taskAddClick = () => {
+    setTaskAdd(true);
+    setTaskEditor(true);
+    setInitScreen(false);
+  };
 
   // 리스트 생성 함수
   const addTodoList = (todo, desc, priority, date) => {
@@ -84,15 +122,6 @@ const AppProvider = ({ children }) => {
   //   priority: "",
   //   deadline: "",
   // });
-
-  // 메뉴 toggle 버튼
-  const btnClick = () => {
-    setIsClick(!isClick);
-  };
-
-  const taskAddClick = () => {
-    setTaskAdd(!taskAdd);
-  };
 
   return (
     <AppContext.Provider
@@ -130,13 +159,22 @@ const AppProvider = ({ children }) => {
         taskBtnActive,
         setTaskBtnActive,
 
-        // 우선 순위 state
+        // 우선 순위 wrapper state
         showPriority,
         setShowPriority,
 
         // 우선 순위 값 지정
         currentValue,
         setCurrentValue,
+
+        // 작업 취소 state와 작업 취소 함수
+        initScreen,
+        setInitScreen,
+        taskCancelButton,
+
+        // 작업 추가 버튼 클릭 시 editor state
+        taskEditor,
+        setTaskEditor,
       }}
     >
       {children}

@@ -6,6 +6,10 @@
   font-size: 14px;
 }
 
+.click_task_add_button {
+  display: none;
+}
+
 .plus_add_button:hover {
   color: #dd4b39;
 }

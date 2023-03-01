@@ -95,74 +95,14 @@
   z-index: 1;
 }
 
-.empty_state_holder {
-  position: relative;
-  max-width: 360px;
-  margin: auto;
-  text-align: center;
-  transition: opacity 0.17s ease-in;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.img_box {
-  box-sizing: border-box;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  font-family: inherit;
-  vertical-align: baseline;
-  background-color: transparent;
-  list-style: none;
-
-  margin-top: 50px;
-  margin-bottom: 20px;
-}
-
-img {
-  border: 0;
-  vertical-align: middle;
-}
-
-.empty_state_message {
-  font-size: 16px;
-  font-weight: 600;
-
-  margin-bottom: 20px;
-}
-
-.empty_state {
-  position: relative;
-  max-width: 360px;
-  margin: auto;
-  text-align: center;
-  transition: opacity 0.17s ease-in;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.empty_state_body {
-  line-height: 1.5;
-  font-size: 14px;
-  margin-left: 24px;
-  margin-right: 24px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.task_btn_click {
-  display: none;
-}
-
 .task_editor {
   padding: 0;
   margin: 0;
 
   border: 1px solid #eeeeee;
   border-radius: 10px;
+
+  display: none;
 }
 
 .task_editor_editing_area {
@@ -304,6 +244,12 @@ img {
   padding: 8px 12px 8px 8px;
   width: 100%;
   margin-top: 8px;
+
+  display: none;
+}
+
+.task_btn_click {
+  display: block;
 }
 
 .task_cancel_button {
@@ -341,15 +287,6 @@ img {
 /* 작업 추가 버튼 활성화 CSS */
 .is_task_btn_active {
   background-color: tomato;
-  cursor: pointer;
-}
-
-.priority_box {
-  display: flex;
-  color: grey;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-
   cursor: pointer;
 }
 

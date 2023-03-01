@@ -9,13 +9,11 @@ import { useGlobalContext } from "../context";
 import { useEffect, useRef } from "react";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";
+import InitScreen from "./InitScreen";
 
 export default function MainContents() {
   const {
     isClick,
-    taskAdd,
-    setTaskAdd,
-    taskAddClick,
     taskName,
     setTaskName,
     taskDesc,
@@ -27,6 +25,8 @@ export default function MainContents() {
     setShowPriority,
     addTodoList,
     currentValue,
+    taskCancelButton,
+    taskEditor,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -50,6 +50,7 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
+  // 작업 추가 submit 함수
   const addTask = (e) => {
     e.preventDefault();
 
@@ -61,22 +62,15 @@ export default function MainContents() {
     addTodoList(taskName, taskDesc, currentValue);
     setTaskName("");
     setTaskDesc("");
+
+    emptyData.current.focus();
   };
 
-  // 작업 취소 펑션
-  const handleTaskCancel = () => {
-    taskAddClick();
-    setTaskName("");
-    setTaskDesc("");
-  };
-
-  // 우선순위 wrapper on/off
-  const handleTaskWrapper = () => {
-    setShowPriority(!showPriority);
-  };
+  const menuRef = useRef();
 
   return (
     <div
+      ref={menuRef}
       className={cx(styles.main_contents, { [styles.btn_toggle]: !isClick })}
     >
       <div className={styles.editor}>
@@ -93,31 +87,6 @@ export default function MainContents() {
             <SortButton />
           </div>
           <div className={styles.view_content}>
-            <TaskAdd />
-            <div
-              className={cx(styles.empty_state_holder, {
-                [styles.task_btn_click]: taskAdd,
-              })}
-            >
-              <div className={styles.img_box}>
-                <img
-                  src={`${process.env.PUBLIC_URL}/public_assets/waiter-silhouette.png`}
-                  alt={"대충 고양이가 커피 마시는 짤"}
-                />
-              </div>
-
-              <div className={styles.empty_state}>
-                <div className={styles.empty_state_message}>
-                  축하합니다! 오늘 작업을 모두 마쳤습니다!
-                </div>
-              </div>
-              <div className={styles.empty_state_body}>
-                <div>
-                  기본적으로, 여기에 추가된 작업은 오늘 마감됩니다. +를 클릭하여
-                  작업을 추가하세요.
-                </div>
-              </div>
-            </div>
             {/* todo list 구현 화면 */}
             <div className={styles.todo_list}>
               <ul className={styles.task_list_items}>
@@ -140,7 +109,7 @@ export default function MainContents() {
             </div>
             <form
               className={cx(styles.task_editor, {
-                [styles.task_btn_click]: !taskAdd,
+                [styles.task_btn_click]: taskEditor,
               })}
               onSubmit={addTask}
             >
@@ -196,27 +165,30 @@ export default function MainContents() {
                         ></path>
                       </svg>
                     </div>
-                    <div
-                      className={styles.priority_box}
-                      onClick={handleTaskWrapper}
-                    >
-                      {/* 우선순위 컨테이너 */}
-                      <PriorityBox />
-                    </div>
+
+                    {/* 우선순위 컨테이너 */}
+                    <PriorityBox />
                   </div>
                 </div>
               </div>
             </form>
+
+            {/* + 작업 추가  */}
+            <TaskAdd />
+
+            {/* 초기 화면 구현 (고양이 커피짤) */}
+            <InitScreen />
+
             <div
               className={cx(styles.task_editor_footer, {
-                [styles.task_btn_click]: !taskAdd,
+                [styles.task_btn_click]: taskEditor,
               })}
             >
               <div className={styles.task_button_wrapper}>
                 {/* 작업 취소 버튼 */}
                 <button
                   className={styles.task_cancel_button}
-                  onClick={handleTaskCancel}
+                  onClick={taskCancelButton}
                 >
                   <span>취소</span>
                 </button>

@@ -7,14 +7,12 @@ export default function TaskAdd() {
   const { taskAdd, taskAddClick } = useGlobalContext();
 
   return (
-    <div className={styles.list_hold}>
-      {/* 작업 추가 버튼, 클릭 시 .empty_state_holder: display none */}
-      <button
-        className={cx(styles.plus_add_button, {
-          [styles.task_btn_click]: taskAdd,
-        })}
-        onClick={taskAddClick}
-      >
+    <div
+      className={cx(styles.list_hold, {
+        [styles.click_task_add_button]: taskAdd,
+      })}
+    >
+      <button className={styles.plus_add_button} onClick={taskAddClick}>
         <span className={styles.icon_add}>
           <svg width="13" height="13">
             <path
