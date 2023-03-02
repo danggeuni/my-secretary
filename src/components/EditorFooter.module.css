@@ -1,0 +1,51 @@
+.task_editor_footer {
+  box-sizing: border-box;
+  border-top: 1px solid #eeeeee;
+  padding: 8px 12px 8px 8px;
+  width: 100%;
+  margin-top: 8px;
+
+  display: none;
+}
+
+.task_btn_click {
+  display: block;
+}
+
+.task_button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.task_cancel_button {
+  min-width: 68px;
+  min-height: 25px;
+
+  color: #444444;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+
+  font-weight: 600;
+
+  margin-right: 5px;
+}
+
+/* 작업 추가 버튼 CSS */
+.task_add_button {
+  width: 68px;
+  height: 25px;
+
+  color: #ffffff;
+  background-color: rgba(219, 76, 63, 0.4);
+  border-radius: 5px;
+
+  font-weight: 600;
+
+  cursor: not-allowed;
+}
+
+/* 작업 추가 버튼 활성화 CSS */
+.is_task_btn_active {
+  background-color: tomato;
+  cursor: pointer;
+}

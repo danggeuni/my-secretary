@@ -100,6 +100,22 @@ const AppProvider = ({ children }) => {
     setInitScreen(false);
   };
 
+  // 작업 추가 submit 함수
+  const addTask = (e) => {
+    e.preventDefault();
+
+    if (taskName.length < 1) {
+      emptyData.current.focus();
+      return;
+    }
+
+    addTodoList(taskName, taskDesc, currentValue);
+    setTaskName("");
+    setTaskDesc("");
+
+    emptyData.current.focus();
+  };
+
   // 리스트 생성 함수
   const addTodoList = (todo, desc, priority, date) => {
     dispatch({
@@ -175,6 +191,9 @@ const AppProvider = ({ children }) => {
         // 작업 추가 버튼 클릭 시 editor state
         taskEditor,
         setTaskEditor,
+
+        // 작업 추가 submit 함수
+        addTask,
       }}
     >
       {children}
