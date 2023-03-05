@@ -1,0 +1,30 @@
+.due_date {
+  display: flex;
+  align-items: center;
+
+  color: grey;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+
+  padding-top: 5px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+
+  cursor: pointer;
+}
+
+.no_due_date {
+  margin-right: 3px;
+}
+
+.due_date_text {
+  color: green;
+  font-size: 13px;
+}
+
+.due_date_cancel_svg {
+  color: #666666;
+  width: 16px;
+  height: 16px;
+}

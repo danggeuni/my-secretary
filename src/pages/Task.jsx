@@ -1,11 +1,18 @@
-import Header from "../components/Header";
-import Leftmenu from "../components/Leftmenu";
+import React, { useEffect } from "react";
+import { useGlobalContext } from "../context";
+import styles from "./Task.module.css";
 
-export default function Task() {
+// id: dataId.current,
+// todo,
+// desc,
+// priority,
+// date,
+export default function Task({ ...item }) {
   return (
-    <div>
-      <Header />
-      <Leftmenu />
+    <div className={styles.data_item_content}>
+      {item.id}
+      {item.todo}
+      {item.desc}
     </div>
   );
 }
