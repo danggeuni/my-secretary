@@ -13,6 +13,7 @@ export default function Task({ ...item }) {
       {item.id}
       {item.todo}
       {item.desc}
+      {item.desc}
     </div>
   );
 }
