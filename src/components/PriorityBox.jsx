@@ -111,7 +111,6 @@ export default function PriorityBox() {
 
   window.addEventListener("click", (e) => {
     // console.log(e.target === imgRef.current);
-    console.log(e.target === menuRef.current);
     // if (e.target !== menuRef.current && e.target !== imgRef.current) {
     //   setShowPriority(false);
     // }

@@ -69,6 +69,9 @@ const AppProvider = ({ children }) => {
   // 작업 추가 시 editor state
   const [taskEditor, setTaskEditor] = useState(false);
 
+  // 모달 상태 state
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -100,6 +103,15 @@ const AppProvider = ({ children }) => {
     setInitScreen(false);
   };
 
+  // 작업 추가 submit 함수
+  const addTask = (e) => {
+    e.preventDefault();
+
+    addTodoList(taskName, taskDesc, currentValue);
+    setTaskName("");
+    setTaskDesc("");
+  };
+
   // 리스트 생성 함수
   const addTodoList = (todo, desc, priority, date) => {
     dispatch({
@@ -114,14 +126,13 @@ const AppProvider = ({ children }) => {
     });
     dataId.current = dataId.current + 1;
   };
-  // const [todoList, setTodoList] = useState({
-  //   id: "",
-  //   done: false,
-  //   todo: "",
-  //   desc: "",
-  //   priority: "",
-  //   deadline: "",
-  // });
+
+  // 리스트 제거 함수
+  const removeTodoList = (targetId) => {
+    setTimeout(() => {
+      dispatch({ type: "REMOVE", targetId });
+    }, 500);
+  };
 
   return (
     <AppContext.Provider
@@ -175,6 +186,9 @@ const AppProvider = ({ children }) => {
         // 작업 추가 버튼 클릭 시 editor state
         taskEditor,
         setTaskEditor,
+
+        // 작업 추가 submit 함수
+        addTask,
       }}
     >
       {children}
