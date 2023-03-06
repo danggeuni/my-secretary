@@ -72,6 +72,9 @@ const AppProvider = ({ children }) => {
   // 모달 상태 state
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // 모달 id state
+  const [modalVisible, setModalVisible] = useState("");
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -189,6 +192,13 @@ const AppProvider = ({ children }) => {
 
         // 작업 추가 submit 함수
         addTask,
+
+        // 모달 state
+        modalIsOpen,
+        setModalIsOpen,
+
+        // 리스트 삭제 함수
+        removeTodoList,
       }}
     >
       {children}

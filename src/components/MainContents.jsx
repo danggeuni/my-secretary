@@ -73,8 +73,7 @@ export default function MainContents() {
             {/* todo list 구현 화면 */}
             <div className={styles.todo_list}>
               <ul className={styles.task_list_items}>
-                {/* 만약 item의 priority 값이 1이면 ,  */}
-                {data.map((item) => (
+                {data.map((item, index) => (
                   <li key={item.id} className={styles.task_list_item}>
                     <button
                       className={styles.task_checkbox}
@@ -89,7 +88,7 @@ export default function MainContents() {
 
                     <div onClick={() => setModalIsOpen(!modalIsOpen)}>
                       {modalIsOpen && (
-                        <Modal>
+                        <Modal id={item.id}>
                           <Task {...item} />
                         </Modal>
                       )}
