@@ -73,7 +73,7 @@ export default function MainContents() {
             {/* todo list 구현 화면 */}
             <div className={styles.todo_list}>
               <ul className={styles.task_list_items}>
-                {data.map((item, index) => (
+                {data.map((item) => (
                   <li key={item.id} className={styles.task_list_item}>
                     <button
                       className={styles.task_checkbox}
@@ -88,8 +88,8 @@ export default function MainContents() {
 
                     <div onClick={() => setModalIsOpen(!modalIsOpen)}>
                       {modalIsOpen && (
-                        <Modal id={item.id}>
-                          <Task {...item} />
+                        <Modal>
+                          <Task />
                         </Modal>
                       )}
                       <div className={styles.task_name}>{item.todo}</div>
