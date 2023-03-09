@@ -72,8 +72,8 @@ const AppProvider = ({ children }) => {
   // 모달 상태 state
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // 모달 id state
-  const [modalVisible, setModalVisible] = useState("");
+  // 리스트 선택 시 ID state
+  const [currentId, setCurrentId] = useState(0);
 
   // 작업 취소 버튼
   const taskCancelButton = () => {
@@ -135,6 +135,13 @@ const AppProvider = ({ children }) => {
     setTimeout(() => {
       dispatch({ type: "REMOVE", targetId });
     }, 500);
+  };
+
+  // 모달 실행 함수
+  // 모달을 true로 만들고,
+  const launchModal = (item) => {
+    setModalIsOpen(!modalIsOpen);
+    setCurrentId(item);
   };
 
   return (
@@ -199,6 +206,12 @@ const AppProvider = ({ children }) => {
 
         // 리스트 삭제 함수
         removeTodoList,
+
+        // 모달 실행 함수
+        launchModal,
+
+        // 모달 id 전달 state
+        currentId,
       }}
     >
       {children}

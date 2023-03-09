@@ -29,6 +29,7 @@ export default function MainContents() {
     setModalIsOpen,
     modalIsOpen,
     addTask,
+    launchModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -86,18 +87,18 @@ export default function MainContents() {
                       </div>
                     </button>
 
-                    <div onClick={() => setModalIsOpen(!modalIsOpen)}>
-                      {modalIsOpen && (
-                        <Modal>
-                          <Task />
-                        </Modal>
-                      )}
+                    <div onClick={() => launchModal(item.id)}>
                       <div className={styles.task_name}>{item.todo}</div>
                       <div className={styles.task_desc}>{item.desc}</div>
                     </div>
                   </li>
                 ))}
               </ul>
+              {modalIsOpen && (
+                <Modal>
+                  <Task />
+                </Modal>
+              )}
             </div>
             <form
               className={cx(styles.task_editor, {
