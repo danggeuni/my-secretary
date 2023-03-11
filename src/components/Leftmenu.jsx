@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 export default function Leftmenu() {
-  const { isClick } = useGlobalContext();
+  const { isClick, data } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
   const date = new Date();
@@ -52,7 +52,7 @@ export default function Leftmenu() {
 
                 <span>오늘</span>
               </div>
-              <div className={styles.item_quantity}>2</div>
+              <div className={styles.item_quantity}>{data.length}</div>
             </Link>
             <Link to={"/task/:id"} className={styles.item_link}>
               <div className={styles.single_item_align}>
