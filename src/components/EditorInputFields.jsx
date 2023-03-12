@@ -1,6 +1,5 @@
 import styles from "./EditorInputFields.module.css";
 import { useGlobalContext } from "../context";
-import { useEffect, useRef } from "react";
 
 export default function EditorInputFields() {
   const { taskName, setTaskName, taskDesc, setTaskDesc, emptyData } =

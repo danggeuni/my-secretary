@@ -1,8 +1,14 @@
 import styles from "./DateBox.module.css";
+import "react-calendar/dist/Calendar.css";
+import { useGlobalContext } from "../context";
+import moment from "moment";
+import { useEffect } from "react";
 
 export default function DateBox() {
+  const { calendar, openCalendar } = useGlobalContext();
+
   return (
-    <div className={styles.due_date}>
+    <div className={styles.due_date} onClick={openCalendar}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -15,8 +21,9 @@ export default function DateBox() {
           d="M12 2a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2h8zm0 1H4a1 1 0 00-1 1v8a1 1 0 001 1h8a1 1 0 001-1V4a1 1 0 00-1-1zm-1.25 7a.75.75 0 110 1.5.75.75 0 010-1.5zm.75-5a.5.5 0 110 1h-7a.5.5 0 010-1h7z"
         ></path>
       </svg>
-      <div className={styles.due_date_text}>오늘</div>
-
+      <div className={styles.due_date_text}>
+        {moment(calendar).format("MM월 DD일")}
+      </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

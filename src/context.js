@@ -75,6 +75,12 @@ const AppProvider = ({ children }) => {
   // 리스트 선택 시 ID state
   const [currentId, setCurrentId] = useState(0);
 
+  // 달력 state
+  const [calendar, setCalendar] = useState(new Date());
+
+  // 댓글 state
+  const [replyComment, setReplyComment] = useState("");
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -110,7 +116,7 @@ const AppProvider = ({ children }) => {
   const addTask = (e) => {
     e.preventDefault();
 
-    addTodoList(taskName, taskDesc, currentValue);
+    addTodoList(taskName, taskDesc, currentValue, calendar);
     setTaskName("");
     setTaskDesc("");
   };
@@ -137,11 +143,18 @@ const AppProvider = ({ children }) => {
     }, 500);
   };
 
-  // 모달 실행 함수
-  // 모달을 true로 만들고,
+  // 세부 정보 모달 실행 함수
   const launchModal = (item) => {
     setModalIsOpen(!modalIsOpen);
     setCurrentId(item);
+  };
+
+  // 달력 state
+  const [isOnCalendar, setIsOnCalendar] = useState(false);
+
+  // 달력 모달 실행 함수
+  const openCalendar = () => {
+    setIsOnCalendar(!isOnCalendar);
   };
 
   return (
@@ -212,6 +225,20 @@ const AppProvider = ({ children }) => {
 
         // 모달 id 전달 state
         currentId,
+
+        // 달력 state
+        calendar,
+        setCalendar,
+
+        // 달력 모달 실행 함수
+        openCalendar,
+
+        // 달력 모달 state
+        isOnCalendar,
+
+        // 댓글 state
+        replyComment,
+        setReplyComment,
       }}
     >
       {children}

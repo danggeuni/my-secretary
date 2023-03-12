@@ -1,4 +1,6 @@
 .due_date {
+  position: relative;
+
   display: flex;
   align-items: center;
 

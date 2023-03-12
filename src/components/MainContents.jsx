@@ -7,7 +7,7 @@ import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import moment from "moment";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";
 import InitScreen from "./InitScreen";
@@ -16,6 +16,7 @@ import Task from "../pages/Task";
 import EditorInutField from "./EditorInputFields";
 import DateBox from "./DateBox";
 import EditorFooter from "./EditorFooter";
+import { Calendar } from "react-calendar";
 
 export default function MainContents() {
   const {
@@ -26,10 +27,13 @@ export default function MainContents() {
     data,
     taskEditor,
     removeTodoList,
-    setModalIsOpen,
     modalIsOpen,
     addTask,
     launchModal,
+    isOnCalendar,
+    setCalendar,
+    calendar,
+    openCalendar,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -109,7 +113,6 @@ export default function MainContents() {
               <div className={styles.task_editor_editing_area}>
                 {/* 데이터 입력 input 필드 */}
                 <EditorInutField />
-
                 <div className={styles.task_editor_button_area}>
                   <div className={styles.seperate}>
                     {/* 날짜 선택 컨테이너 */}
@@ -119,15 +122,22 @@ export default function MainContents() {
                     <PriorityBox />
                   </div>
                 </div>
+                <Calendar
+                  formatDay={(locale, date) => moment(date).format("DD")}
+                  className={cx(styles.calendar, {
+                    [styles.onCalendar]: isOnCalendar,
+                  })}
+                  minDate={new Date()}
+                  onChange={setCalendar}
+                  value={calendar}
+                ></Calendar>
               </div>
             </form>
 
             {/* + 작업 추가  */}
             <TaskAdd />
-
             {/* 초기 화면 구현 (고양이 커피짤) */}
             <InitScreen />
-
             {/* 작업 추가 footer (취소, 추가 button)  */}
             <EditorFooter />
           </div>

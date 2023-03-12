@@ -3,10 +3,12 @@ import styles from "./Task.module.css";
 import { useGlobalContext } from "../context";
 
 export default function Task() {
-  const { data, currentId } = useGlobalContext();
+  const { data, currentId, replyComment, setReplyComment } = useGlobalContext();
 
   const copyData = [...data];
   const currentData = copyData.filter((item) => item.id === currentId);
+
+  console.log(replyComment);
 
   return (
     <div className={styles.data_item_content}>
@@ -17,8 +19,16 @@ export default function Task() {
               <div className={styles.task_name}>{currentData[0].todo}</div>
               <div className={styles.task_desc}>{currentData[0].desc}</div>
             </div>
-            <div className={styles.reply}>
-              <input></input>
+            <div className={styles.reply_wrapper}>
+              <div className={styles.replyIcon}>
+                <span>R</span>
+              </div>
+              <input
+                className={styles.reply}
+                placeholder={"댓글"}
+                onChange={(e) => setReplyComment(e.target.value)}
+                value={replyComment}
+              ></input>
             </div>
           </div>
           <div></div>

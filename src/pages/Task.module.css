@@ -70,3 +70,45 @@
 .task_desc {
   font-size: 15px;
 }
+
+.reply_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.reply {
+  width: 50%;
+  border-radius: 15px;
+  border: 1px solid #eeeeee;
+  color: rgba(0, 0, 0, 0.56);
+  flex: 1;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 16px;
+  text-align: left;
+}
+
+.reply:hover {
+  background-color: #eeeeee;
+  color: black;
+}
+
+.replyIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 600;
+  color: tomato;
+
+  border: 2px solid tomato;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+
+  margin-right: 10px;
+}
