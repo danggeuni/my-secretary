@@ -234,6 +234,7 @@ const AppProvider = ({ children }) => {
         openCalendar,
 
         // 달력 모달 state
+        setIsOnCalendar,
         isOnCalendar,
 
         // 댓글 state

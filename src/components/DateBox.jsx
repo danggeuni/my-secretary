@@ -5,7 +5,10 @@ import moment from "moment";
 import { useEffect } from "react";
 
 export default function DateBox() {
-  const { calendar, openCalendar } = useGlobalContext();
+  const { calendar, setIsOnCalendar, openCalendar } = useGlobalContext();
+  useEffect(() => {
+    setIsOnCalendar(false);
+  }, [calendar, setIsOnCalendar]);
 
   return (
     <div className={styles.due_date} onClick={openCalendar}>

@@ -33,7 +33,6 @@ export default function MainContents() {
     isOnCalendar,
     setCalendar,
     calendar,
-    openCalendar,
   } = useGlobalContext();
 
   useEffect(() => {

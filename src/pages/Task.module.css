@@ -14,7 +14,10 @@
 }
 
 .task_main_content_container {
+  display: flex;
+
   width: 100%;
+  height: 100%;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 16px;
@@ -32,7 +35,7 @@
 
 .field_seperate {
   gap: 16px;
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
 
@@ -45,9 +48,6 @@
   vertical-align: baseline;
   background-color: transparent;
   list-style: none;
-}
-
-.task_overview {
 }
 
 .task_overview_header {
@@ -80,7 +80,6 @@
 }
 
 .reply {
-  width: 50%;
   border-radius: 15px;
   border: 1px solid #eeeeee;
   color: rgba(0, 0, 0, 0.56);
@@ -111,4 +110,71 @@
   border-radius: 50%;
 
   margin-right: 10px;
+}
+
+.field_seperate_right {
+  width: 30%;
+  background-color: #fafafa;
+  border-radius: 5px;
+  padding: 20px 20px;
+  margin-left: 20px;
+}
+
+.right_menu_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+}
+
+.public_css {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+
+  width: 100%;
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 600;
+  padding-left: 1px;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  color: rgba(0, 0, 0, 0.56);
+  border-bottom: 1px solid #eeeeee;
+}
+
+.public_text {
+  text-align: left;
+}
+
+.current_date {
+  display: flex;
+  width: 100%;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.current_date:hover {
+  background-color: #eeeeee;
+}
+
+.current_priority {
+  display: flex;
+  width: 100%;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.noneDesc {
+  color: #707070;
+  cursor: pointer;
+}
+
+.task_desc {
+  cursor: pointer;
 }

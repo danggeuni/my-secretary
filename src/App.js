@@ -1,9 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context";
-import ReactDOM from "react-dom";
-
-import Modal from "react-modal";
 
 import Today from "./pages/Today";
 import Task from "./pages/Task";
