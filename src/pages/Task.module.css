@@ -79,6 +79,11 @@
   margin-top: 20px;
 }
 
+.replyForm {
+  display: flex;
+  flex: 1;
+}
+
 .reply {
   border-radius: 15px;
   border: 1px solid #eeeeee;

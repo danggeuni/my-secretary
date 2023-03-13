@@ -5,15 +5,24 @@ import cx from "clsx";
 import { useGlobalContext } from "../context";
 
 export default function Task() {
-  const { data, currentId, replyComment, setReplyComment } = useGlobalContext();
+  const {
+    data,
+    currentId,
+    replyComment,
+    setReplyComment,
+    addReply,
+    replyData,
+  } = useGlobalContext();
 
   const copyData = [...data];
   const currentData = copyData.filter((item) => item.id === currentId);
   const currentDate = new Date(currentData[0].date);
   const currentMonth = currentDate.getMonth();
   const currentDay = currentDate.getDate();
-
   const currentDesc = currentData[0].desc;
+
+  console.log(replyData);
+  console.log(replyComment);
 
   return (
     <div className={styles.data_item_content}>
@@ -34,12 +43,14 @@ export default function Task() {
               <div className={styles.replyIcon}>
                 <span>R</span>
               </div>
-              <input
-                className={styles.reply}
-                placeholder={"댓글"}
-                onChange={(e) => setReplyComment(e.target.value)}
-                value={replyComment}
-              ></input>
+              <form className={styles.replyForm} onSubmit={addReply}>
+                <input
+                  className={styles.reply}
+                  placeholder={"댓글"}
+                  value={replyComment}
+                  onChange={(e) => setReplyComment(e.target.value)}
+                ></input>
+              </form>
             </div>
           </div>
         </div>

@@ -36,8 +36,43 @@ const AppProvider = ({ children }) => {
     return newState;
   };
 
-  // dispatch state
+  const replyReducer = (state, action) => {
+    let replyState = [];
+
+    switch (action.type) {
+      case "INIT": {
+        return action.replyData;
+      }
+
+      case "CREATEREPLY": {
+        replyState = [action.replyData, ...state];
+        break;
+      }
+
+      case "REMOVEREPLY": {
+        replyState = state.filter((item) => item.id !== action.targetId);
+        break;
+      }
+
+      case "EDITREPLY": {
+        replyState = state.map((item) =>
+          item.id === action.targetId ? { ...action.data } : item
+        );
+        break;
+      }
+
+      default:
+        return state;
+    }
+
+    return replyState;
+  };
+
+  // todo dispatch state
   const [data, dispatch] = useReducer(reducer, []);
+
+  // reply dispatch state
+  const [replyData, replyDispatch] = useReducer(replyReducer, []);
 
   // 메뉴 클릭 toggle state
   const [isClick, setIsClick] = useState(false);
@@ -121,7 +156,15 @@ const AppProvider = ({ children }) => {
     setTaskDesc("");
   };
 
-  // 리스트 생성 함수
+  // 댓글 추가 submit 함수
+  const addReply = (e) => {
+    e.preventDefault();
+
+    addReplyList(replyComment);
+    setReplyComment("");
+  };
+
+  // todo 리스트 생성 함수
   const addTodoList = (todo, desc, priority, date) => {
     dispatch({
       type: "CREATE",
@@ -132,6 +175,15 @@ const AppProvider = ({ children }) => {
         priority,
         date,
       },
+    });
+    dataId.current = dataId.current + 1;
+  };
+
+  // 댓글 리스트 생성 함수
+  const addReplyList = (reply) => {
+    replyDispatch({
+      type: "CREATEREPLY",
+      replyData: { id: dataId.current, reply },
     });
     dataId.current = dataId.current + 1;
   };
@@ -240,6 +292,14 @@ const AppProvider = ({ children }) => {
         // 댓글 state
         replyComment,
         setReplyComment,
+
+        // 댓글 추가 함수
+        addReply,
+        addReplyList,
+
+        // 댓글 dispatch 데이타
+        replyData,
+        replyDispatch,
       }}
     >
       {children}
