@@ -116,6 +116,9 @@ const AppProvider = ({ children }) => {
   // 댓글 state
   const [replyComment, setReplyComment] = useState("");
 
+  // 댓글 시간 state
+  const [replyTime, setReplyTime] = useState(new Date());
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {

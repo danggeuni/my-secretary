@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import moment from "moment";
 import styles from "./Task.module.css";
 import cx from "clsx";
 
@@ -21,8 +22,31 @@ export default function Task() {
   const currentDay = currentDate.getDate();
   const currentDesc = currentData[0].desc;
 
-  console.log(replyData);
-  console.log(replyComment);
+  const getDayMinuteCounter = (date) => {
+    if (!date) {
+      return "";
+    }
+
+    const today = moment();
+    const postingDate = moment(date);
+    const dayDiff = postingDate.diff(today, "days");
+    const hourDiff = postingDate.diff(today, "hours");
+    const minutesDiff = postingDate.diff(today, "minutes");
+
+    if (dayDiff === 0 && hourDiff === 0) {
+      // 작성한지 1시간도 안지났을때
+      const minutes = Math.ceil(-minutesDiff);
+      return minutes + "분 전"; // '분' 로 표시
+    }
+
+    if (dayDiff === 0 && hourDiff <= 24) {
+      // 작성한지 1시간은 넘었지만 하루는 안지났을때,
+      const hour = Math.ceil(-hourDiff);
+      return hour + "시간 전"; // '시간'으로 표시
+    }
+
+    return -dayDiff + "일 전"; // '일'로 표시
+  };
 
   return (
     <div className={styles.data_item_content}>
@@ -39,6 +63,14 @@ export default function Task() {
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
             </div>
+            <ul>
+              {replyData.map((item, index) => (
+                <li key={index} className={styles.replyList}>
+                  <div className={styles.resist_date}></div>
+                  {item.reply}
+                </li>
+              ))}
+            </ul>
             <div className={styles.reply_wrapper}>
               <div className={styles.replyIcon}>
                 <span>R</span>
