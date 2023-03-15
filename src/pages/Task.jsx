@@ -67,7 +67,7 @@ export default function Task() {
               {replyData.map((item, index) => (
                 <li key={index} className={styles.replyList}>
                   <div className={styles.resist_date}></div>
-                  {item.reply}
+                  {currentId === item.modalId ? item.reply : ""}
                 </li>
               ))}
             </ul>

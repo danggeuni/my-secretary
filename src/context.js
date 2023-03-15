@@ -183,10 +183,10 @@ const AppProvider = ({ children }) => {
   };
 
   // 댓글 리스트 생성 함수
-  const addReplyList = (reply) => {
+  const addReplyList = (reply, modalId) => {
     replyDispatch({
       type: "CREATEREPLY",
-      replyData: { id: dataId.current, reply },
+      replyData: { id: dataId.current, reply, modalId: currentId },
     });
     dataId.current = dataId.current + 1;
   };
