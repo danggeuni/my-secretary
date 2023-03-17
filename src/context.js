@@ -45,7 +45,7 @@ const AppProvider = ({ children }) => {
       }
 
       case "CREATEREPLY": {
-        replyState = [action.replyData, ...state];
+        replyState = [...state, action.replyData];
         break;
       }
 
@@ -165,6 +165,8 @@ const AppProvider = ({ children }) => {
 
     addReplyList(replyComment);
     setReplyComment("");
+
+    setReplyTime(new Date());
   };
 
   // todo 리스트 생성 함수
@@ -303,6 +305,10 @@ const AppProvider = ({ children }) => {
         // 댓글 dispatch 데이타
         replyData,
         replyDispatch,
+
+        // 댓글 시간 state
+        replyTime,
+        setReplyTime,
       }}
     >
       {children}
