@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Task.module.css";
 import cx from "clsx";
 
@@ -12,7 +11,6 @@ export default function Task() {
     setReplyComment,
     addReply,
     replyData,
-    replyTime,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -21,16 +19,6 @@ export default function Task() {
   const currentMonth = currentDate.getMonth();
   const currentDay = currentDate.getDate();
   const currentDesc = currentData[0].desc;
-
-  const getDayMinuteCounter = () => {
-    const dateData = replyTime;
-    const month = dateData.getMonth();
-    const day = dateData.getDate();
-    const hour = dateData.getHours();
-    const min = dateData.getMinutes();
-
-    return `${hour}시${min}분 ${month + 1}월${day}일`;
-  };
 
   return (
     <div className={styles.data_item_content}>
@@ -47,20 +35,16 @@ export default function Task() {
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
             </div>
-            <ul>
+            <ul className={styles.reply_list}>
               {replyData.map((item, index) => {
                 if (item.modalId === currentId) {
                   return (
                     <li key={index} className={styles.replyList}>
                       <div className={styles.reply_header}>
                         <span className={styles.reply_small_icon}>R</span>
-                        <span
-                          className={styles.resist_time}
-                        >{`${getDayMinuteCounter()}`}</span>
+                        <span className={styles.resist_time}>{item.time}</span>
                       </div>
-                      <div className={styles.reply_content}>
-                        {currentId === item.modalId ? item.reply : ""}
-                      </div>
+                      <div className={styles.reply_content}>{item.reply}</div>
                     </li>
                   );
                 }

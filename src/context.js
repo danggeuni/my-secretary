@@ -116,9 +116,6 @@ const AppProvider = ({ children }) => {
   // 댓글 state
   const [replyComment, setReplyComment] = useState("");
 
-  // 댓글 시간 state
-  const [replyTime, setReplyTime] = useState(new Date());
-
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -163,10 +160,15 @@ const AppProvider = ({ children }) => {
   const addReply = (e) => {
     e.preventDefault();
 
-    addReplyList(replyComment);
-    setReplyComment("");
+    const dateData = new Date();
+    const month = dateData.getMonth();
+    const day = dateData.getDate();
+    const hour = dateData.getHours();
+    const min = dateData.getMinutes();
+    const nowTime = `${hour}시${min}분 ${month + 1}월${day}일`;
 
-    setReplyTime(new Date());
+    addReplyList(replyComment, nowTime);
+    setReplyComment("");
   };
 
   // todo 리스트 생성 함수
@@ -185,10 +187,10 @@ const AppProvider = ({ children }) => {
   };
 
   // 댓글 리스트 생성 함수
-  const addReplyList = (reply, modalId) => {
+  const addReplyList = (reply, time) => {
     replyDispatch({
       type: "CREATEREPLY",
-      replyData: { id: dataId.current, reply, modalId: currentId },
+      replyData: { id: dataId.current, reply, modalId: currentId, time },
     });
     dataId.current = dataId.current + 1;
   };
@@ -305,10 +307,6 @@ const AppProvider = ({ children }) => {
         // 댓글 dispatch 데이타
         replyData,
         replyDispatch,
-
-        // 댓글 시간 state
-        replyTime,
-        setReplyTime,
       }}
     >
       {children}
