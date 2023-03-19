@@ -225,3 +225,20 @@
   margin-bottom: 30px;
   text-align: left;
 }
+
+.reply_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reply_wrapper > .reply_delete_button {
+  display: block;
+}
+
+.reply_delete_button:hover {
+  color: tomato;
+}
+.reply_delete_button:focus {
+  font-weight: 600;
+  transition: all 0.7s ease-in-out;
+}

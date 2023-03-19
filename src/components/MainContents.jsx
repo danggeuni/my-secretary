@@ -6,7 +6,7 @@ import cx from "clsx";
 import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";
@@ -22,7 +22,6 @@ export default function MainContents() {
   const {
     isClick,
     taskName,
-    taskBtnActive,
     setTaskBtnActive,
     data,
     taskEditor,
@@ -41,7 +40,7 @@ export default function MainContents() {
     } else {
       setTaskBtnActive(false);
     }
-  }, [taskName, taskBtnActive]);
+  });
 
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
@@ -53,11 +52,8 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
-  const menuRef = useRef();
-
   return (
     <div
-      ref={menuRef}
       className={cx(styles.main_contents, { [styles.btn_toggle]: !isClick })}
     >
       <div className={styles.editor}>

@@ -173,13 +173,15 @@
   cursor: pointer;
 
   border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
 
   margin-top: 10px;
   margin-bottom: 30px;
 }
 
-.task_list_item:nth-child(1) {
-  color: to;
+.task_list_item:first-child {
+  border: none;
+  padding-top: 0px;
 }
 
 .task_list_item_overflow_action {
@@ -219,21 +221,12 @@
   height: 8px;
   width: 8px;
   background-color: tomato;
-  transition: background-color 0.3s ease-out;
-  animation: unmount1;
 }
 
-.unmount1 {
-  animation: 0.7s ease-in-out loadEffect1;
-}
-
-@keyframes loadEffect1 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.task_checkbox_circle:active > .task_checkbox_inner_circle {
+  width: 5px;
+  height: 5px;
+  background-color: tomato;
 }
 
 .task_name {

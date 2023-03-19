@@ -202,6 +202,13 @@ const AppProvider = ({ children }) => {
     }, 500);
   };
 
+  // 댓글 제거 함수
+  const removeReply = (targetId) => {
+    setTimeout(() => {
+      replyDispatch({ type: "REMOVEREPLY", targetId });
+    }, 500);
+  };
+
   // 세부 정보 모달 실행 함수
   const launchModal = (item) => {
     setModalIsOpen(!modalIsOpen);
@@ -307,6 +314,9 @@ const AppProvider = ({ children }) => {
         // 댓글 dispatch 데이타
         replyData,
         replyDispatch,
+
+        // 댓글 제거 함수
+        removeReply,
       }}
     >
       {children}

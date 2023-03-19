@@ -1,9 +1,11 @@
 import styles from "./EditorInputFields.module.css";
 import { useGlobalContext } from "../context";
+import { useRef } from "react";
 
 export default function EditorInputFields() {
-  const { taskName, setTaskName, taskDesc, setTaskDesc, emptyData } =
-    useGlobalContext();
+  const { taskName, setTaskName, taskDesc, setTaskDesc } = useGlobalContext();
+
+  const emptyData = useRef();
 
   return (
     <div className={styles.task_editor_input_fields}>

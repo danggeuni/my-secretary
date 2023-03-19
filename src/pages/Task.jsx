@@ -11,6 +11,7 @@ export default function Task() {
     setReplyComment,
     addReply,
     replyData,
+    removeReply,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -40,9 +41,21 @@ export default function Task() {
                 if (item.modalId === currentId) {
                   return (
                     <li key={index} className={styles.replyList}>
-                      <div className={styles.reply_header}>
-                        <span className={styles.reply_small_icon}>R</span>
-                        <span className={styles.resist_time}>{item.time}</span>
+                      <div className={styles.reply_wrapper}>
+                        <div className={styles.reply_header}>
+                          <span className={styles.reply_small_icon}>R</span>
+                          <span className={styles.resist_time}>
+                            {item.time}
+                          </span>
+                        </div>
+                        <div>
+                          <button
+                            onClick={() => removeReply(item.id)}
+                            className={styles.reply_delete_button}
+                          >
+                            삭제
+                          </button>
+                        </div>
                       </div>
                       <div className={styles.reply_content}>{item.reply}</div>
                     </li>
