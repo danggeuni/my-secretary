@@ -202,6 +202,9 @@ const AppProvider = ({ children }) => {
     }, 500);
   };
 
+  // 리스트 수정 함수
+  const modifyTodoList = () => {};
+
   // 댓글 제거 함수
   const removeReply = (targetId) => {
     setTimeout(() => {
@@ -215,12 +218,20 @@ const AppProvider = ({ children }) => {
     setCurrentId(item);
   };
 
-  // 달력 state
+  // 메인 달력 state
   const [isOnCalendar, setIsOnCalendar] = useState(false);
+
+  // 세부 화면 달력 state
+  const [isOnCalendarInModal, setIsOnCalendarInModal] = useState(false);
 
   // 달력 모달 실행 함수
   const openCalendar = () => {
     setIsOnCalendar(!isOnCalendar);
+  };
+
+  // 모달 내부 달력 실행 함수
+  const openCalendarInModal = () => {
+    setIsOnCalendarInModal(!isOnCalendarInModal);
   };
 
   return (
@@ -317,6 +328,16 @@ const AppProvider = ({ children }) => {
 
         // 댓글 제거 함수
         removeReply,
+
+        // 세부화면 달력 state
+        isOnCalendarInModal,
+        setIsOnCalendarInModal,
+
+        // 모달 내부 달력 실행 함수
+        openCalendarInModal,
+
+        // 리스트 수정 함수
+        modifyTodoList,
       }}
     >
       {children}

@@ -118,6 +118,10 @@
 }
 
 .field_seperate_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: 30%;
   background-color: #fafafa;
   border-radius: 5px;
@@ -156,6 +160,7 @@
 }
 
 .current_date {
+  position: relative;
   display: flex;
   width: 100%;
   color: black;
@@ -238,7 +243,36 @@
 .reply_delete_button:hover {
   color: tomato;
 }
+
 .reply_delete_button:focus {
   font-weight: 600;
   transition: all 0.7s ease-in-out;
+}
+
+.calendar {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 5px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px #f6f6f6;
+}
+
+.onCalendar {
+  display: block;
+}
+
+.set_modify {
+  cursor: pointer;
+  background-color: tomato;
+  color: white;
+  font-weight: 600;
+  padding: 10px 5px;
+  border-radius: 5px;
+}
+
+.editDesc {
+  /* display: none; */
+  border: none;
+  outline: none;
 }

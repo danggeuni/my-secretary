@@ -2,6 +2,9 @@ import styles from "./Task.module.css";
 import cx from "clsx";
 
 import { useGlobalContext } from "../context";
+import moment from "moment";
+import { Calendar } from "react-calendar";
+import { useEffect, useState } from "react";
 
 export default function Task() {
   const {
@@ -12,14 +15,20 @@ export default function Task() {
     addReply,
     replyData,
     removeReply,
+    isOnCalendarInModal,
+    openCalendarInModal,
+    setIsOnCalendarInModal,
+    modifyTodoList,
   } = useGlobalContext();
 
   const copyData = [...data];
   const currentData = copyData.filter((item) => item.id === currentId);
-  const currentDate = new Date(currentData[0].date);
-  const currentMonth = currentDate.getMonth();
-  const currentDay = currentDate.getDate();
   const currentDesc = currentData[0].desc;
+  const [modalDate, setModalDate] = useState(currentData[0].date);
+
+  useEffect(() => {
+    setIsOnCalendarInModal(false);
+  }, [modalDate, setIsOnCalendarInModal]);
 
   return (
     <div className={styles.data_item_content}>
@@ -35,6 +44,7 @@ export default function Task() {
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
+              <input className={styles.editDesc}></input>
             </div>
             <ul className={styles.reply_list}>
               {replyData.map((item, index) => {
@@ -88,7 +98,18 @@ export default function Task() {
             <div className={(styles.due_date, styles.public_css)}>
               <span>마감날짜</span>
               <div className={styles.current_date}>
-                <span>{`${currentMonth}월 ${currentDay}일`}</span>
+                <span onClick={openCalendarInModal}>
+                  {moment(modalDate).format("MM월 DD일")}
+                </span>
+                <Calendar
+                  formatDay={(locale, date) => moment(date).format("DD")}
+                  className={cx(styles.calendar, {
+                    [styles.onCalendar]: isOnCalendarInModal,
+                  })}
+                  minDate={new Date()}
+                  onChange={setModalDate}
+                  value={modalDate}
+                ></Calendar>
               </div>
             </div>
             <div className={(styles.priority, styles.public_css)}>
@@ -97,6 +118,9 @@ export default function Task() {
                 <span>{currentData[0].priority}</span>
               </div>
             </div>
+          </div>
+          <div className={styles.set_modify} onClick={modifyTodoList}>
+            수정하기
           </div>
         </div>
       </div>
