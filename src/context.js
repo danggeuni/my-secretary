@@ -8,10 +8,6 @@ const AppProvider = ({ children }) => {
     let newState = [];
 
     switch (action.type) {
-      case "INIT": {
-        return action.data;
-      }
-
       case "CREATE": {
         newState = [action.data, ...state];
         break;
@@ -51,13 +47,6 @@ const AppProvider = ({ children }) => {
 
       case "REMOVEREPLY": {
         replyState = state.filter((item) => item.id !== action.targetId);
-        break;
-      }
-
-      case "EDITREPLY": {
-        replyState = state.map((item) =>
-          item.id === action.targetId ? { ...action.data } : item
-        );
         break;
       }
 
@@ -186,6 +175,14 @@ const AppProvider = ({ children }) => {
     dataId.current = dataId.current + 1;
   };
 
+  // todo 리스트 편집 함수
+  const onEdit = (targetId, todo, desc, priority, date) => {
+    dispatch({
+      type: "EDIT",
+      data: { id: targetId, todo, desc, priority, date },
+    });
+  };
+
   // 댓글 리스트 생성 함수
   const addReplyList = (reply, time) => {
     replyDispatch({
@@ -201,9 +198,6 @@ const AppProvider = ({ children }) => {
       dispatch({ type: "REMOVE", targetId });
     }, 500);
   };
-
-  // 리스트 수정 함수
-  const modifyTodoList = () => {};
 
   // 댓글 제거 함수
   const removeReply = (targetId) => {
@@ -265,6 +259,9 @@ const AppProvider = ({ children }) => {
 
         // 리스트 생성 함수
         addTodoList,
+
+        // 리스트 편집 함수
+        onEdit,
 
         // 작업 추가 버튼 활성화 state
         taskBtnActive,
@@ -335,9 +332,6 @@ const AppProvider = ({ children }) => {
 
         // 모달 내부 달력 실행 함수
         openCalendarInModal,
-
-        // 리스트 수정 함수
-        modifyTodoList,
       }}
     >
       {children}

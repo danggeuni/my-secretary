@@ -18,7 +18,7 @@ export default function Task() {
     isOnCalendarInModal,
     openCalendarInModal,
     setIsOnCalendarInModal,
-    modifyTodoList,
+    onEdit,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -29,6 +29,11 @@ export default function Task() {
   useEffect(() => {
     setIsOnCalendarInModal(false);
   }, [modalDate, setIsOnCalendarInModal]);
+
+  const editList = () => {
+    onEdit(currentData[0].id, 1, 2, 3, modalDate);
+    console.log(modalDate);
+  };
 
   return (
     <div className={styles.data_item_content}>
@@ -107,6 +112,7 @@ export default function Task() {
                     [styles.onCalendar]: isOnCalendarInModal,
                   })}
                   minDate={new Date()}
+                  d
                   onChange={setModalDate}
                   value={modalDate}
                 ></Calendar>
@@ -119,7 +125,7 @@ export default function Task() {
               </div>
             </div>
           </div>
-          <div className={styles.set_modify} onClick={modifyTodoList}>
+          <div className={styles.set_modify} onClick={editList}>
             수정하기
           </div>
         </div>
