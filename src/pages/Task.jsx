@@ -31,8 +31,8 @@ export default function Task() {
   }, [modalDate, setIsOnCalendarInModal]);
 
   const editList = () => {
-    onEdit(currentData[0].id, 1, 2, 3, modalDate);
-    console.log(modalDate);
+    onEdit(3);
+    console.log(data);
   };
 
   return (
