@@ -20,8 +20,9 @@ const AppProvider = ({ children }) => {
 
       case "EDIT": {
         newState = state.map((item) =>
-          item.id === action.targetId ? { ...action.data } : item
+          item.id === action.data.id ? { ...action.data } : item
         );
+
         break;
       }
 
@@ -137,9 +138,7 @@ const AppProvider = ({ children }) => {
   };
 
   // 작업 추가 submit 함수
-  const addTask = (e) => {
-    e.preventDefault();
-
+  const addTask = () => {
     addTodoList(taskName, taskDesc, currentValue, calendar);
     setTaskName("");
     setTaskDesc("");
@@ -179,7 +178,13 @@ const AppProvider = ({ children }) => {
   const onEdit = (targetId, todo, desc, priority, date) => {
     dispatch({
       type: "EDIT",
-      data: { id: targetId, todo, desc, priority, date },
+      data: {
+        id: targetId,
+        todo,
+        desc,
+        priority,
+        date,
+      },
     });
   };
 

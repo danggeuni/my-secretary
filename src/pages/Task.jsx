@@ -30,9 +30,12 @@ export default function Task() {
     setIsOnCalendarInModal(false);
   }, [modalDate, setIsOnCalendarInModal]);
 
+  // 작업 수정 submit 함수
   const editList = () => {
-    onEdit(3);
-    console.log(data);
+    if (window.confirm("수정할까요?")) {
+      onEdit(currentData[0].id, 1, 2, 3, modalDate);
+      console.log(data);
+    }
   };
 
   return (
