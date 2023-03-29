@@ -106,6 +106,9 @@ const AppProvider = ({ children }) => {
   // 댓글 state
   const [replyComment, setReplyComment] = useState("");
 
+  // 세부 내용 state
+  const [editDesc, setEditDesc] = useState(false);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -337,6 +340,10 @@ const AppProvider = ({ children }) => {
 
         // 모달 내부 달력 실행 함수
         openCalendarInModal,
+
+        // 세부 내용 state
+        editDesc,
+        setEditDesc,
       }}
     >
       {children}

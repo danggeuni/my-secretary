@@ -34,7 +34,6 @@ export default function Task() {
   const editList = () => {
     if (window.confirm("수정할까요?")) {
       onEdit(currentData[0].id, 1, 2, 3, modalDate);
-      console.log(data);
     }
   };
 
@@ -52,7 +51,6 @@ export default function Task() {
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
-              <input className={styles.editDesc}></input>
             </div>
             <ul className={styles.reply_list}>
               {replyData.map((item, index) => {

@@ -182,11 +182,6 @@
 
 .noneDesc {
   color: #707070;
-  cursor: pointer;
-}
-
-.task_desc {
-  cursor: pointer;
 }
 
 .replyList {
@@ -269,10 +264,4 @@
   font-weight: 600;
   padding: 10px 5px;
   border-radius: 5px;
-}
-
-.editDesc {
-  /* display: none; */
-  border: none;
-  outline: none;
 }
