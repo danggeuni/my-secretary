@@ -1,8 +1,10 @@
 import styles from "./Task.module.css";
 import cx from "clsx";
+import moment from "moment";
+
+import ModalPriorityBox from "../components/ModalPriorityBox";
 
 import { useGlobalContext } from "../context";
-import moment from "moment";
 import { Calendar } from "react-calendar";
 import { useEffect, useState } from "react";
 
@@ -122,7 +124,9 @@ export default function Task() {
             <div className={(styles.priority, styles.public_css)}>
               <span>우선순위</span>
               <div className={styles.current_priority}>
-                <span>{currentData[0].priority}</span>
+                <span>
+                  <ModalPriorityBox />
+                </span>
               </div>
             </div>
           </div>

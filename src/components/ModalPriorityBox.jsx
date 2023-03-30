@@ -1,18 +1,24 @@
-import styles from "./PriorityBox.module.css";
+import styles from "./ModalPriorityBox.module.css";
 import cx from "clsx";
 import { useGlobalContext } from "../context";
 import { useRef } from "react";
 
-export default function PriorityBox() {
-  const { showPriority, currentValue, setCurrentValue, setShowPriority } =
-    useGlobalContext();
+export default function ModalPriorityBox() {
+  const {
+    showPriority,
+    currentValue,
+    setShowPriority,
+    modalPriority,
+    setModalPriority,
+  } = useGlobalContext();
 
   const menuRef = useRef();
 
   // 현재 선택 확인
   const PriorityFunction = (e) => {
     const { innerText } = e.target;
-    setCurrentValue(innerText);
+    setModalPriority(innerText);
+    console.log(modalPriority);
   };
 
   // 우선순위 wrapper on/off

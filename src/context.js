@@ -109,6 +109,9 @@ const AppProvider = ({ children }) => {
   // 세부 내용 state
   const [editDesc, setEditDesc] = useState(false);
 
+  // 모달 우선 순위 state
+  const [modalPriority, setModalPriority] = useState();
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -236,6 +239,8 @@ const AppProvider = ({ children }) => {
     setIsOnCalendarInModal(!isOnCalendarInModal);
   };
 
+  // 모달 내부 우선순위 실행 함수
+
   return (
     <AppContext.Provider
       value={{
@@ -344,6 +349,10 @@ const AppProvider = ({ children }) => {
         // 세부 내용 state
         editDesc,
         setEditDesc,
+
+        // 모달 우선 순위 state
+        modalPriority,
+        setModalPriority,
       }}
     >
       {children}
