@@ -1,24 +1,15 @@
 import styles from "./ModalPriorityBox.module.css";
 import cx from "clsx";
 import { useGlobalContext } from "../context";
-import { useRef } from "react";
 
 export default function ModalPriorityBox() {
-  const {
-    showPriority,
-    currentValue,
-    setShowPriority,
-    modalPriority,
-    setModalPriority,
-  } = useGlobalContext();
-
-  const menuRef = useRef();
+  const { showPriority, setShowPriority, modalPriority, setModalPriority } =
+    useGlobalContext();
 
   // 현재 선택 확인
   const PriorityFunction = (e) => {
     const { innerText } = e.target;
     setModalPriority(innerText);
-    console.log(modalPriority);
   };
 
   // 우선순위 wrapper on/off
@@ -28,7 +19,7 @@ export default function ModalPriorityBox() {
 
   // 선택 flag별 이미지 가져오기
   const CurrentValueflag = () => {
-    if (currentValue === "우선 순위 1") {
+    if (modalPriority === "우선 순위 1") {
       return (
         <div className={styles.due_date} onClick={PriorityFunction}>
           <svg
@@ -49,7 +40,7 @@ export default function ModalPriorityBox() {
           <div className={styles.priority_text}>우선 순위 1</div>
         </div>
       );
-    } else if (currentValue === "우선 순위 2") {
+    } else if (modalPriority === "우선 순위 2") {
       return (
         <div className={styles.due_date} onClick={PriorityFunction}>
           <svg
@@ -70,7 +61,7 @@ export default function ModalPriorityBox() {
           <div className={styles.priority_text}>우선 순위 2</div>
         </div>
       );
-    } else if (currentValue === "우선 순위 3") {
+    } else if (modalPriority === "우선 순위 3") {
       return (
         <div className={styles.due_date} onClick={PriorityFunction}>
           <svg
@@ -124,16 +115,11 @@ export default function ModalPriorityBox() {
         <CurrentValueflag />
 
         <div
-          ref={menuRef}
           className={cx(styles.priority_container, {
             [styles.priority_container_show]: showPriority,
           })}
         >
-          <div
-            className={styles.due_date}
-            onClick={PriorityFunction}
-            ref={menuRef}
-          >
+          <div className={styles.due_date} onClick={PriorityFunction}>
             <svg
               width="24"
               height="24"
@@ -149,9 +135,7 @@ export default function ModalPriorityBox() {
                 fill="currentColor"
               ></path>
             </svg>
-            <div className={styles.priority_text} ref={menuRef}>
-              우선 순위 1
-            </div>
+            <div className={styles.priority_text}>우선 순위 1</div>
           </div>
 
           <div className={styles.due_date} onClick={PriorityFunction}>

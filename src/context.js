@@ -148,6 +148,8 @@ const AppProvider = ({ children }) => {
     addTodoList(taskName, taskDesc, currentValue, calendar);
     setTaskName("");
     setTaskDesc("");
+    setCurrentValue("우선 순위 4");
+    setCalendar(new Date());
   };
 
   // 댓글 추가 submit 함수

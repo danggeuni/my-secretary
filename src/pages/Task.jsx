@@ -21,6 +21,8 @@ export default function Task() {
     openCalendarInModal,
     setIsOnCalendarInModal,
     onEdit,
+    modalPriority,
+    setModalPriority,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -32,10 +34,23 @@ export default function Task() {
     setIsOnCalendarInModal(false);
   }, [modalDate, setIsOnCalendarInModal]);
 
+  useEffect(() => {
+    setModalPriority(currentData[0].priority);
+  }, []);
+
   // 작업 수정 submit 함수
   const editList = () => {
     if (window.confirm("수정할까요?")) {
-      onEdit(currentData[0].id, 1, 2, 3, modalDate);
+      onEdit(
+        currentData[0].id,
+        currentData[0].todo,
+        currentData[0].desc,
+        modalPriority,
+        modalDate
+      );
+    } else {
+      setModalPriority(currentData[0].priority);
+      setModalDate(currentData[0].date);
     }
   };
 

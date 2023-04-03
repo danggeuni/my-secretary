@@ -180,10 +180,6 @@
   border-radius: 5px;
 }
 
-.current_priority:hover {
-  background-color: #eeeeee;
-}
-
 .noneDesc {
   color: #707070;
 }

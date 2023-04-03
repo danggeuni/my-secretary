@@ -32,6 +32,9 @@ export default function MainContents() {
     isOnCalendar,
     setCalendar,
     calendar,
+    setInitScreen,
+    setTaskAdd,
+    setTaskEditor,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -41,6 +44,20 @@ export default function MainContents() {
       setTaskBtnActive(false);
     }
   });
+
+  useEffect(() => {
+    // 아이템이 0개일 때, 메인화면 보여주기.
+    if (data.length === 0) {
+      setInitScreen(true);
+      setTaskAdd(false);
+      setTaskEditor(false);
+    }
+  }, [data]);
+
+  const launchAddTask = (e) => {
+    e.preventDefault();
+    addTask();
+  };
 
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
@@ -103,7 +120,7 @@ export default function MainContents() {
               className={cx(styles.task_editor, {
                 [styles.task_btn_click]: taskEditor,
               })}
-              onSubmit={addTask}
+              onSubmit={launchAddTask}
             >
               <div className={styles.task_editor_editing_area}>
                 {/* 데이터 입력 input 필드 */}
