@@ -1,4 +1,11 @@
-import { useState, useContext, createContext, useReducer, useRef } from "react";
+import {
+  useState,
+  useContext,
+  createContext,
+  useReducer,
+  useRef,
+  useEffect,
+} from "react";
 
 const AppContext = createContext();
 
@@ -8,6 +15,10 @@ const AppProvider = ({ children }) => {
     let newState = [];
 
     switch (action.type) {
+      case "INIT": {
+        return action.data;
+      }
+
       case "CREATE": {
         newState = [action.data, ...state];
         break;
@@ -30,6 +41,7 @@ const AppProvider = ({ children }) => {
         return state;
     }
 
+    localStorage.setItem("todo", JSON.stringify(newState));
     return newState;
   };
 
@@ -55,8 +67,26 @@ const AppProvider = ({ children }) => {
         return state;
     }
 
+    localStorage.setItem("reply", JSON.stringify(replyState));
     return replyState;
   };
+
+  // local 데이터 불러온 후 id순으로 정렬(id값이 높으면 위로 올라오게)
+  // local 데이터가 존재할 경우, 마지막 id 값에 + 1 하여 리스트 생성하도록. ditpatch 통해 리스트 구현
+  useEffect(() => {
+    const localData = localStorage.getItem("todo");
+
+    if (localData) {
+      const todoList = JSON.parse(localData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+
+      if (todoList.length >= 1) {
+        dataId.current = parseInt(todoList[0].id) + 1;
+        dispatch({ type: "INIT", data: todoList });
+      }
+    }
+  }, []);
 
   // todo dispatch state
   const [data, dispatch] = useReducer(reducer, []);

@@ -6,7 +6,7 @@ import cx from "clsx";
 import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import moment from "moment";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";
@@ -47,8 +47,12 @@ export default function MainContents() {
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
-    if (data.length === 0) {
+    if (JSON.parse(localStorage.getItem("todo")).length === 0) {
       setInitScreen(true);
+      setTaskAdd(false);
+      setTaskEditor(false);
+    } else {
+      setInitScreen(false);
       setTaskAdd(false);
       setTaskEditor(false);
     }

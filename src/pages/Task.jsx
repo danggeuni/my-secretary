@@ -28,7 +28,7 @@ export default function Task() {
   const copyData = [...data];
   const currentData = copyData.filter((item) => item.id === currentId);
   const currentDesc = currentData[0].desc;
-  const [modalDate, setModalDate] = useState(currentData[0].date);
+  const [modalDate, setModalDate] = useState(new Date(currentData[0].date));
 
   useEffect(() => {
     setIsOnCalendarInModal(false);
