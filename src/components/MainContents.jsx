@@ -95,7 +95,15 @@ export default function MainContents() {
             <div className={styles.todo_list}>
               <ul className={styles.task_list_items}>
                 {data.map((item) => (
-                  <li key={item.id} className={styles.task_list_item}>
+                  <li
+                    key={item.id}
+                    className={
+                      Math.floor(new Date().getTime() / 86400000) >
+                      Math.floor(new Date(item.date).getTime() / 86400000)
+                        ? styles.expired_task_list_item
+                        : styles.task_list_item
+                    }
+                  >
                     <button
                       className={styles.task_checkbox}
                       onClick={() => removeTodoList(item.id)}
@@ -106,7 +114,6 @@ export default function MainContents() {
                         ></div>
                       </div>
                     </button>
-
                     <div onClick={() => launchModal(item.id)}>
                       <div className={styles.task_name}>{item.todo}</div>
                       <div className={styles.task_desc}>{item.desc}</div>
@@ -162,3 +169,6 @@ export default function MainContents() {
     </div>
   );
 }
+
+// 51470003472 10초
+// 515402696758 10초

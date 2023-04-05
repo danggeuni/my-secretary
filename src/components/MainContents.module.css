@@ -179,6 +179,23 @@
   margin-bottom: 30px;
 }
 
+.expired_task_list_item {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+
+  border-top: 1px solid #f0f0f0;
+  padding-top: 10px;
+
+  margin-top: 10px;
+  margin-bottom: 30px;
+
+  text-decoration: line-through;
+  color: #666666;
+}
+
 .task_list_item:first-child {
   border: none;
   padding-top: 0px;
