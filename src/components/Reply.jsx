@@ -8,8 +8,7 @@ export default function Reply() {
     return (
       <div>
         {replyData.map((item, index) => (if(currentId===item.modalId){
-            
-        }
+                    }
           <li key={index} className={styles.replyList}>
             <div className={styles.reply_header}>
               <span className={styles.reply_small_icon}>R</span>

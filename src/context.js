@@ -88,6 +88,20 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const localReplyData = localStorage.getItem("reply");
+
+    if (localReplyData) {
+      const todoReplyList = JSON.parse(localReplyData).sort(
+        (a, b) => parseInt(b.id) - parseInt(a.id)
+      );
+
+      if (todoReplyList.length >= 1) {
+        ReplyDataId.current = parseInt(todoReplyList[0].id) + 1;
+      }
+    }
+  }, []);
+
   // todo dispatch state
   const [data, dispatch] = useReducer(reducer, []);
 
@@ -109,8 +123,11 @@ const AppProvider = ({ children }) => {
   // 작업 추가 버튼 활성화  state
   const [taskBtnActive, setTaskBtnActive] = useState(false);
 
-  // id 생성을 위한 useRef
+  // todo list id 생성을 위한 useRef
   const dataId = useRef(0);
+
+  // reply list id 생성을 위한 useRef
+  const ReplyDataId = useRef(0);
 
   // 우선 순위 wrapper state
   const [showPriority, setShowPriority] = useState(false);
@@ -232,7 +249,7 @@ const AppProvider = ({ children }) => {
       type: "CREATEREPLY",
       replyData: { id: dataId.current, reply, modalId: currentId, time },
     });
-    dataId.current = dataId.current + 1;
+    ReplyDataId.current = ReplyDataId.current + 1;
   };
 
   // 리스트 제거 함수
