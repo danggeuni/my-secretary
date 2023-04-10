@@ -98,6 +98,7 @@ const AppProvider = ({ children }) => {
 
       if (todoReplyList.length >= 1) {
         ReplyDataId.current = parseInt(todoReplyList[0].id) + 1;
+        replyDispatch({ type: "INIT", replyData: todoReplyList });
       }
     }
   }, []);
@@ -158,6 +159,9 @@ const AppProvider = ({ children }) => {
 
   // 모달 우선 순위 state
   const [modalPriority, setModalPriority] = useState();
+
+  // 정렬 view state
+  const [showSortingMenu, setShowSortingMenu] = useState(false);
 
   // 작업 취소 버튼
   const taskCancelButton = () => {
@@ -247,7 +251,7 @@ const AppProvider = ({ children }) => {
   const addReplyList = (reply, time) => {
     replyDispatch({
       type: "CREATEREPLY",
-      replyData: { id: dataId.current, reply, modalId: currentId, time },
+      replyData: { id: ReplyDataId.current, reply, modalId: currentId, time },
     });
     ReplyDataId.current = ReplyDataId.current + 1;
   };
@@ -402,6 +406,10 @@ const AppProvider = ({ children }) => {
         // 모달 우선 순위 state
         modalPriority,
         setModalPriority,
+
+        // 정렬 view state
+        showSortingMenu,
+        setShowSortingMenu,
       }}
     >
       {children}

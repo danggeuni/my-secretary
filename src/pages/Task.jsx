@@ -22,13 +22,14 @@ export default function Task() {
     onEdit,
     modalPriority,
     setModalPriority,
-    replyDispatch,
+    replyData,
   } = useGlobalContext();
 
   const copyData = [...data];
   const currentData = copyData.filter((item) => item.id === currentId);
   const currentDesc = currentData[0].desc;
   const [modalDate, setModalDate] = useState(new Date(currentData[0].date));
+  const localReplyData = [...replyData];
 
   useEffect(() => {
     setIsOnCalendarInModal(false);
@@ -36,16 +37,6 @@ export default function Task() {
 
   useEffect(() => {
     setModalPriority(currentData[0].priority);
-  }, []);
-
-  const localReplyData = JSON.parse(localStorage.getItem("reply"));
-
-  // 여기부터 다시 봐야함.
-  // 현재 문제 : 댓글 작성 시 다시 새로 써지거나 전체삭제됨. 아래 useEffect 사용시 state 값 덧씌울수없다는 문구 뜸
-  useEffect(() => {
-    if (localReplyData.length >= 1) {
-      replyDispatch({ type: "INIT", data: localReplyData });
-    }
   }, []);
 
   // 작업 수정 submit 함수

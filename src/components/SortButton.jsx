@@ -18,6 +18,12 @@ export default function SortButton() {
         </svg>
         <span className={styles.action_label}>정렬</span>
       </button>
+      <div className={styles.sort_menu}>
+        <span className={styles.sort_single_menu}>기본값</span>
+        <span className={styles.sort_single_menu}>이름</span>
+        <span className={styles.sort_single_menu}>마감 날짜</span>
+        <span className={styles.sort_single_menu}>우선 순위</span>
+      </div>
     </div>
   );
 }
