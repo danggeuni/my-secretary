@@ -47,14 +47,17 @@ export default function MainContents() {
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
-    if (JSON.parse(localStorage.getItem("todo")).length === 0) {
-      setInitScreen(true);
-      setTaskAdd(false);
-      setTaskEditor(false);
-    } else {
-      setInitScreen(false);
-      setTaskAdd(false);
-      setTaskEditor(false);
+    const getTodo = JSON.parse(localStorage.getItem("todo"));
+    if (getTodo) {
+      if (getTodo.length === 0) {
+        setInitScreen(true);
+        setTaskAdd(false);
+        setTaskEditor(false);
+      } else {
+        setInitScreen(false);
+        setTaskAdd(false);
+        setTaskEditor(false);
+      }
     }
   }, [data]);
 

@@ -1,9 +1,34 @@
 import styles from "./SortButton.module.css";
+import { useGlobalContext } from "../context";
+import { useEffect, useRef } from "react";
 
 export default function SortButton() {
+  const { showSortingMenu, setShowSortingMenu } = useGlobalContext();
+  const menuRef = useRef();
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setShowSortingMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
+  const toggleSortingMenu = () => {
+    setShowSortingMenu(!showSortingMenu);
+  };
   return (
-    <div className={styles.view_header_action}>
-      <button className={styles.view_header_action_button}>
+    <div ref={menuRef} className={styles.view_header_action}>
+      <button
+        onClick={toggleSortingMenu}
+        className={styles.view_header_action_button}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -18,7 +43,9 @@ export default function SortButton() {
         </svg>
         <span className={styles.action_label}>정렬</span>
       </button>
-      <div className={styles.sort_menu}>
+      <div
+        className={showSortingMenu ? styles.sort_menu : styles.hide_sort_menu}
+      >
         <span className={styles.sort_single_menu}>기본값</span>
         <span className={styles.sort_single_menu}>이름</span>
         <span className={styles.sort_single_menu}>마감 날짜</span>

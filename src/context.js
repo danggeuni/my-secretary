@@ -93,7 +93,7 @@ const AppProvider = ({ children }) => {
 
     if (localReplyData) {
       const todoReplyList = JSON.parse(localReplyData).sort(
-        (a, b) => parseInt(b.id) - parseInt(a.id)
+        (a, b) => parseInt(a.id) - parseInt(b.id)
       );
 
       if (todoReplyList.length >= 1) {
@@ -407,7 +407,7 @@ const AppProvider = ({ children }) => {
         modalPriority,
         setModalPriority,
 
-        // 정렬 view state
+        // sorting view state
         showSortingMenu,
         setShowSortingMenu,
       }}
