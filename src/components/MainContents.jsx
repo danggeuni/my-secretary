@@ -6,7 +6,7 @@ import cx from "clsx";
 import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";

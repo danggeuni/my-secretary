@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppProvider } from "./context";
 
 import Today from "./pages/Today";
-import Task from "./pages/Task";
+import Next from "./pages/Next";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <div className={"App"}>
           <Routes>
             <Route path={"/"} element={<Today />}></Route>
-            <Route path={"/task/:id"} element={<Task />}></Route>
+            <Route path={"/next"} element={<Next />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

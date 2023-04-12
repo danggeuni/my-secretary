@@ -49,9 +49,10 @@ export default function Task() {
         modalPriority,
         modalDate
       );
+      window.alert("수정완료");
     } else {
       setModalPriority(currentData[0].priority);
-      setModalDate(currentData[0].date);
+      setModalDate(new Date(currentData[0].date));
     }
   };
 

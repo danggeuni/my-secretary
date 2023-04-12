@@ -54,7 +54,7 @@ export default function Leftmenu() {
               </div>
               <div className={styles.item_quantity}>{data.length}</div>
             </Link>
-            <Link to={"/task/:id"} className={styles.item_link}>
+            <Link to={"/next"} className={styles.item_link}>
               <div className={styles.single_item_align}>
                 <svg
                   width="24"
