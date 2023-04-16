@@ -69,3 +69,14 @@
 .hide_sort_menu {
   display: none;
 }
+
+.sort_menu_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sort_menue_check_icon {
+  padding-right: 10px;
+}

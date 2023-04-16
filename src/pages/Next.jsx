@@ -1,13 +1,13 @@
 import Header from "../components/Header";
 import Leftmenu from "../components/Leftmenu";
-import MainContents from "../components/MainContents";
+import NextContents from "../components/NextContents";
 
 export default function Next() {
   return (
     <div>
       <Header />
       <Leftmenu />
-      <MainContents />
+      <NextContents />
     </div>
   );
 }

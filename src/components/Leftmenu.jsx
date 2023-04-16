@@ -13,6 +13,13 @@ export default function Leftmenu() {
   const date = new Date();
   const day = date.getDate();
 
+  const copyData = [...data];
+  const currentData = copyData.filter(
+    (item) => new Date(item.date) <= new Date()
+  );
+
+  const nexttData = copyData.filter((item) => new Date(item.date) > new Date());
+
   return (
     <div className={cx(styles.left_menu, { [styles.btn_toggle]: isClick })}>
       <div className={styles.left_menu_inner} role={"navigation"}>
@@ -52,7 +59,7 @@ export default function Leftmenu() {
 
                 <span>오늘</span>
               </div>
-              <div className={styles.item_quantity}>{data.length}</div>
+              <div className={styles.item_quantity}>{currentData.length}</div>
             </Link>
             <Link to={"/next"} className={styles.item_link}>
               <div className={styles.single_item_align}>
@@ -74,6 +81,7 @@ export default function Leftmenu() {
 
                 <span>다음</span>
               </div>
+              <div className={styles.item_quantity}>{nexttData.length}</div>
             </Link>
           </div>
         </div>

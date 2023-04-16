@@ -1,6 +1,6 @@
 // today (첫페이지 메인 화면 표시 콘텐츠)
 
-import styles from "./MainContents.module.css";
+import styles from "./NextContents.module.css";
 import cx from "clsx";
 
 import PriorityBox from "./PriorityBox";
@@ -18,7 +18,7 @@ import DateBox from "./DateBox";
 import EditorFooter from "./EditorFooter";
 import { Calendar } from "react-calendar";
 
-export default function MainContents() {
+export default function NextContents() {
   const {
     isClick,
     taskName,
@@ -66,19 +66,9 @@ export default function MainContents() {
     addTask();
   };
 
-  // 요일, 월, 일 표시 함수
-  const Nowday = () => {
-    const date = new Date();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const week = ["일", "월", "화", "수", "목", "금", "토"];
-    const getday = week[date.getDay()];
-    return getday + " " + month + "월" + day + "일";
-  };
-
   const copyData = [...data];
   const currentData = copyData.filter(
-    (item) => new Date(item.date) <= new Date()
+    (item) => new Date(item.date) > new Date()
   );
 
   return (
@@ -90,9 +80,9 @@ export default function MainContents() {
           <div className={styles.view_header_content}>
             <div className={styles.date_wrapper}>
               <h1 className={styles.view_header_h1}>
-                <span>오늘</span>
+                <span>다음</span>
                 <small className={styles.view_header_small}>
-                  <Nowday />
+                  {"보다 먼 미래를 계획하세요."}
                 </small>
               </h1>
             </div>

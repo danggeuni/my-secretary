@@ -292,7 +292,16 @@ const AppProvider = ({ children }) => {
     setIsOnCalendarInModal(!isOnCalendarInModal);
   };
 
-  // 모달 내부 우선순위 실행 함수
+  // 정렬 배열 값
+  const sortArray = [
+    { data: "기본값" },
+    { data: "이름" },
+    { data: "마감 날짜" },
+    { data: "우선 순위" },
+  ];
+
+  // 정렬 배열 선택 여부
+  const [selectedSort, setSelectedSort] = useState("기본값");
 
   return (
     <AppContext.Provider
@@ -410,6 +419,13 @@ const AppProvider = ({ children }) => {
         // sorting view state
         showSortingMenu,
         setShowSortingMenu,
+
+        // 정렬 배열 값
+        sortArray,
+
+        // 정렬 배열 선택 여부
+        selectedSort,
+        setSelectedSort,
       }}
     >
       {children}

@@ -3,8 +3,24 @@ import { useGlobalContext } from "../context";
 import { useEffect, useRef } from "react";
 
 export default function SortButton() {
-  const { showSortingMenu, setShowSortingMenu } = useGlobalContext();
+  const {
+    showSortingMenu,
+    setShowSortingMenu,
+    sortArray,
+    selectedSort,
+    setSelectedSort,
+  } = useGlobalContext();
+
   const menuRef = useRef();
+  const selectedMenuRef = useRef();
+
+  // 함수로 만들면 어떨까?
+  // 클릭하면 현재 selectedSort값을 변경한다.
+  const selectMenu = (item) => {
+    setSelectedSort(item.data);
+  };
+
+  console.log(selectedSort);
 
   useEffect(() => {
     const handler = (e) => {
@@ -46,10 +62,18 @@ export default function SortButton() {
       <div
         className={showSortingMenu ? styles.sort_menu : styles.hide_sort_menu}
       >
-        <span className={styles.sort_single_menu}>기본값</span>
-        <span className={styles.sort_single_menu}>이름</span>
-        <span className={styles.sort_single_menu}>마감 날짜</span>
-        <span className={styles.sort_single_menu}>우선 순위</span>
+        {sortArray.map((item, index) => (
+          <div
+            className={styles.sort_menu_wrapper}
+            key={index}
+            onClick={selectMenu}
+          >
+            <span className={styles.sort_single_menu} ref={selectedMenuRef}>
+              {item.data}
+            </span>
+            <span className={styles.sort_menue_check_icon}>✔</span>
+          </div>
+        ))}
       </div>
     </div>
   );
