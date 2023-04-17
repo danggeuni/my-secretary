@@ -9,18 +9,38 @@ export default function SortButton() {
     sortArray,
     selectedSort,
     setSelectedSort,
+    data,
   } = useGlobalContext();
+
+  useEffect(() => {
+    if (selectedSort === 1) {
+      return;
+    }
+    if (selectedSort === 2) {
+    }
+    if (selectedSort === 3) {
+      console.log("현재 3번입니다.");
+    }
+    if (selectedSort === 4) {
+      console.log("현재 4번입니다.");
+    }
+  }, [selectedSort]);
 
   const menuRef = useRef();
   const selectedMenuRef = useRef();
 
-  // 함수로 만들면 어떨까?
-  // 클릭하면 현재 selectedSort값을 변경한다.
   const selectMenu = (item) => {
-    setSelectedSort(item.data);
+    setSelectedSort(item.id);
+    setShowSortingMenu(!showSortingMenu);
   };
 
-  console.log(selectedSort);
+  const sortingFunction = () => {
+    if (selectedSort === 1) {
+    }
+
+    if (selectedSort === 2) {
+    }
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -62,16 +82,28 @@ export default function SortButton() {
       <div
         className={showSortingMenu ? styles.sort_menu : styles.hide_sort_menu}
       >
-        {sortArray.map((item, index) => (
+        {sortArray.map((item) => (
           <div
             className={styles.sort_menu_wrapper}
-            key={index}
-            onClick={selectMenu}
+            key={item.id}
+            onClick={() => selectMenu(item)}
           >
-            <span className={styles.sort_single_menu} ref={selectedMenuRef}>
+            <span
+              className={styles.sort_single_menu}
+              ref={selectedMenuRef}
+              onClick={sortingFunction}
+            >
               {item.data}
             </span>
-            <span className={styles.sort_menue_check_icon}>✔</span>
+            <span
+              className={
+                selectedSort === item.id
+                  ? styles.show_sort_menu_check_icon
+                  : styles.sort_menu_check_icon
+              }
+            >
+              ✔
+            </span>
           </div>
         ))}
       </div>

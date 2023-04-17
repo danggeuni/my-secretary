@@ -294,14 +294,14 @@ const AppProvider = ({ children }) => {
 
   // 정렬 배열 값
   const sortArray = [
-    { data: "기본값" },
-    { data: "이름" },
-    { data: "마감 날짜" },
-    { data: "우선 순위" },
+    { id: 1, data: "기본값" },
+    { id: 2, data: "이름" },
+    { id: 3, data: "마감 날짜" },
+    { id: 4, data: "우선 순위" },
   ];
 
   // 정렬 배열 선택 여부
-  const [selectedSort, setSelectedSort] = useState("기본값");
+  const [selectedSort, setSelectedSort] = useState(1);
 
   return (
     <AppContext.Provider

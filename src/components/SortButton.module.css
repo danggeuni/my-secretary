@@ -77,6 +77,11 @@
   align-items: center;
 }
 
-.sort_menue_check_icon {
+.sort_menu_check_icon {
+  display: none;
+  padding-right: 10px;
+}
+
+.show_sort_menu_check_icon {
   padding-right: 10px;
 }
