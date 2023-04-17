@@ -35,6 +35,8 @@ export default function NextContents() {
     setInitScreen,
     setTaskAdd,
     setTaskEditor,
+    control,
+    setControl,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -61,13 +63,17 @@ export default function NextContents() {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (!data) return;
+    setControl(data);
+  }, [data]);
+
   const launchAddTask = (e) => {
     e.preventDefault();
     addTask();
   };
 
-  const copyData = [...data];
-  const currentData = copyData.filter(
+  const currentData = control.filter(
     (item) => new Date(item.date) > new Date()
   );
 

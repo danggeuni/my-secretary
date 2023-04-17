@@ -35,6 +35,8 @@ export default function MainContents() {
     setInitScreen,
     setTaskAdd,
     setTaskEditor,
+    control,
+    setControl,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -61,6 +63,11 @@ export default function MainContents() {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (!data) return;
+    setControl(data);
+  }, [data]);
+
   const launchAddTask = (e) => {
     e.preventDefault();
     addTask();
@@ -76,8 +83,7 @@ export default function MainContents() {
     return getday + " " + month + "월" + day + "일";
   };
 
-  const copyData = [...data];
-  const currentData = copyData.filter(
+  const currentData = control.filter(
     (item) => new Date(item.date) <= new Date()
   );
 

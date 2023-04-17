@@ -303,6 +303,9 @@ const AppProvider = ({ children }) => {
   // 정렬 배열 선택 여부
   const [selectedSort, setSelectedSort] = useState(1);
 
+  // localStorage 데이터 보관 state
+  const [control, setControl] = useState([]);
+
   return (
     <AppContext.Provider
       value={{
@@ -426,6 +429,10 @@ const AppProvider = ({ children }) => {
         // 정렬 배열 선택 여부
         selectedSort,
         setSelectedSort,
+
+        // localStorage 데이터 보관 state
+        control,
+        setControl,
       }}
     >
       {children}

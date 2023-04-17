@@ -1,6 +1,6 @@
 import styles from "./SortButton.module.css";
 import { useGlobalContext } from "../context";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function SortButton() {
   const {
@@ -10,21 +10,38 @@ export default function SortButton() {
     selectedSort,
     setSelectedSort,
     data,
+    setControl,
   } = useGlobalContext();
 
   useEffect(() => {
     if (selectedSort === 1) {
-      return;
+      return setControl(data);
     }
+
     if (selectedSort === 2) {
+      setControl(
+        [...data].sort(function (a, b) {
+          return a.todo < b.todo ? -1 : a.todo < b.todo ? 1 : 0;
+        })
+      );
     }
+
     if (selectedSort === 3) {
-      console.log("현재 3번입니다.");
+      setControl(
+        [...data].sort(function (a, b) {
+          return a.date < b.date ? -1 : a.date < b.date ? 1 : 0;
+        })
+      );
     }
+
     if (selectedSort === 4) {
-      console.log("현재 4번입니다.");
+      setControl(
+        [...data].sort(function (a, b) {
+          return a.priority < b.priority ? -1 : a.date < b.date ? 1 : 0;
+        })
+      );
     }
-  }, [selectedSort]);
+  }, [selectedSort, data]);
 
   const menuRef = useRef();
   const selectedMenuRef = useRef();
