@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 export default function Leftmenu() {
-  const { isClick, data } = useGlobalContext();
+  const { isClick, data, showCate, setShowCate } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
   const date = new Date();
@@ -86,7 +86,7 @@ export default function Leftmenu() {
           </div>
         </div>
         <div className={styles.project_item_wrapper}>
-          <div className={styles.project}>프로젝트</div>
+          <div className={styles.project}>간편메모</div>
           <div className={styles.project_btn}>
             <button>
               <svg width="13" height="13" className={styles.project_icon}>
@@ -98,7 +98,11 @@ export default function Leftmenu() {
               </svg>
             </button>
 
-            <button aria-label={"프로젝트 숨김/표시 토글"}>
+            <button
+              aria-label={"간편메모 숨김/표시 토글"}
+              onClick={() => setShowCate(!showCate)}
+              className={showCate ? styles.openProject : styles.closeProject}
+            >
               <svg
                 width="16"
                 height="16"

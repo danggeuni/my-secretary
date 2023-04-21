@@ -1,0 +1,39 @@
+.popup_wrapper {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+
+  transform: translateY(-0px);
+  transition: all 1s ease;
+}
+
+.popup_hide_wrapper {
+  position: fixed;
+  bottom: -40px;
+
+  transform: translateY(0px);
+  transition: all 1s ease;
+}
+
+.popup_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #282828;
+  color: white;
+  width: 270px;
+  height: 40px;
+
+  border-radius: 5px;
+}
+
+.popup_type {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.popup_type:hover {
+  color: tomato;
+  cursor: pointer;
+}

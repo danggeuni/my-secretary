@@ -163,6 +163,24 @@ const AppProvider = ({ children }) => {
   // 정렬 view state
   const [showSortingMenu, setShowSortingMenu] = useState(false);
 
+  // 정렬 배열 선택 여부
+  const [selectedSort, setSelectedSort] = useState(1);
+
+  // localStorage 데이터 보관 state
+  const [control, setControl] = useState([]);
+
+  // 메인 달력 state
+  const [isOnCalendar, setIsOnCalendar] = useState(false);
+
+  // 세부 화면 달력 state
+  const [isOnCalendarInModal, setIsOnCalendarInModal] = useState(false);
+
+  // left menu 프로젝트 on/off 토글 state
+  const [showCate, setShowCate] = useState(false);
+
+  // popup display 관리 state
+  const [showPopup, setShowPopup] = useState(false);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -201,6 +219,8 @@ const AppProvider = ({ children }) => {
     setTaskDesc("");
     setCurrentValue("우선 순위 4");
     setCalendar(new Date());
+
+    setSelectedSort(1);
   };
 
   // 댓글 추가 submit 함수
@@ -276,12 +296,6 @@ const AppProvider = ({ children }) => {
     setCurrentId(item);
   };
 
-  // 메인 달력 state
-  const [isOnCalendar, setIsOnCalendar] = useState(false);
-
-  // 세부 화면 달력 state
-  const [isOnCalendarInModal, setIsOnCalendarInModal] = useState(false);
-
   // 달력 모달 실행 함수
   const openCalendar = () => {
     setIsOnCalendar(!isOnCalendar);
@@ -299,12 +313,6 @@ const AppProvider = ({ children }) => {
     { id: 3, data: "마감 날짜" },
     { id: 4, data: "우선 순위" },
   ];
-
-  // 정렬 배열 선택 여부
-  const [selectedSort, setSelectedSort] = useState(1);
-
-  // localStorage 데이터 보관 state
-  const [control, setControl] = useState([]);
 
   return (
     <AppContext.Provider
@@ -433,6 +441,14 @@ const AppProvider = ({ children }) => {
         // localStorage 데이터 보관 state
         control,
         setControl,
+
+        // left menu 프로젝트 on/off 토글 state
+        showCate,
+        setShowCate,
+
+        // popup display 관리 state
+        showPopup,
+        setShowPopup,
       }}
     >
       {children}
