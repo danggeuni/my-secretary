@@ -18,7 +18,7 @@ export default function Leftmenu() {
     (item) => new Date(item.date) <= new Date()
   );
 
-  const nexttData = copyData.filter((item) => new Date(item.date) > new Date());
+  const nextData = copyData.filter((item) => new Date(item.date) > new Date());
 
   return (
     <div className={cx(styles.left_menu, { [styles.btn_toggle]: isClick })}>
@@ -81,7 +81,7 @@ export default function Leftmenu() {
 
                 <span>다음</span>
               </div>
-              <div className={styles.item_quantity}>{nexttData.length}</div>
+              <div className={styles.item_quantity}>{nextData.length}</div>
             </Link>
           </div>
         </div>

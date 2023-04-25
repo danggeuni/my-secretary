@@ -181,6 +181,9 @@ const AppProvider = ({ children }) => {
   // popup display 관리 state
   const [showPopup, setShowPopup] = useState(false);
 
+  // popup disyplay 표시 state
+  const [popupDisplay, setPopupDisplay] = useState("오늘");
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -215,6 +218,21 @@ const AppProvider = ({ children }) => {
   // 작업 추가 submit 함수
   const addTask = () => {
     addTodoList(taskName, taskDesc, currentValue, calendar);
+
+    if (new Date(calendar) < new Date()) {
+      setPopupDisplay("오늘");
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
+    } else {
+      setPopupDisplay("다음");
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
+    }
+
     setTaskName("");
     setTaskDesc("");
     setCurrentValue("우선 순위 4");
@@ -449,6 +467,10 @@ const AppProvider = ({ children }) => {
         // popup display 관리 state
         showPopup,
         setShowPopup,
+
+        // popup disyplay 표시 state
+        popupDisplay,
+        setPopupDisplay,
       }}
     >
       {children}

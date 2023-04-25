@@ -38,3 +38,7 @@
   color: tomato;
   cursor: pointer;
 }
+
+.popup_type {
+  text-decoration: none;
+}
