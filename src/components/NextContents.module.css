@@ -8,8 +8,6 @@
   background-color: #fff;
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.6, 1);
   position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
   overflow: hidden auto;
   outline: 0;
   transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);

@@ -103,6 +103,10 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
+  // 날짜 데이터
+  const today = new Date();
+  const tomorrow = today.setDate(today.getDate() + 1);
+
   // todo dispatch state
   const [data, dispatch] = useReducer(reducer, []);
 
@@ -148,8 +152,11 @@ const AppProvider = ({ children }) => {
   // 리스트 선택 시 ID state
   const [currentId, setCurrentId] = useState(0);
 
-  // 달력 state
+  // 오늘 달력 state
   const [calendar, setCalendar] = useState(new Date());
+
+  // 오늘 달력 state
+  const [nextCalendar, setNextCalendar] = useState(new Date(tomorrow));
 
   // 댓글 state
   const [replyComment, setReplyComment] = useState("");
@@ -471,6 +478,12 @@ const AppProvider = ({ children }) => {
         // popup disyplay 표시 state
         popupDisplay,
         setPopupDisplay,
+
+        // 날짜 데이터
+        today,
+        tomorrow,
+
+        nextCalendar,
       }}
     >
       {children}

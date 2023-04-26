@@ -182,7 +182,7 @@ export default function MainContents() {
             </div>
           </div>
         </div>
-      </div>{" "}
+      </div>
       <UpdatePopup />
     </>
   );

@@ -35,10 +35,10 @@
 }
 
 .popup_type:hover {
-  color: tomato;
   cursor: pointer;
 }
 
 .popup_type {
   text-decoration: none;
+  color: tomato;
 }
