@@ -3,15 +3,19 @@
 import styles from "./Header.module.css";
 import cx from "clsx";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useGlobalContext } from "../context";
 
 export default function Header() {
-  const { btnClick } = useGlobalContext();
+  const { btnClick, data, search, setSearch, launchModal } = useGlobalContext();
 
-  const [search, setSearch] = useState("");
+  const searchData = [...data];
+
+  const searched = searchData.filter((item) =>
+    item.todo.toLowerCase().includes(search)
+  );
 
   return (
     <header className={styles.top_bar}>
@@ -61,7 +65,7 @@ export default function Header() {
                   }
                 ></path>
               </svg>
-            </button>{" "}
+            </button>
           </Link>
           {/* 돋보기 아이콘, input창은 이곳에 포함*/}
           <div className={styles.quick_find}>
@@ -81,12 +85,25 @@ export default function Header() {
               <input
                 className={styles.search_input}
                 placeholder="검색"
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => setSearch(e.target.value.toLowerCase())}
                 value={search}
               ></input>
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles.search_list}>
+        {searched.map((item, index) =>
+          search === "" ? null : (
+            <div
+              className={styles.search_item}
+              key={index}
+              onClick={() => launchModal(item.id)}
+            >
+              {item.todo}
+            </div>
+          )
+        )}
       </div>
     </header>
   );

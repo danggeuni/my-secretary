@@ -191,6 +191,9 @@ const AppProvider = ({ children }) => {
   // popup disyplay 표시 state
   const [popupDisplay, setPopupDisplay] = useState("오늘");
 
+  // header 검색창 state
+  const [search, setSearch] = useState("");
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -244,6 +247,32 @@ const AppProvider = ({ children }) => {
     setTaskDesc("");
     setCurrentValue("우선 순위 4");
     setCalendar(new Date());
+
+    setSelectedSort(1);
+  };
+
+  // 다음 작업 추가 submit 함수
+  const nextAddTask = () => {
+    addTodoList(taskName, taskDesc, currentValue, nextCalendar);
+
+    if (new Date(tomorrow) < new Date()) {
+      setPopupDisplay("오늘");
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
+    } else {
+      setPopupDisplay("다음");
+      setShowPopup(true);
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 5000);
+    }
+
+    setTaskName("");
+    setTaskDesc("");
+    setCurrentValue("우선 순위 4");
+    setNextCalendar(new Date(tomorrow));
 
     setSelectedSort(1);
   };
@@ -319,6 +348,7 @@ const AppProvider = ({ children }) => {
   const launchModal = (item) => {
     setModalIsOpen(!modalIsOpen);
     setCurrentId(item);
+    setSearch("");
   };
 
   // 달력 모달 실행 함수
@@ -484,6 +514,13 @@ const AppProvider = ({ children }) => {
         tomorrow,
 
         nextCalendar,
+        setNextCalendar,
+
+        nextAddTask,
+
+        // header 검색창 state
+        search,
+        setSearch,
       }}
     >
       {children}

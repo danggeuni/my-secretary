@@ -1,5 +1,6 @@
 /* 상단 메뉴 기본 CSS */
 .top_bar {
+  position: relative;
   box-sizing: border-box;
   height: 44px;
   z-index: 200;
@@ -136,4 +137,24 @@ button {
 
 .menu_click {
   background-color: tomato;
+}
+
+.search_list {
+  position: absolute;
+  top: 45px;
+  left: 85px;
+
+  border-radius: 5px;
+  width: 452px;
+  line-height: 20px;
+  box-shadow: 1px 1px 1px 1px #dddddd;
+
+  cursor: pointer;
+  line-height: 20px;
+
+  background-color: white;
+}
+
+.search_item:hover {
+  background-color: #606060;
 }

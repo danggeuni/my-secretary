@@ -10,16 +10,14 @@ import { useEffect } from "react";
 import moment from "moment";
 import SortButton from "./SortButton";
 import TaskAdd from "./TaskAddButton";
-import InitScreen from "./InitScreen";
 import Modal from "./Modal";
 import Task from "../pages/Task";
 import EditorInutField from "./EditorInputFields";
-import DateBox from "./DateBox";
-import EditorFooter from "./EditorFooter";
 import UpdatePopup from "./UpdatePopup";
 import { Calendar } from "react-calendar";
 import NextInitScreen from "./NextInitScreen";
 import NextDateBox from "./NextDateBox";
+import NextEditorFooter from "./NextEditorFooter";
 
 export default function NextContents() {
   const {
@@ -33,16 +31,21 @@ export default function NextContents() {
     addTask,
     launchModal,
     isOnCalendar,
-    setCalendar,
-    calendar,
     setInitScreen,
     setTaskAdd,
     setTaskEditor,
     control,
     setControl,
-    today,
     tomorrow,
+    nextCalendar,
+    setNextCalendar,
+    setIsOnCalendar,
+    nextAddTask,
   } = useGlobalContext();
+
+  useEffect(() => {
+    setIsOnCalendar(false);
+  }, [nextCalendar]);
 
   useEffect(() => {
     if (taskName.length > 0) {
@@ -66,16 +69,13 @@ export default function NextContents() {
         setTaskEditor(false);
       }
     }
-  }, [data]);
-
-  useEffect(() => {
     if (!data) return;
     setControl(data);
   }, [data]);
 
   const launchAddTask = (e) => {
     e.preventDefault();
-    addTask();
+    nextAddTask();
   };
 
   const currentData = control.filter(
@@ -161,8 +161,8 @@ export default function NextContents() {
                       [styles.onCalendar]: isOnCalendar,
                     })}
                     minDate={new Date(tomorrow)}
-                    onChange={setCalendar}
-                    value={calendar}
+                    onChange={setNextCalendar}
+                    value={nextCalendar}
                   ></Calendar>
                 </div>
               </form>
@@ -172,7 +172,7 @@ export default function NextContents() {
               {/* 초기 화면 구현 (고양이 커피짤) */}
               <NextInitScreen />
               {/* 작업 추가 footer (취소, 추가 button)  */}
-              <EditorFooter />
+              <NextEditorFooter />
             </div>
           </div>
         </div>

@@ -1,9 +1,9 @@
-import styles from "./EditorFooter.module.css";
+import styles from "./NextEditorFooter.module.css";
 import cx from "clsx";
 import { useGlobalContext } from "../context";
 
 export default function NextEditorFooter() {
-  const { taskBtnActive, taskCancelButton, taskEditor, addTask } =
+  const { taskBtnActive, taskCancelButton, taskEditor, nextAddTask } =
     useGlobalContext();
 
   return (
@@ -24,7 +24,7 @@ export default function NextEditorFooter() {
           className={cx(styles.task_add_button, {
             [styles.is_task_btn_active]: taskBtnActive,
           })}
-          onClick={addTask}
+          onClick={nextAddTask}
         >
           <span>작업 추가</span>
         </button>
