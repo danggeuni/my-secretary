@@ -1,13 +1,16 @@
 // 좌측 메뉴
-
 import styles from "./Leftmenu.module.css";
 import cx from "clsx";
 
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
+import { useRef, useState } from "react";
 
 export default function Leftmenu() {
   const { isClick, data, showCate, setShowCate } = useGlobalContext();
+
+  const [easyMemo, setEasyMemo] = useState("");
+  const [showMemo, setShowMemo] = useState(false);
 
   // 오늘 날짜 구하고 svg에 적용
   const date = new Date();
@@ -19,6 +22,13 @@ export default function Leftmenu() {
   );
 
   const nextData = copyData.filter((item) => new Date(item.date) > new Date());
+
+  const showEasyMemoInput = () => {
+    setShowMemo(!showMemo);
+  };
+
+  const inputRef = useRef();
+  const test = () => {};
 
   return (
     <div className={cx(styles.left_menu, { [styles.btn_toggle]: isClick })}>
@@ -88,7 +98,7 @@ export default function Leftmenu() {
         <div className={styles.project_item_wrapper}>
           <div className={styles.project}>간편메모</div>
           <div className={styles.project_btn}>
-            <button>
+            <button onClick={showEasyMemoInput}>
               <svg width="13" height="13" className={styles.project_icon}>
                 <path
                   d="M6 6V.5a.5.5 0 0 1 1 0V6h5.5a.5.5 0 1 1 0 1H7v5.5a.5.5 0 1 1-1 0V7H.5a.5.5 0 0 1 0-1H6z"
@@ -117,6 +127,29 @@ export default function Leftmenu() {
             </button>
           </div>
         </div>
+        <form>
+          <div
+            className={showMemo ? styles.show_easy_memo : styles.hide_easy_memo}
+          >
+            <input
+              className={styles.input_easy_memo}
+              value={easyMemo}
+              onChange={(e) => setEasyMemo(e.target.value)}
+              ref={inputRef}
+              maxLength={20}
+            />
+            <button
+              onSubmit={test}
+              className={
+                showMemo
+                  ? styles.show_button_easy_memo
+                  : styles.hide_button_easy_memo
+              }
+            >
+              등록
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

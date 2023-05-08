@@ -175,3 +175,45 @@
 .project_icon:hover {
   color: tomato;
 }
+
+.hide_easy_memo > .input_easy_memo {
+  visibility: hidden;
+  border-radius: 5px;
+  width: 0px;
+  transition: all 0.3s;
+}
+
+.show_easy_memo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.show_easy_memo > .input_easy_memo {
+  visibility: visible;
+  border-radius: 5px;
+  width: 220px;
+  transition: all 0.3s;
+}
+
+.input_easy_memo {
+  margin: 5px;
+}
+
+.hide_button_easy_memo {
+  visibility: hidden;
+}
+
+.show_button_easy_memo {
+  visibility: visible;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  padding-left: 2px;
+  padding-right: 2px;
+
+  border-radius: 5px;
+
+  font-weight: 600;
+  background-color: tomato;
+  color: white;
+}
