@@ -28,7 +28,6 @@ export default function NextContents() {
     taskEditor,
     removeTodoList,
     modalIsOpen,
-    addTask,
     launchModal,
     isOnCalendar,
     setInitScreen,

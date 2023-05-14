@@ -7,10 +7,18 @@ import { useGlobalContext } from "../context";
 import { useRef, useState } from "react";
 
 export default function Leftmenu() {
-  const { isClick, data, showCate, setShowCate } = useGlobalContext();
-
-  const [easyMemo, setEasyMemo] = useState("");
-  const [showMemo, setShowMemo] = useState(false);
+  const {
+    isClick,
+    data,
+    showCate,
+    setShowCate,
+    easyMemo,
+    setEasyMemo,
+    addMemo,
+    memoData,
+    showMemo,
+    setShowMemo,
+  } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
   const date = new Date();
@@ -28,7 +36,8 @@ export default function Leftmenu() {
   };
 
   const inputRef = useRef();
-  const test = () => {};
+
+  const copyMemoData = [...memoData];
 
   return (
     <div className={cx(styles.left_menu, { [styles.btn_toggle]: isClick })}>
@@ -96,7 +105,9 @@ export default function Leftmenu() {
           </div>
         </div>
         <div className={styles.project_item_wrapper}>
-          <div className={styles.project}>간편메모</div>
+          <div className={styles.project}>
+            간단메모 ({copyMemoData.length}/5)
+          </div>
           <div className={styles.project_btn}>
             <button onClick={showEasyMemoInput}>
               <svg width="13" height="13" className={styles.project_icon}>
@@ -127,7 +138,7 @@ export default function Leftmenu() {
             </button>
           </div>
         </div>
-        <form>
+        <form onSubmit={addMemo}>
           <div
             className={showMemo ? styles.show_easy_memo : styles.hide_easy_memo}
           >
@@ -139,7 +150,6 @@ export default function Leftmenu() {
               maxLength={20}
             />
             <button
-              onSubmit={test}
               className={
                 showMemo
                   ? styles.show_button_easy_memo
@@ -150,6 +160,15 @@ export default function Leftmenu() {
             </button>
           </div>
         </form>
+        <ol>
+          {copyMemoData.map((item) => (
+            <li className={!showCate ? styles.memo : styles.hide_memo}>
+              {item.memo}
+              <button className={styles.memo_done_button}>오잉</button>
+              <button className={styles.memo_delete_button}>또잉</button>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );

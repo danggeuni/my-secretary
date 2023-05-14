@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap");
+
 .left_menu {
   box-sizing: border-box;
   width: 305px;
@@ -216,4 +218,28 @@
   font-weight: 600;
   background-color: tomato;
   color: white;
+}
+
+.memo {
+  margin-left: 10px;
+  line-height: 2;
+  font-weight: 600;
+  font-family: "Hi Melody", cursive;
+  font-size: 25px;
+  transition: all 0.5s;
+}
+
+.memo:first-child {
+  margin-top: 5px;
+}
+
+.hide_memo {
+  visibility: hidden;
+  margin-left: 10px;
+  line-height: 2;
+  font-weight: 600;
+  font-family: "Hi Melody", cursive;
+  font-size: 25px;
+
+  transition: all 0.5s;
 }

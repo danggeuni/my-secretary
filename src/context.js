@@ -71,6 +71,33 @@ const AppProvider = ({ children }) => {
     return replyState;
   };
 
+  const memoReducer = (state, action) => {
+    let memoState = [];
+
+    switch (action.type) {
+      case "INIT": {
+        return action.memoData;
+      }
+
+      case "CREATEMEMO": {
+        memoState = [...state, action.memoData];
+        break;
+      }
+
+      case "REMOVEMEMO": {
+        memoState = state.filter((item) => item.id !== action.targetId);
+        break;
+      }
+
+      default:
+        return state;
+    }
+
+    localStorage.setItem("memo", JSON.stringify(memoState));
+
+    return memoState;
+  };
+
   // local 데이터 불러온 후 id순으로 정렬(id값이 높으면 위로 올라오게)
   // local 데이터가 존재할 경우, 마지막 id 값에 + 1 하여 리스트 생성하도록. ditpatch 통해 리스트 구현
   useEffect(() => {
@@ -103,6 +130,21 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const localMemoData = localStorage.getItem("memo");
+
+    if (localMemoData) {
+      const todoMemoList = JSON.parse(localMemoData).sort(
+        (a, b) => parseInt(a.id) - parseInt(b.id)
+      );
+
+      if (todoMemoList.length >= 1) {
+        memoDataId.current = parseInt(todoMemoList[0].id) + 1;
+        memoDispatch({ type: "INIT", memoData: todoMemoList });
+      }
+    }
+  }, []);
+
   // 날짜 데이터
   const today = new Date();
   const tomorrow = today.setDate(today.getDate() + 1);
@@ -112,6 +154,9 @@ const AppProvider = ({ children }) => {
 
   // reply dispatch state
   const [replyData, replyDispatch] = useReducer(replyReducer, []);
+
+  // memo dispatch state
+  const [memoData, memoDispatch] = useReducer(memoReducer, []);
 
   // 메뉴 클릭 toggle state
   const [isClick, setIsClick] = useState(false);
@@ -133,6 +178,9 @@ const AppProvider = ({ children }) => {
 
   // reply list id 생성을 위한 useRef
   const ReplyDataId = useRef(0);
+
+  // memo list id 생성을 위한 useRef
+  const memoDataId = useRef(0);
 
   // 우선 순위 wrapper state
   const [showPriority, setShowPriority] = useState(false);
@@ -193,6 +241,12 @@ const AppProvider = ({ children }) => {
 
   // header 검색창 state
   const [search, setSearch] = useState("");
+
+  // 좌측 메뉴 memo 값 state
+  const [easyMemo, setEasyMemo] = useState("");
+
+  // memo 표시 / 숨기기 state
+  const [showMemo, setShowMemo] = useState(false);
 
   // 작업 취소 버튼
   const taskCancelButton = () => {
@@ -277,6 +331,20 @@ const AppProvider = ({ children }) => {
     setSelectedSort(1);
   };
 
+  // 메모 추가 submit 함수
+  const addMemo = (e) => {
+    if (memoData.length < 5) {
+      e.preventDefault();
+
+      addMemoList(easyMemo);
+      setEasyMemo("");
+    } else {
+      e.preventDefault();
+      alert("테스트입니다");
+      setEasyMemo("");
+    }
+  };
+
   // 댓글 추가 submit 함수
   const addReply = (e) => {
     e.preventDefault();
@@ -328,6 +396,18 @@ const AppProvider = ({ children }) => {
       replyData: { id: ReplyDataId.current, reply, modalId: currentId, time },
     });
     ReplyDataId.current = ReplyDataId.current + 1;
+  };
+
+  // memo 리스트 생성 함수
+  const addMemoList = (memo) => {
+    memoDispatch({
+      type: "CREATEMEMO",
+      memoData: {
+        id: memoDataId.current,
+        memo,
+      },
+    });
+    memoDataId.current = dataId.current + 1;
   };
 
   // 리스트 제거 함수
@@ -521,6 +601,20 @@ const AppProvider = ({ children }) => {
         // header 검색창 state
         search,
         setSearch,
+
+        // 좌측 메뉴 memo 값 state
+        easyMemo,
+        setEasyMemo,
+
+        // memo submit 함수
+        addMemo,
+
+        // 메모 저장 배열 데이타
+        memoData,
+
+        // memo 표시 / 숨기기 state
+        showMemo,
+        setShowMemo,
       }}
     >
       {children}

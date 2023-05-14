@@ -3,7 +3,6 @@
 import styles from "./Header.module.css";
 import cx from "clsx";
 
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useGlobalContext } from "../context";
