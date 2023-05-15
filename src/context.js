@@ -89,6 +89,16 @@ const AppProvider = ({ children }) => {
         break;
       }
 
+      case "CHECK": {
+        memoState = [...state];
+        memoState.map((item) => {
+          if (item.id === action.item) {
+            item.isChecked = !item.isChecked;
+          }
+        });
+        break;
+      }
+
       default:
         return state;
     }
@@ -248,6 +258,9 @@ const AppProvider = ({ children }) => {
   // memo 표시 / 숨기기 state
   const [showMemo, setShowMemo] = useState(false);
 
+  // 메모 확인 id
+  const [checkMemoId, setCheckMemoId] = useState(0);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -340,7 +353,7 @@ const AppProvider = ({ children }) => {
       setEasyMemo("");
     } else {
       e.preventDefault();
-      alert("테스트입니다");
+      alert("간단 메모는 최대 5개까지 사용할 수 있습니다. :)");
       setEasyMemo("");
     }
   };
@@ -404,10 +417,21 @@ const AppProvider = ({ children }) => {
       type: "CREATEMEMO",
       memoData: {
         id: memoDataId.current,
+        isChecked: false,
         memo,
       },
     });
-    memoDataId.current = dataId.current + 1;
+    memoDataId.current = memoDataId.current + 1;
+  };
+
+  // 메모 체크 함수
+  const checkMemo = (item) => {
+    memoDispatch({
+      type: "CHECK",
+      item,
+    });
+
+    setCheckMemoId(item);
   };
 
   // 리스트 제거 함수
@@ -615,6 +639,13 @@ const AppProvider = ({ children }) => {
         // memo 표시 / 숨기기 state
         showMemo,
         setShowMemo,
+
+        // 메모 체크 함수
+        checkMemo,
+
+        // 메모 확인 id
+        checkMemoId,
+        setCheckMemoId,
       }}
     >
       {children}

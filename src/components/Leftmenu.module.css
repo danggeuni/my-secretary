@@ -189,6 +189,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  margin-bottom: 20px;
 }
 
 .show_easy_memo > .input_easy_memo {
@@ -204,6 +206,7 @@
 
 .hide_button_easy_memo {
   visibility: hidden;
+  margin-bottom: 28px;
 }
 
 .show_button_easy_memo {
@@ -221,6 +224,11 @@
 }
 
 .memo {
+  display: flex;
+  width: 83%;
+  flex-direction: row;
+  justify-content: space-between;
+
   margin-left: 10px;
   line-height: 2;
   font-weight: 600;
@@ -229,17 +237,37 @@
   transition: all 0.5s;
 }
 
-.memo:first-child {
-  margin-top: 5px;
-}
-
 .hide_memo {
-  visibility: hidden;
+  display: flex;
+  width: 83%;
+
+  color: #fafafa;
+  flex-direction: row;
+  justify-content: space-between;
+
   margin-left: 10px;
   line-height: 2;
   font-weight: 600;
   font-family: "Hi Melody", cursive;
   font-size: 25px;
+  transition: all 0.5s;
+}
 
+.space {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.memo_button_wrapper {
+  display: flex;
+}
+
+.hide_button {
+  color: #fafafa;
+  transition: all 0.5s;
+  visibility: hidden;
+}
+
+.show_button {
   transition: all 0.5s;
 }
