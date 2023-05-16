@@ -4,7 +4,7 @@ import cx from "clsx";
 
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function Leftmenu() {
   const {

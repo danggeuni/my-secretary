@@ -3,19 +3,11 @@
 .left_menu {
   box-sizing: border-box;
   width: 305px;
-  height: calc(100vh - 44px);
+  height: 100vh;
   padding-top: 30px;
   position: fixed;
-  transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow-x: hidden;
-  overflow-y: hidden;
   background-color: #fafafa;
-  -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  transform: translateX(-300px);
+  transform: translateX(-350px);
   transition: all 0.2s ease-in-out;
 }
 
@@ -28,50 +20,7 @@
 .left_menu_inner {
   padding-right: 18px;
   padding-left: 18px;
-  gap: 16px;
   width: 304px;
-}
-
-.top_menu {
-  outline: none !important;
-  box-sizing: border-box;
-  left: 0;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
-  font-family: inherit;
-  background-color: transparent;
-  display: block;
-  list-style-type: disc;
-  list-style: none;
-  margin-block-start: 0.6em;
-  margin-block-end: 1em;
-}
-
-.filter_inbox {
-  outline: none !important;
-  display: list-item;
-  text-align: -webkit-match-parent;
-  list-style: none;
-  font-size: 14px;
-  font-family: inherit;
-}
-
-.sidebar_list_item {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-  box-sizing: border-box;
-  border: 0;
-  margin: 0;
-  padding: 0;
-
-  font-family: inherit;
-  vertical-align: baseline;
-  background-color: transparent;
-  list-style: none;
 }
 
 .single_item_wrapper {

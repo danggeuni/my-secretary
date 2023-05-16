@@ -50,9 +50,13 @@ export default function MainContents() {
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
-    const getTodo = JSON.parse(localStorage.getItem("todo"));
-    if (getTodo) {
-      if (getTodo.length === 0) {
+    const copyData = [...data];
+    const currentData = copyData.filter(
+      (item) => new Date(item.date) <= new Date()
+    );
+
+    if (currentData) {
+      if (currentData.length === 0) {
         setInitScreen(true);
         setTaskAdd(false);
         setTaskEditor(false);

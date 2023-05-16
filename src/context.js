@@ -201,6 +201,9 @@ const AppProvider = ({ children }) => {
   // 작업 취소 state
   const [initScreen, setInitScreen] = useState(true);
 
+  // 다음 작업 취소 state
+  const [nextInitScreen, setNextInitScreen] = useState(true);
+
   // 작업 추가 시 editor state
   const [taskEditor, setTaskEditor] = useState(false);
 
@@ -265,6 +268,7 @@ const AppProvider = ({ children }) => {
   const taskCancelButton = () => {
     if (data.length === 0) {
       setInitScreen(true);
+      setNextInitScreen(true);
       setTaskAdd(false);
       setTaskEditor(false);
 
@@ -272,6 +276,7 @@ const AppProvider = ({ children }) => {
       setTaskDesc("");
     } else {
       setInitScreen(false);
+      setNextInitScreen(false);
       setTaskAdd(false);
       setTaskEditor(false);
 
@@ -290,6 +295,7 @@ const AppProvider = ({ children }) => {
     setTaskAdd(true);
     setTaskEditor(true);
     setInitScreen(false);
+    setNextInitScreen(false);
   };
 
   // 작업 추가 submit 함수
@@ -531,6 +537,10 @@ const AppProvider = ({ children }) => {
         initScreen,
         setInitScreen,
         taskCancelButton,
+
+        // 다음 작업 취소 state
+        nextInitScreen,
+        setNextInitScreen,
 
         // 작업 추가 버튼 클릭 시 editor state
         taskEditor,

@@ -3,7 +3,7 @@ import cx from "clsx";
 import { useGlobalContext } from "../context";
 
 export default function NextEditorFooter() {
-  const { taskBtnActive, taskCancelButton, taskEditor, nextAddTask } =
+  const { taskBtnActive, taskCancelButton, taskEditor, nextAddTask, taskName } =
     useGlobalContext();
 
   return (
@@ -21,6 +21,7 @@ export default function NextEditorFooter() {
           <span>취소</span>
         </button>
         <button
+          disabled={taskName.length > 0 ? false : true}
           className={cx(styles.task_add_button, {
             [styles.is_task_btn_active]: taskBtnActive,
           })}

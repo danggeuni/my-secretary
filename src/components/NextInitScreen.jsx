@@ -3,12 +3,11 @@ import cx from "clsx";
 import { useGlobalContext } from "../context";
 
 export default function NextInitScreen() {
-  const { initScreen } = useGlobalContext();
-
+  const { nextInitScreen } = useGlobalContext();
   return (
     <div
       className={cx(styles.empty_state_holder, {
-        [styles.show_init_holder]: initScreen,
+        [styles.show_init_holder]: nextInitScreen,
       })}
     >
       <div>

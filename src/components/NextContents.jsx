@@ -30,7 +30,7 @@ export default function NextContents() {
     modalIsOpen,
     launchModal,
     isOnCalendar,
-    setInitScreen,
+    setNextInitScreen,
     setTaskAdd,
     setTaskEditor,
     control,
@@ -56,14 +56,19 @@ export default function NextContents() {
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
-    const getTodo = JSON.parse(localStorage.getItem("todo"));
-    if (getTodo) {
-      if (getTodo.length === 0) {
-        setInitScreen(true);
+    const copyData = [...data];
+
+    const nextData = copyData.filter(
+      (item) => new Date(item.date) > new Date()
+    );
+
+    if (nextData) {
+      if (nextData.length === 0) {
+        setNextInitScreen(true);
         setTaskAdd(false);
         setTaskEditor(false);
       } else {
-        setInitScreen(false);
+        setNextInitScreen(false);
         setTaskAdd(false);
         setTaskEditor(false);
       }
