@@ -235,6 +235,8 @@
   font-family: "Hi Melody", cursive;
   font-size: 25px;
   transition: all 0.5s;
+
+  border-bottom: 1px solid #999999;
 }
 
 .hide_memo {
@@ -249,7 +251,6 @@
   line-height: 2;
   font-weight: 600;
   font-family: "Hi Melody", cursive;
-  font-size: 25px;
   transition: all 0.5s;
 }
 
@@ -268,6 +269,29 @@
   visibility: hidden;
 }
 
+.show_button:hover {
+  color: tomato;
+}
+
 .show_button {
   transition: all 0.5s;
+}
+
+.middle_line {
+  text-decoration: line-through;
+  color: #666666;
+  transition: all 0.5s;
+  font-size: 25px;
+  line-height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.none {
+  font-size: 25px;
+  line-height: 30px;
+  transition: all 1.1s;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

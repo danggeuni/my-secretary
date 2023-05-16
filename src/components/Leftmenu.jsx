@@ -19,6 +19,7 @@ export default function Leftmenu() {
     showMemo,
     setShowMemo,
     checkMemo,
+    removeMemo,
   } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
@@ -165,7 +166,11 @@ export default function Leftmenu() {
           {copyMemoData.map((item) => (
             <div key={item.id}>
               <li className={!showCate ? styles.memo : styles.hide_memo}>
-                <span>{item.memo}</span>
+                <span
+                  className={item.isChecked ? styles.middle_line : styles.none}
+                >
+                  {item.memo}
+                </span>
                 <div className={styles.memo_button_wrapper}>
                   <button
                     className={
@@ -180,6 +185,7 @@ export default function Leftmenu() {
                     className={
                       !showCate ? styles.show_button : styles.hide_button
                     }
+                    onClick={() => removeMemo(item.id)}
                   >
                     ✘
                   </button>

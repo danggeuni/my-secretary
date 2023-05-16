@@ -448,6 +448,13 @@ const AppProvider = ({ children }) => {
     }, 500);
   };
 
+  // 메모 제거 함수
+  const removeMemo = (targetId) => {
+    setTimeout(() => {
+      memoDispatch({ type: "REMOVEMEMO", targetId });
+    }, 500);
+  };
+
   // 세부 정보 모달 실행 함수
   const launchModal = (item) => {
     setModalIsOpen(!modalIsOpen);
@@ -646,6 +653,9 @@ const AppProvider = ({ children }) => {
         // 메모 확인 id
         checkMemoId,
         setCheckMemoId,
+
+        // 메모 삭제 함수
+        removeMemo,
       }}
     >
       {children}
