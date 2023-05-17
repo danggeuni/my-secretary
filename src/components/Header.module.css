@@ -4,6 +4,7 @@
   box-sizing: border-box;
   height: 44px;
   z-index: 200;
+
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -157,4 +158,22 @@ button {
 
 .search_item:hover {
   background-color: #f3f3f3;
+}
+
+@media (max-width: 480px) {
+  .quick_find {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 10%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .search_input:focus {
+    width: 100%;
+    background-color: #ffffff;
+    color: black;
+    transition: all 0.1s ease-in;
+  }
 }
