@@ -3,15 +3,8 @@
   position: relative;
   box-sizing: border-box;
   height: 44px;
-<<<<<<< Updated upstream
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-=======
   width: 100%;
 
->>>>>>> Stashed changes
   border-bottom: 1px solid transparent;
   background-color: black;
   padding-left: 18px;
@@ -158,8 +151,20 @@ button {
   line-height: 20px;
 
   background-color: white;
+
+  z-index: 9999;
 }
 
 .search_item:hover {
   background-color: #f3f3f3;
+}
+
+@media (max-width: 481px) {
+  .search_list {
+    width: 70%;
+  }
+
+  .search_input:focus {
+    width: 120%;
+  }
 }
