@@ -33,3 +33,11 @@
   background-color: transparent;
   font-size: 20px;
 }
+
+@media (max-width: 481px) {
+  .modalBody {
+    width: 85%;
+    height: 80%;
+    padding: 3%;
+  }
+}

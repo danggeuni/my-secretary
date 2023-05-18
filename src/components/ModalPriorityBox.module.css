@@ -91,3 +91,10 @@
 
   cursor: pointer;
 }
+
+@media (max-width: 481px) {
+  .priority_container {
+    top: -132px;
+    left: -7px;
+  }
+}

@@ -78,7 +78,7 @@ export default function Leftmenu() {
                   </g>
                 </svg>
 
-                <span>오늘</span>
+                <span className={styles.text_today}>오늘</span>
               </div>
               <div className={styles.item_quantity}>{currentData.length}</div>
             </Link>
@@ -100,7 +100,7 @@ export default function Leftmenu() {
                   </g>
                 </svg>
 
-                <span>다음</span>
+                <span className={styles.text_next}>다음</span>
               </div>
               <div className={styles.item_quantity}>{nextData.length}</div>
             </Link>

@@ -3,13 +3,17 @@
   position: relative;
   box-sizing: border-box;
   height: 44px;
+<<<<<<< Updated upstream
   z-index: 200;
   display: flex;
   align-items: center;
   flex-shrink: 0;
+=======
+  width: 100%;
+
+>>>>>>> Stashed changes
   border-bottom: 1px solid transparent;
   background-color: black;
-  transition: height 0.2s ease-in;
   padding-left: 18px;
   padding-right: 16px;
   font-size: 13px;
@@ -27,6 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
 }
 
 .left_menu_toggle {

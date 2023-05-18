@@ -63,3 +63,13 @@ img {
   border: 0;
   vertical-align: middle;
 }
+
+@media (max-width: 481px) {
+  .img_box {
+    height: 280px;
+  }
+
+  .empty_state_message {
+    font-size: 15px;
+  }
+}

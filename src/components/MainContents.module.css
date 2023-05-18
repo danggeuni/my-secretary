@@ -272,3 +272,6 @@
 .onCalendar {
   display: block;
 }
+
+@media (max-width: 481px) {
+}
