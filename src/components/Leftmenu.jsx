@@ -20,6 +20,7 @@ export default function Leftmenu() {
     setShowMemo,
     checkMemo,
     removeMemo,
+    setIsClick,
   } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
@@ -46,7 +47,11 @@ export default function Leftmenu() {
       <div className={styles.left_menu_inner} role={"navigation"}>
         <div className={styles.sidebar_list_item}>
           <div className={styles.single_item_wrapper}>
-            <Link to={"/"} className={styles.item_link}>
+            <Link
+              to={"/"}
+              className={styles.item_link}
+              onClick={() => setIsClick(false)}
+            >
               {/* 오늘 달력 아이콘 */}
               <div className={styles.single_item_align}>
                 <svg
@@ -82,7 +87,11 @@ export default function Leftmenu() {
               </div>
               <div className={styles.item_quantity}>{currentData.length}</div>
             </Link>
-            <Link to={"/next"} className={styles.item_link}>
+            <Link
+              to={"/next"}
+              className={styles.item_link}
+              onClick={() => setIsClick(false)}
+            >
               <div className={styles.single_item_align}>
                 <svg
                   width="24"
