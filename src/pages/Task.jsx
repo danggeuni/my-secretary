@@ -56,6 +56,8 @@ export default function Task() {
     }
   };
 
+  const editTitle = () => {};
+
   return (
     <div className={styles.data_item_content}>
       <div className={styles.task_main_content_container}>
@@ -63,10 +65,13 @@ export default function Task() {
           <div className={styles.task_overview}>
             <div className={styles.task_overview_header}>
               <div className={styles.task_name}>{currentData[0].todo}</div>
+
+              {/* 모달의 상세설명 */}
               <div
                 className={cx(styles.task_desc, {
                   [styles.noneDesc]: !currentDesc,
                 })}
+                onClick={editTitle}
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
