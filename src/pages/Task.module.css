@@ -44,6 +44,8 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
+
+  cursor: pointer;
 }
 
 .task_name {
@@ -302,4 +304,12 @@
   .current_date {
     width: 99%;
   }
+}
+
+.hide_title {
+  display: none;
+}
+
+.hide_edit_title {
+  display: none;
 }

@@ -23,6 +23,8 @@ export default function Task() {
     modalPriority,
     setModalPriority,
     replyData,
+    editTitle,
+    setEditTitle,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -30,6 +32,11 @@ export default function Task() {
   const currentDesc = currentData[0].desc;
   const [modalDate, setModalDate] = useState(new Date(currentData[0].date));
   const localReplyData = [...replyData];
+
+  // 모달 편집 input title 값 state
+  const [editTitleValue, setEditTitleValue] = useState();
+
+  // 모달 편집 input sub 값 state
 
   useEffect(() => {
     setIsOnCalendarInModal(false);
@@ -63,7 +70,12 @@ export default function Task() {
       <div className={styles.task_main_content_container}>
         <div className={styles.field_seperate}>
           <div className={styles.task_overview}>
-            <div className={styles.task_overview_header}>
+            <div
+              className={
+                !editTitle ? styles.task_overview_header : styles.hide_title
+              }
+              onClick={() => setEditTitle(true)}
+            >
               <div className={styles.task_name}>{currentData[0].todo}</div>
 
               {/* 모달의 상세설명 */}
@@ -74,6 +86,16 @@ export default function Task() {
                 onClick={editTitle}
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
+              </div>
+            </div>
+            <div
+              className={editTitle ? styles.edit_title : styles.hide_edit_title}
+            >
+              <div>
+                <input value={1}></input>
+              </div>
+              <div>
+                <input></input>
               </div>
             </div>
             <ul className={styles.reply_list}>

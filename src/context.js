@@ -264,6 +264,9 @@ const AppProvider = ({ children }) => {
   // 메모 확인 id
   const [checkMemoId, setCheckMemoId] = useState(0);
 
+  // 모달 제목 편집 state
+  const [editTitle, setEditTitle] = useState(false);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -666,6 +669,10 @@ const AppProvider = ({ children }) => {
 
         // 메모 삭제 함수
         removeMemo,
+
+        // 모달 제목 편집 state
+        editTitle,
+        setEditTitle,
       }}
     >
       {children}
