@@ -100,10 +100,13 @@ export default function Task() {
               onClick={() => setEditTitle(true)}
             >
               <div className={styles.task_name}>{currentData[0].todo}</div>
+
+              {/* 모달의 상세설명 */}
               <div
                 className={cx(styles.task_desc, {
                   [styles.noneDesc]: !currentDesc,
                 })}
+                onClick={editTitle}
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
