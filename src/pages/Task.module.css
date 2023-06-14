@@ -313,3 +313,85 @@
 .hide_edit_title {
   display: none;
 }
+
+.edit_button {
+  background-color: tomato;
+  border-radius: 5px;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+
+  margin-left: 5px;
+}
+
+.cancel_button {
+  background-color: #e5e5e5;
+  border-radius: 5px;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: black;
+
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+
+  margin-left: 5px;
+}
+
+.edit_button_wrapper {
+  margin-top: 8px;
+  display: flex;
+  justify-content: end;
+}
+
+.edit_title_input {
+  font-size: 20px;
+  font-weight: 800;
+
+  border-width: 0;
+  margin-bottom: 15px;
+}
+
+.edit_title_input:focus {
+  outline: 0;
+}
+
+.edit_desc_input {
+  border-width: 0;
+  margin-bottom: 15px;
+}
+
+.edit_desc_input:focus {
+  outline: 0;
+}
+
+.edit_input_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit_title_input_wrapper {
+  display: flex;
+}
+
+.edit_desc_input {
+  display: flex;
+}
+
+.edit_title {
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.edit_title:focus {
+  outline: #999999;
+}

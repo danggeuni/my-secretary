@@ -25,6 +25,7 @@ export default function Task() {
     replyData,
     editTitle,
     setEditTitle,
+    dispatch,
   } = useGlobalContext();
 
   const copyData = [...data];
@@ -34,7 +35,10 @@ export default function Task() {
   const localReplyData = [...replyData];
 
   // 모달 편집 input title 값 state
-  const [editTitleValue, setEditTitleValue] = useState();
+  const [editTitleValue, setEditTitleValue] = useState(currentData[0].todo);
+
+  // 모달 편집 input desc 값 state
+  const [editDescValue, setEditDescValue] = useState(currentData[0].desc);
 
   // 모달 편집 input sub 값 state
 
@@ -63,6 +67,27 @@ export default function Task() {
     }
   };
 
+  // 제목, 세부내용 수정 함수
+  const editTitleAndDesc = (targetId, todo, desc, date) => {
+    dispatch({
+      type: "EDIT",
+      data: {
+        id: targetId,
+        todo,
+        desc,
+        date,
+      },
+    });
+    setEditTitle(false);
+  };
+
+  // 제목, 세부내용 취소 함수
+  const editCancel = () => {
+    setEditTitle(false);
+    setEditTitleValue(currentData[0].todo);
+    setEditDescValue(currentData[0].desc);
+  };
+
   return (
     <div className={styles.data_item_content}>
       <div className={styles.task_main_content_container}>
@@ -86,12 +111,48 @@ export default function Task() {
             <div
               className={editTitle ? styles.edit_title : styles.hide_edit_title}
             >
-              <div>
-                <input value={1}></input>
+              <div className={styles.edit_title_input_wrapper}>
+                <input
+                  className={styles.edit_title_input}
+                  value={editTitleValue}
+                  onChange={(e) => setEditTitleValue(e.target.value)}
+                ></input>
               </div>
               <div>
-                <input></input>
+                <input
+                  className={styles.edit_desc_input}
+                  value={editDescValue}
+                  placeholder={
+                    currentData[0].desc ? currentData[0].desc : "설명"
+                  }
+                  onChange={(e) => setEditDescValue(e.target.value)}
+                ></input>
               </div>
+            </div>
+            <div className={styles.edit_button_wrapper}>
+              <button
+                className={
+                  editTitle ? styles.cancel_button : styles.hide_edit_title
+                }
+                onClick={editCancel}
+              >
+                취소
+              </button>
+              <button
+                className={
+                  editTitle ? styles.edit_button : styles.hide_edit_title
+                }
+                onClick={() =>
+                  editTitleAndDesc(
+                    currentData[0].id,
+                    editTitleValue,
+                    editDescValue,
+                    currentData[0].date
+                  )
+                }
+              >
+                저장
+              </button>
             </div>
             <ul className={styles.reply_list}>
               {localReplyData.map((item, index) => {
