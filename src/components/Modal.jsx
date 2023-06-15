@@ -4,7 +4,7 @@ import { useGlobalContext } from "../context";
 import { useEffect } from "react";
 
 export default function Modal(props) {
-  const { setModalIsOpen, setReplyComment } = useGlobalContext();
+  const { setModalIsOpen, setReplyComment, setEditTitle } = useGlobalContext();
 
   useEffect(() => {
     const escKeyModalClose = (e) => {
@@ -18,6 +18,7 @@ export default function Modal(props) {
 
   const closeThing = () => {
     setModalIsOpen(false);
+    setEditTitle(false);
     setReplyComment("");
   };
 

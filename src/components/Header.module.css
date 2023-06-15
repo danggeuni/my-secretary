@@ -148,11 +148,8 @@ button {
   box-shadow: 1px 1px 1px 1px #dddddd;
 
   cursor: pointer;
-  line-height: 20px;
 
-  background-color: white;
-
-  z-index: 9999;
+  z-index: 100;
 }
 
 .search_item:hover {

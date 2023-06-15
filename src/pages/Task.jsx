@@ -67,6 +67,16 @@ export default function Task() {
     }
   };
 
+  const editTitleAndDescSubmit = (e) => {
+    e.preventDefault();
+    editTitleAndDesc(
+      currentData[0].id,
+      editTitleValue,
+      editDescValue,
+      currentData[0].date
+    );
+  };
+
   // 제목, 세부내용 수정 함수
   const editTitleAndDesc = (targetId, todo, desc, date) => {
     dispatch({
@@ -106,7 +116,6 @@ export default function Task() {
                 className={cx(styles.task_desc, {
                   [styles.noneDesc]: !currentDesc,
                 })}
-                onClick={editTitle}
               >
                 {currentData[0].desc ? currentData[0].desc : "설명"}
               </div>
@@ -115,21 +124,25 @@ export default function Task() {
               className={editTitle ? styles.edit_title : styles.hide_edit_title}
             >
               <div className={styles.edit_title_input_wrapper}>
-                <input
-                  className={styles.edit_title_input}
-                  value={editTitleValue}
-                  onChange={(e) => setEditTitleValue(e.target.value)}
-                ></input>
+                <form onSubmit={editTitleAndDescSubmit}>
+                  <input
+                    className={styles.edit_title_input}
+                    value={editTitleValue}
+                    onChange={(e) => setEditTitleValue(e.target.value)}
+                  ></input>
+                </form>
               </div>
               <div>
-                <input
-                  className={styles.edit_desc_input}
-                  value={editDescValue}
-                  placeholder={
-                    currentData[0].desc ? currentData[0].desc : "설명"
-                  }
-                  onChange={(e) => setEditDescValue(e.target.value)}
-                ></input>
+                <form onSubmit={editTitleAndDescSubmit}>
+                  <input
+                    className={styles.edit_desc_input}
+                    value={editDescValue}
+                    placeholder={
+                      currentData[0].desc ? currentData[0].desc : "설명"
+                    }
+                    onChange={(e) => setEditDescValue(e.target.value)}
+                  ></input>
+                </form>
               </div>
             </div>
             <div className={styles.edit_button_wrapper}>

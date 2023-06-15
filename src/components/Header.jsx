@@ -91,7 +91,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <div className={styles.search_list}>
+      <div className={search === "" ? null : styles.search_list}>
         {searched.map((item, index) =>
           search === "" ? null : (
             <div
