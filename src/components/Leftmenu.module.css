@@ -72,6 +72,11 @@
   margin-right: 5px;
 }
 
+.item_storage_svg {
+  color: #246fe0;
+  margin-right: 5px;
+}
+
 .item_quantity {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.3);

@@ -4,6 +4,7 @@ import { AppProvider } from "./context";
 
 import Today from "./pages/Today";
 import Next from "./pages/Next";
+import Storage from "./pages/Storage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path={"/"} element={<Today />}></Route>
             <Route path={"/next"} element={<Next />}></Route>
+            <Route path={"/storage"} element={<Storage />}></Route>
           </Routes>
         </div>
       </BrowserRouter>
