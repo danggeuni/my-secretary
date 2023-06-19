@@ -104,8 +104,28 @@ const AppProvider = ({ children }) => {
     }
 
     localStorage.setItem("memo", JSON.stringify(memoState));
-
     return memoState;
+  };
+
+  const storageReducer = (state, action) => {
+    let storageState = [];
+
+    switch (action.type) {
+      case "INIT": {
+        return action.storageData;
+      }
+
+      case "STORAGECREATE": {
+        storageState = [action.storageData, ...state];
+        break;
+      }
+
+      default:
+        return state;
+    }
+
+    localStorage.setItem("wtf", JSON.stringify(storageState));
+    return storageState;
   };
 
   // local 데이터 불러온 후 id순으로 정렬(id값이 높으면 위로 올라오게)
@@ -155,6 +175,10 @@ const AppProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    storageDispatch({ type: "INIT" });
+  }, []);
+
   // 날짜 데이터
   const today = new Date();
   const tomorrow = today.setDate(today.getDate() + 1);
@@ -167,6 +191,9 @@ const AppProvider = ({ children }) => {
 
   // memo dispatch state
   const [memoData, memoDispatch] = useReducer(memoReducer, []);
+
+  // 임시보관함 dispatch state
+  const [storageData, storageDispatch] = useReducer(storageReducer, []);
 
   // 메뉴 클릭 toggle state
   const [isClick, setIsClick] = useState(false);
@@ -673,6 +700,11 @@ const AppProvider = ({ children }) => {
         // 모달 제목 편집 state
         editTitle,
         setEditTitle,
+
+        // 임시 보관함 dispatch 관련애들
+        storageReducer,
+        storageData,
+        storageDispatch,
       }}
     >
       {children}

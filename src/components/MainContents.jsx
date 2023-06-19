@@ -38,6 +38,7 @@ export default function MainContents() {
     setTaskEditor,
     control,
     setControl,
+    storageDispatch,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -92,6 +93,26 @@ export default function MainContents() {
     (item) => new Date(item.date) <= new Date()
   );
 
+  // targetId의 data를 복사하여 전달해준다
+  const transTodoList = (targetId) => {
+    const copyData = [...data];
+    const storageData = copyData.filter((item) => item.id === targetId);
+    const id = storageData[0].id;
+    const todo = storageData[0].todo;
+    const desc = storageData[0].desc;
+    const priority = storageData[0].priority;
+    const date = storageData[0].date;
+
+    storageDispatch({
+      TYPE: "STORAGECREATE",
+      storageData: { id, todo, desc, priority, date },
+    });
+
+    console.log(storageData);
+
+    // removeTodoList(targetId);
+  };
+
   return (
     <>
       <div
@@ -126,7 +147,7 @@ export default function MainContents() {
                     >
                       <button
                         className={styles.task_checkbox}
-                        onClick={() => removeTodoList(item.id)}
+                        onClick={() => transTodoList(item.id)}
                       >
                         <div className={styles.task_checkbox_circle}>
                           <div
