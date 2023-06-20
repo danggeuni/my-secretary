@@ -180,7 +180,7 @@ const AppProvider = ({ children }) => {
     const localTempData = localStorage.getItem("temp");
 
     if (localTempData) {
-      tempDispatch({ type: "INIT", tempData: localTempData });
+      tempDispatch({ type: "INIT", tempData: JSON.parse(localTempData) });
     }
   }, []);
 

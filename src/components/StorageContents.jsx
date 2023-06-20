@@ -26,6 +26,8 @@ export default function StorageContents() {
     }
   }, [tempData]);
 
+  const copyData = [...tempData];
+
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
     const date = new Date();
@@ -72,6 +74,38 @@ export default function StorageContents() {
                     아직 완료된 항목이 없습니다.
                   </div>
                 </div>
+              </div>
+
+              {/* 보관함에 항목이 있을 경우 포스트잇 형식으로 구현합니다. */}
+              <div className={styles.box_container}>
+                {copyData.map((item) => (
+                  <div
+                    key={item.id}
+                    className={
+                      !tempInitScreen ? styles.show_img : styles.hide_img
+                    }
+                  >
+                    <div className={styles.box_wrapper}>
+                      <div
+                        className={
+                          item.priority === "우선 순위 4"
+                            ? styles.priority_4
+                            : item.priority === "우선 순위 3"
+                            ? styles.priority_3
+                            : item.priority === "우선 순위 2"
+                            ? styles.priority_2
+                            : styles.priority_1
+                        }
+                      >
+                        {item.priority}
+                      </div>
+                      <div className={styles.box_body}>
+                        <div className={styles.body_text}>{item.todo}</div>
+                        <div className={styles.body_button}>복구하기</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
