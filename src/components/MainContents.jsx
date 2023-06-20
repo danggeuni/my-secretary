@@ -26,7 +26,6 @@ export default function MainContents() {
     setTaskBtnActive,
     data,
     taskEditor,
-    removeTodoList,
     modalIsOpen,
     addTask,
     launchModal,
@@ -38,7 +37,8 @@ export default function MainContents() {
     setTaskEditor,
     control,
     setControl,
-    storageDispatch,
+    addTempList,
+    removeTodoList,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -96,21 +96,15 @@ export default function MainContents() {
   // targetId의 data를 복사하여 전달해준다
   const transTodoList = (targetId) => {
     const copyData = [...data];
-    const storageData = copyData.filter((item) => item.id === targetId);
-    const id = storageData[0].id;
-    const todo = storageData[0].todo;
-    const desc = storageData[0].desc;
-    const priority = storageData[0].priority;
-    const date = storageData[0].date;
+    const tempData = copyData.filter((item) => item.id === targetId);
+    const id = tempData[0].id;
+    const todo = tempData[0].todo;
+    const desc = tempData[0].desc;
+    const priority = tempData[0].priority;
+    const date = tempData[0].date;
 
-    storageDispatch({
-      TYPE: "STORAGECREATE",
-      storageData: { id, todo, desc, priority, date },
-    });
-
-    console.log(storageData);
-
-    // removeTodoList(targetId);
+    addTempList(id, todo, desc, priority, date);
+    removeTodoList(targetId);
   };
 
   return (

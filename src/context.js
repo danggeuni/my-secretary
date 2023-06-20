@@ -45,6 +45,28 @@ const AppProvider = ({ children }) => {
     return newState;
   };
 
+  // 임시 저장함에 사용될 reducer 입니다.
+  const tempReducer = (state, action) => {
+    let tempState = [];
+
+    switch (action.type) {
+      case "INIT": {
+        return action.tempData;
+      }
+
+      case "CREATE": {
+        tempState = [action.tempData, ...state];
+        break;
+      }
+
+      default:
+        return tempState;
+    }
+
+    localStorage.setItem("temp", JSON.stringify(tempState));
+    return tempState;
+  };
+
   const replyReducer = (state, action) => {
     let replyState = [];
 
@@ -107,27 +129,6 @@ const AppProvider = ({ children }) => {
     return memoState;
   };
 
-  const storageReducer = (state, action) => {
-    let storageState = [];
-
-    switch (action.type) {
-      case "INIT": {
-        return action.storageData;
-      }
-
-      case "STORAGECREATE": {
-        storageState = [action.storageData, ...state];
-        break;
-      }
-
-      default:
-        return state;
-    }
-
-    localStorage.setItem("wtf", JSON.stringify(storageState));
-    return storageState;
-  };
-
   // local 데이터 불러온 후 id순으로 정렬(id값이 높으면 위로 올라오게)
   // local 데이터가 존재할 경우, 마지막 id 값에 + 1 하여 리스트 생성하도록. ditpatch 통해 리스트 구현
   useEffect(() => {
@@ -176,7 +177,11 @@ const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    storageDispatch({ type: "INIT" });
+    const localTempData = localStorage.getItem("temp");
+
+    if (localTempData) {
+      tempDispatch({ type: "INIT", tempData: localTempData });
+    }
   }, []);
 
   // 날짜 데이터
@@ -186,14 +191,14 @@ const AppProvider = ({ children }) => {
   // todo dispatch state
   const [data, dispatch] = useReducer(reducer, []);
 
+  // 임시보관함 dispatch state
+  const [tempData, tempDispatch] = useReducer(tempReducer, []);
+
   // reply dispatch state
   const [replyData, replyDispatch] = useReducer(replyReducer, []);
 
   // memo dispatch state
   const [memoData, memoDispatch] = useReducer(memoReducer, []);
-
-  // 임시보관함 dispatch state
-  const [storageData, storageDispatch] = useReducer(storageReducer, []);
 
   // 메뉴 클릭 toggle state
   const [isClick, setIsClick] = useState(false);
@@ -293,6 +298,9 @@ const AppProvider = ({ children }) => {
 
   // 모달 제목 편집 state
   const [editTitle, setEditTitle] = useState(false);
+
+  // 임시보관함 이미지 표시 state
+  const [tempInitScreen, setTempInitScreen] = useState(false);
 
   // 작업 취소 버튼
   const taskCancelButton = () => {
@@ -407,6 +415,20 @@ const AppProvider = ({ children }) => {
 
     addReplyList(replyComment, nowTime);
     setReplyComment("");
+  };
+
+  // 임시보관함 리스트 생성 함수
+  const addTempList = (id, todo, desc, priority, date) => {
+    tempDispatch({
+      type: "CREATE",
+      tempData: {
+        id,
+        todo,
+        desc,
+        priority,
+        date,
+      },
+    });
   };
 
   // todo 리스트 생성 함수
@@ -701,10 +723,13 @@ const AppProvider = ({ children }) => {
         editTitle,
         setEditTitle,
 
-        // 임시 보관함 dispatch 관련애들
-        storageReducer,
-        storageData,
-        storageDispatch,
+        // 임시보관함 데이터 추가 함수
+        addTempList,
+        tempData,
+
+        // 임시보관함 이미지 표시 state
+        tempInitScreen,
+        setTempInitScreen,
       }}
     >
       {children}

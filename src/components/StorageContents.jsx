@@ -7,60 +7,24 @@ import PriorityBox from "./PriorityBox";
 
 import { useGlobalContext } from "../context";
 import { useEffect } from "react";
-import moment from "moment";
 import SortButton from "./SortButton";
-import TaskAdd from "./TaskAddButton";
-import InitScreen from "./InitScreen";
-import Modal from "./Modal";
-import Task from "../pages/Task";
-import EditorInutField from "./EditorInputFields";
-import DateBox from "./DateBox";
-import EditorFooter from "./EditorFooter";
-import UpdatePopup from "./UpdatePopup";
-import { Calendar } from "react-calendar";
 
 export default function StorageContents() {
-  const {
-    isClick,
-    taskName,
-    setTaskBtnActive,
-    data,
-    addTask,
-    setInitScreen,
-    setTaskAdd,
-    setTaskEditor,
-    control,
-    setControl,
-    initScreen,
-  } = useGlobalContext();
-
-  useEffect(() => {
-    if (taskName.length > 0) {
-      setTaskBtnActive(true);
-    } else {
-      setTaskBtnActive(false);
-    }
-  });
+  const { isClick, tempData, tempInitScreen, setTempInitScreen } =
+    useGlobalContext();
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
-    const copyData = [...data];
-    const currentData = copyData.filter(
-      (item) => new Date(item.date) <= new Date()
-    );
+    const copyData = [...tempData];
 
-    if (currentData) {
-      if (currentData.length === 0) {
-        setInitScreen(true);
-        setTaskAdd(false);
-        setTaskEditor(false);
+    if (copyData) {
+      if (copyData.length === 0) {
+        setTempInitScreen(true);
       } else {
-        setInitScreen(false);
-        setTaskAdd(false);
-        setTaskEditor(false);
+        setTempInitScreen(false);
       }
     }
-  }, [data]);
+  }, [tempData]);
 
   // 요일, 월, 일 표시 함수
   const Nowday = () => {
@@ -93,9 +57,7 @@ export default function StorageContents() {
             <div className={styles.view_content}>
               {/* 초기 화면 구현 (고양이 커피짤) */}
               <div
-                className={cx(styles.empty_state_holder, {
-                  [styles.show_init_holder]: initScreen,
-                })}
+                className={tempInitScreen ? styles.show_img : styles.hide_img}
               >
                 <div className={styles.img_box}>
                   <img
