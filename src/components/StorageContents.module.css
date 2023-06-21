@@ -4,7 +4,7 @@
   flex-direction: column;
 
   margin-left: 306px;
-  height: 641px;
+  height: 700px;
   background-color: #fff;
   transition: opacity 0.25s cubic-bezier(0.4, 0, 0.6, 1);
   position: relative;
@@ -80,6 +80,8 @@
 
 .view_content {
   max-width: 800px;
+  height: 50vh;
+
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -109,7 +111,6 @@
 
 .show_img {
   display: block;
-  width: 100%;
 }
 
 .hide_img {
@@ -147,6 +148,7 @@
 
 .priority_1 {
   background-color: #ff0000;
+  color: white;
 }
 
 .box_wrapper {
@@ -178,7 +180,8 @@
   background-color: #fafafa;
 }
 
-.body_button {
+.body_button,
+.body_delete_button {
   cursor: pointer;
   font-weight: 600;
   color: white;
@@ -189,15 +192,35 @@
 
   width: 150px;
   height: 20%;
-  background-color: #f1b7b2;
 
-  border-bottom-left-radius: 7%;
-  border-bottom-right-radius: 7%;
+  font-size: 13px;
+  border: 1px solid;
+}
+
+.body_button {
+  background-color: #ffcc00;
+  border-bottom-left-radius: 8%;
+}
+
+.body_delete_button {
+  background-color: tomato;
+  border-bottom-right-radius: 8%;
 }
 
 .box_container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-left: 30px;
 
   width: 100%;
+  height: 620px;
+
+  overflow-y: scroll;
+}
+
+.button_seperate {
+  display: flex;
+  height: 200px;
 }

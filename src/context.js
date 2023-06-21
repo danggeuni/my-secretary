@@ -59,6 +59,11 @@ const AppProvider = ({ children }) => {
         break;
       }
 
+      case "REMOVE": {
+        tempState = state.filter((item) => item.id !== action.targetId);
+        break;
+      }
+
       default:
         return tempState;
     }
@@ -730,6 +735,7 @@ const AppProvider = ({ children }) => {
         // 임시보관함 이미지 표시 state
         tempInitScreen,
         setTempInitScreen,
+        tempDispatch,
       }}
     >
       {children}

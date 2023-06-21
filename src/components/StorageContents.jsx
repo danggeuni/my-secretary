@@ -3,15 +3,19 @@
 import styles from "./StorageContents.module.css";
 import cx from "clsx";
 
-import PriorityBox from "./PriorityBox";
-
 import { useGlobalContext } from "../context";
 import { useEffect } from "react";
 import SortButton from "./SortButton";
 
 export default function StorageContents() {
-  const { isClick, tempData, tempInitScreen, setTempInitScreen } =
-    useGlobalContext();
+  const {
+    isClick,
+    tempData,
+    tempInitScreen,
+    setTempInitScreen,
+    tempDispatch,
+    dispatch,
+  } = useGlobalContext();
 
   useEffect(() => {
     // 아이템이 0개일 때, 메인화면 보여주기.
@@ -36,6 +40,24 @@ export default function StorageContents() {
     const week = ["일", "월", "화", "수", "목", "금", "토"];
     const getday = week[date.getDay()];
     return getday + " " + month + "월" + day + "일";
+  };
+
+  // 데이터 복원 함수입니다.
+  const restore = (targetId, todo, desc, priority, date) => {
+    dispatch({
+      type: "CREATE",
+      data: { id: targetId, todo, desc, priority, date },
+    });
+
+    tempDispatch({ type: "REMOVE", targetId });
+  };
+
+  // 테스트 함수입니다.
+  const tempDelete = (targetId, todo, desc, priority, date) => {
+    dispatch({
+      type: "CREATE",
+      data: { id: targetId, todo, desc, priority, date },
+    });
   };
 
   return (
@@ -77,10 +99,14 @@ export default function StorageContents() {
               </div>
 
               {/* 보관함에 항목이 있을 경우 포스트잇 형식으로 구현합니다. */}
-              <div className={styles.box_container}>
-                {copyData.map((item) => (
+              <div
+                className={
+                  !tempInitScreen ? styles.box_container : styles.hide_img
+                }
+              >
+                {copyData.map((item, index) => (
                   <div
-                    key={item.id}
+                    key={index}
                     className={
                       !tempInitScreen ? styles.show_img : styles.hide_img
                     }
@@ -101,7 +127,28 @@ export default function StorageContents() {
                       </div>
                       <div className={styles.box_body}>
                         <div className={styles.body_text}>{item.todo}</div>
-                        <div className={styles.body_button}>복구하기</div>
+                        <div className={styles.button_seperate}>
+                          <div
+                            className={styles.body_button}
+                            onClick={() => restore(item.id)}
+                          >
+                            복구
+                          </div>
+                          <div
+                            className={styles.body_delete_button}
+                            onClick={() =>
+                              tempDelete(
+                                item.id,
+                                item.todo,
+                                item.desc,
+                                item.priority,
+                                item.date
+                              )
+                            }
+                          >
+                            삭제
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
