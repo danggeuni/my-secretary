@@ -149,9 +149,26 @@ export default function MainContents() {
                           ></div>
                         </div>
                       </button>
-                      <div onClick={() => launchModal(item.id)}>
-                        <div className={styles.task_name}>{item.todo}</div>
-                        <div className={styles.task_desc}>{item.desc}</div>
+                      <div
+                        className={styles.info_wrapper}
+                        onClick={() => launchModal(item.id)}
+                      >
+                        <div>
+                          <div className={styles.task_name}>{item.todo}</div>
+                          <div className={styles.task_desc}>
+                            {item.desc.length === 0 ? "설명" : item.desc}
+                          </div>
+                        </div>
+
+                        <div className={styles.task_info}>
+                          <div className={styles.task_date}>
+                            마감기한: {new Date(item.date).getMonth() + 1}월{" "}
+                            {new Date(item.date).getDate()}일
+                          </div>
+                          <div className={styles.task_priority}>
+                            {item.priority}
+                          </div>
+                        </div>
                       </div>
                     </li>
                   ))}

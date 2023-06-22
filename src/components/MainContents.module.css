@@ -153,11 +153,16 @@
   display: list-item;
   text-align: -webkit-match-parent;
   list-style-type: none;
+
+  width: 100%;
 }
 
 .task_list_item {
+  width: 100%;
+
   display: flex;
   align-items: stretch;
+
   position: relative;
   padding: 0;
   cursor: pointer;
@@ -266,4 +271,26 @@
 }
 
 @media (max-width: 481px) {
+}
+
+.info_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task_info {
+  display: flex;
+  justify-content: end;
+}
+
+.task_priority {
+  margin-right: 10px;
+  color: #666666;
+}
+
+.task_date {
+  margin-right: 10px;
+  color: #666666;
 }

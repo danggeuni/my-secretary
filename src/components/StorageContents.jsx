@@ -49,15 +49,14 @@ export default function StorageContents() {
       data: { id: targetId, todo, desc, priority, date },
     });
 
-    tempDispatch({ type: "REMOVE", targetId });
+    setTimeout(tempDispatch({ type: "REMOVE", targetId }), 50000);
   };
 
-  // 테스트 함수입니다.
-  const tempDelete = (targetId, todo, desc, priority, date) => {
-    dispatch({
-      type: "CREATE",
-      data: { id: targetId, todo, desc, priority, date },
-    });
+  // 완전히 데이터를 날려버리지요
+  const tempDelete = (targetId) => {
+    if (window.confirm("완전히 삭제할까요?")) {
+      tempDispatch({ type: "REMOVE", targetId });
+    }
   };
 
   return (
@@ -130,14 +129,8 @@ export default function StorageContents() {
                         <div className={styles.button_seperate}>
                           <div
                             className={styles.body_button}
-                            onClick={() => restore(item.id)}
-                          >
-                            복구
-                          </div>
-                          <div
-                            className={styles.body_delete_button}
                             onClick={() =>
-                              tempDelete(
+                              restore(
                                 item.id,
                                 item.todo,
                                 item.desc,
@@ -145,6 +138,12 @@ export default function StorageContents() {
                                 item.date
                               )
                             }
+                          >
+                            복구
+                          </div>
+                          <div
+                            className={styles.body_delete_button}
+                            onClick={() => tempDelete(item.id)}
                           >
                             삭제
                           </div>

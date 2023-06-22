@@ -6,11 +6,14 @@ import cx from "clsx";
 import { Link } from "react-router-dom";
 
 import { useGlobalContext } from "../context";
+import { useEffect } from "react";
 
 export default function Header() {
   const { btnClick, data, search, setSearch, launchModal } = useGlobalContext();
 
   const searchData = [...data];
+
+  useEffect(() => {}, [data]);
 
   const searched = searchData.filter((item) =>
     item.todo.toLowerCase().includes(search)
