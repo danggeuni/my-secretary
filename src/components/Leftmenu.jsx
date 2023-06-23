@@ -21,6 +21,7 @@ export default function Leftmenu() {
     checkMemo,
     removeMemo,
     setIsClick,
+    tempData,
   } = useGlobalContext();
 
   // 오늘 날짜 구하고 svg에 적용
@@ -138,7 +139,7 @@ export default function Leftmenu() {
 
                 <span className={styles.text_next}>보관함</span>
               </div>
-              <div className={styles.item_quantity}>{nextData.length}</div>
+              <div className={styles.item_quantity}>{tempData.length}</div>
             </Link>
           </div>
         </div>

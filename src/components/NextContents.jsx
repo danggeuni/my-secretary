@@ -40,6 +40,7 @@ export default function NextContents() {
     setNextCalendar,
     setIsOnCalendar,
     nextAddTask,
+    addTempList,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -86,6 +87,20 @@ export default function NextContents() {
     (item) => new Date(item.date) > new Date()
   );
 
+  // targetId의 data를 복사하여 전달해준다
+  const transTodoList = (targetId) => {
+    const copyData = [...data];
+    const tempData = copyData.filter((item) => item.id === targetId);
+    const id = tempData[0].id;
+    const todo = tempData[0].todo;
+    const desc = tempData[0].desc;
+    const priority = tempData[0].priority;
+    const date = tempData[0].date;
+
+    addTempList(id, todo, desc, priority, date);
+    removeTodoList(targetId);
+  };
+
   return (
     <>
       <div
@@ -120,7 +135,7 @@ export default function NextContents() {
                     >
                       <button
                         className={styles.task_checkbox}
-                        onClick={() => removeTodoList(item.id)}
+                        onClick={() => transTodoList(item.id)}
                       >
                         <div className={styles.task_checkbox_circle}>
                           <div
@@ -128,9 +143,26 @@ export default function NextContents() {
                           ></div>
                         </div>
                       </button>
-                      <div onClick={() => launchModal(item.id)}>
-                        <div className={styles.task_name}>{item.todo}</div>
-                        <div className={styles.task_desc}>{item.desc}</div>
+                      <div
+                        className={styles.info_wrapper}
+                        onClick={() => launchModal(item.id)}
+                      >
+                        <div>
+                          <div className={styles.task_name}>{item.todo}</div>
+                          <div className={styles.task_desc}>
+                            {item.desc.length === 0 ? "설명" : item.desc}
+                          </div>
+                        </div>
+
+                        <div className={styles.task_info}>
+                          <div className={styles.task_date}>
+                            마감기한: {new Date(item.date).getMonth() + 1}월{" "}
+                            {new Date(item.date).getDate()}일
+                          </div>
+                          <div className={styles.task_priority}>
+                            {item.priority}
+                          </div>
+                        </div>
                       </div>
                     </li>
                   ))}

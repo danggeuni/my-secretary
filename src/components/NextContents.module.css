@@ -264,3 +264,25 @@
 .onCalendar {
   display: block;
 }
+
+.info_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.task_info {
+  display: flex;
+  justify-content: end;
+}
+
+.task_priority {
+  margin-right: 10px;
+  color: #666666;
+}
+
+.task_date {
+  margin-right: 10px;
+  color: #666666;
+}
