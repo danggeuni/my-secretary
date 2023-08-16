@@ -9,6 +9,7 @@
     "mongoose": "^7.4.2"
   },
   "devDependencies": {
+    "concurrently": "^8.2.0",
     "nodemon": "^3.0.1"
   },
   "name": "my-secretary",
@@ -16,7 +17,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

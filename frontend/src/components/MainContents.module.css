@@ -282,7 +282,7 @@
 
 .task_info {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .task_priority {

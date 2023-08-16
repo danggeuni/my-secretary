@@ -5,6 +5,8 @@ import { AppProvider } from "./context";
 import Today from "./pages/Today";
 import Next from "./pages/Next";
 import Storage from "./pages/Storage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route path={"/"} element={<Today />}></Route>
             <Route path={"/next"} element={<Next />}></Route>
             <Route path={"/storage"} element={<Storage />}></Route>
+            <Route path={"/login"} element={<Login />}></Route>
+            <Route path={"/register"} element={<Register />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

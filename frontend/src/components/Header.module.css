@@ -16,7 +16,7 @@
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-left: 5px;
 }
 
@@ -154,6 +154,39 @@ button {
 
 .search_item:hover {
   background-color: #f3f3f3;
+}
+
+.log_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+}
+
+.is_login {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+
+  margin-right: 4%;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.register {
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  margin-right: 3%;
+
+  cursor: pointer;
 }
 
 @media (max-width: 481px) {

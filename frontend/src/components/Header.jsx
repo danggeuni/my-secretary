@@ -26,7 +26,7 @@ export default function Header() {
         {/* 상단 메뉴의 좌측 */}
         <div className={styles.left_control}>
           <div>
-            {/* 전체메뉴 버튼 및 아이콘 */}
+            {/* 메뉴버튼 및 아이콘 */}
             <button
               className={cx(`${styles.left_menu_toggle} ${styles.top_bar_btn}`)}
               type={"button"}
@@ -92,6 +92,11 @@ export default function Header() {
               ></input>
             </div>
           </div>
+        </div>
+        {/* 우측 로그인/등록 메뉴 */}
+        <div className={styles.log_info}>
+          <div className={styles.is_login}>로그인</div>
+          <div className={styles.register}>등록</div>
         </div>
       </div>
       <div className={search === "" ? null : styles.search_list}>
