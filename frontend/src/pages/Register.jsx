@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./Login.module.css";
+import axios from "axios";
 
 function Login() {
+  const API_URL = "http://localhost:5000/api/users/";
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,11 +33,34 @@ function Login() {
     }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const register = async (userData) => {
+    try {
+      const response = await axios.post(API_URL, userData);
+
+      if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+
+      return response.data;
+    } catch (error) {}
   };
 
-  const register = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      toast.error("비밀번호가 다릅니다.");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+
+      register(userData);
+    }
+  };
+
+  const goregister = () => {
     navigate("/register");
   };
 
@@ -56,7 +83,7 @@ function Login() {
               </h1>
             </div>
             <div className={styles.space}></div>
-            <div className={styles.register} onClick={register}>
+            <div className={styles.register} onClick={goregister}>
               <h1>
                 <FaUser /> Register
               </h1>
