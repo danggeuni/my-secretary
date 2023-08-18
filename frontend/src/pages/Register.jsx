@@ -30,9 +30,7 @@ function Register() {
     if (isSuccess) {
       navigate("/");
     }
-
-    reset();
-  }, [isLoading, isError, isSuccess]);
+  }, [isSuccess]);
 
   useEffect(() => {
     const localuser = localStorage.getItem("user");
@@ -62,19 +60,14 @@ function Register() {
   };
 
   const register = async (userData) => {
-    setIsLoading(true);
-
     try {
       const response = await axios.post(API_URL, userData);
 
       if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        success();
       }
-
-      return response.data;
     } catch (error) {}
-
-    success();
   };
 
   const onSubmit = (e) => {
@@ -91,6 +84,8 @@ function Register() {
 
       register(userData);
     }
+
+    reset();
   };
 
   const goregister = () => {

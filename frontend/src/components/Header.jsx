@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 export default function Header() {
   const { btnClick, data, search, setSearch, launchModal } = useGlobalContext();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const searchData = [...data];
 
@@ -18,6 +19,10 @@ export default function Header() {
   const searched = searchData.filter((item) =>
     item.todo.toLowerCase().includes(search)
   );
+
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
 
   return (
     <header className={styles.top_bar}>
@@ -95,8 +100,10 @@ export default function Header() {
         </div>
         {/* 우측 로그인/등록 메뉴 */}
         <div className={styles.log_info}>
-          <div className={styles.is_login}>로그인</div>
-          <div className={styles.register}>등록</div>
+          <div className={styles.user_name}>{user.name}</div>
+          <div className={styles.logout} onClick={logout}>
+            로그아웃
+          </div>
         </div>
       </div>
       <div className={search === "" ? null : styles.search_list}>

@@ -165,19 +165,17 @@ button {
   width: 100%;
 }
 
-.is_login {
+.user_name {
   color: white;
   font-size: 15px;
   font-weight: 600;
 
-  margin-right: 4%;
-
   white-space: nowrap;
 
-  cursor: pointer;
+  margin-right: 3%;
 }
 
-.register {
+.logout {
   color: white;
   font-size: 15px;
   font-weight: 600;
