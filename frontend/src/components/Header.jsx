@@ -99,12 +99,16 @@ export default function Header() {
           </div>
         </div>
         {/* 우측 로그인/등록 메뉴 */}
-        <div className={styles.log_info}>
-          <div className={styles.user_name}>{user.name}</div>
-          <div className={styles.logout} onClick={logout}>
-            로그아웃
-          </div>
-        </div>
+        <>
+          {user ? (
+            <div className={styles.log_info}>
+              <div className={styles.user_name}>{user.name}</div>
+              <div className={styles.logout} onClick={logout}>
+                로그아웃
+              </div>
+            </div>
+          ) : null}
+        </>
       </div>
       <div className={search === "" ? null : styles.search_list}>
         {searched.map((item, index) =>
