@@ -2,10 +2,45 @@ import { useState, useEffect } from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useGlobalContext } from "../context";
+import Spinner from "../components/Spinner";
 import styles from "./Login.module.css";
 import axios from "axios";
 
-function Login() {
+function Register() {
+  // const { isLoading, setIsLoading } = useGlobalContext();
+
+  const [isError, setIsError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const success = () => {
+    setIsError(false);
+    setIsLoading(false);
+    setIsSuccess(true);
+  };
+
+  const reset = () => {
+    setIsLoading(false);
+    setIsError(false);
+    setIsSuccess(false);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+
+    reset();
+  }, [isLoading, isError, isSuccess]);
+
+  useEffect(() => {
+    const localuser = localStorage.getItem("user");
+    if (localuser) {
+      navigate("/");
+    }
+  }, []);
+
   const API_URL = "http://localhost:5000/api/users/";
 
   const [formData, setFormData] = useState({
@@ -19,13 +54,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const localuser = localStorage.getItem("user");
-    if (localuser) {
-      navigate("/");
-    }
-  });
-
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -34,6 +62,8 @@ function Login() {
   };
 
   const register = async (userData) => {
+    setIsLoading(true);
+
     try {
       const response = await axios.post(API_URL, userData);
 
@@ -43,10 +73,13 @@ function Login() {
 
       return response.data;
     } catch (error) {}
+
+    success();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     if (password !== password2) {
       toast.error("비밀번호가 다릅니다.");
     } else {
@@ -67,6 +100,10 @@ function Login() {
   const login = () => {
     navigate("/login");
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -156,4 +193,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

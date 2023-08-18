@@ -11,6 +11,8 @@ export default function Today() {
     const localuser = localStorage.getItem("user");
     if (!localuser) {
       navigate("/login");
+    } else {
+      navigate("/");
     }
   });
 

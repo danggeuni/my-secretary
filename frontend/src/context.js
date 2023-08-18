@@ -307,6 +307,9 @@ const AppProvider = ({ children }) => {
   // 임시보관함 이미지 표시 state
   const [tempInitScreen, setTempInitScreen] = useState(false);
 
+  // 로딩 중이면 스피너 돌아가는 state
+  const [isLoading, setIsLoading] = useState(false);
+
   // 작업 취소 버튼
   const taskCancelButton = () => {
     if (data.length === 0) {
@@ -736,6 +739,10 @@ const AppProvider = ({ children }) => {
         tempInitScreen,
         setTempInitScreen,
         tempDispatch,
+
+        // 로딩 중이면 스피너 돌아가는 state
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
