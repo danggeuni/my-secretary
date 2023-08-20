@@ -2,12 +2,19 @@ const asyncHandler = require("express-async-handler");
 
 const User = require("../model/userModel");
 const Goal = require("../model/goalModel");
+const Reply = require("../model/replyModel");
 
 // @desc    Get goals
 // @route   GET /api/goals
 // @access  Private
 const getGoals = asyncHandler(async (req, res) => {
   const goals = await Goal.find({ user: req.user.id });
+  // const replies = await Reply.find({ goals: goals });
+
+  // const result = {
+  //   goals: goals,
+  //   replies: replies,
+  // };
 
   res.status(200).json(goals);
 });

@@ -8,11 +8,8 @@ import styles from "./Login.module.css";
 import axios from "axios";
 
 function Register() {
-  // const { isLoading, setIsLoading } = useGlobalContext();
-
-  const [isError, setIsError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { isLoading, setIsLoading, isSuccess, setIsSuccess, setIsError } =
+    useGlobalContext();
 
   const success = () => {
     setIsError(false);
@@ -26,18 +23,17 @@ function Register() {
     setIsSuccess(false);
   };
 
+  const error1 = () => {
+    setIsLoading(false);
+    setIsError(true);
+    setIsSuccess(false);
+  };
+
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
     }
   }, [isSuccess]);
-
-  useEffect(() => {
-    const localuser = localStorage.getItem("user");
-    if (localuser) {
-      navigate("/");
-    }
-  }, []);
 
   const API_URL = "http://localhost:5000/api/users/";
 
@@ -67,7 +63,10 @@ function Register() {
         localStorage.setItem("user", JSON.stringify(response.data));
         success();
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      error1();
+    }
   };
 
   const onSubmit = (e) => {

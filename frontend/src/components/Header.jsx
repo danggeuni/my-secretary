@@ -6,15 +6,13 @@ import cx from "clsx";
 import { Link } from "react-router-dom";
 
 import { useGlobalContext } from "../context";
-import { useEffect } from "react";
 
 export default function Header() {
-  const { btnClick, data, search, setSearch, launchModal } = useGlobalContext();
+  const { btnClick, data, search, setSearch, launchModal, setIsSuccess } =
+    useGlobalContext();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const searchData = [...data];
-
-  useEffect(() => {}, [data]);
 
   const searched = searchData.filter((item) =>
     item.todo.toLowerCase().includes(search)
@@ -22,6 +20,7 @@ export default function Header() {
 
   const logout = () => {
     localStorage.removeItem("user");
+    setIsSuccess(false);
   };
 
   return (

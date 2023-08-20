@@ -3,8 +3,10 @@ import Header from "../components/Header";
 import Leftmenu from "../components/Leftmenu";
 import MainContents from "../components/MainContents";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 export default function Today() {
+  const { isSuccess } = useGlobalContext();
   const navigate = useNavigate();
   // local에 user 정보가 없을 경우 login 페이지로 이동합니다.
   useEffect(() => {
@@ -12,7 +14,7 @@ export default function Today() {
     if (!localuser) {
       navigate("/login");
     }
-  });
+  }, [isSuccess]);
 
   return (
     <div>
