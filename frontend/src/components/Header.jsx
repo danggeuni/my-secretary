@@ -4,8 +4,9 @@ import styles from "./Header.module.css";
 import cx from "clsx";
 
 import { Link } from "react-router-dom";
-
 import { useGlobalContext } from "../context";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { btnClick, data, search, setSearch, launchModal, setIsSuccess } =
@@ -14,13 +15,24 @@ export default function Header() {
 
   const searchData = [...data];
 
+  const navigate = useNavigate();
   const searched = searchData.filter((item) =>
     item.todo.toLowerCase().includes(search)
   );
 
+  const [logoutState, setLogoutState] = useState(false);
+
+  useEffect(() => {
+    const localuser = localStorage.getItem("user");
+    if (!localuser) {
+      navigate("/login");
+    }
+    setLogoutState(false);
+  }, [logoutState, setLogoutState]);
+
   const logout = () => {
     localStorage.removeItem("user");
-    setIsSuccess(false);
+    setLogoutState(true);
   };
 
   return (

@@ -20,7 +20,7 @@ function Login() {
     if (localuser) {
       navigate("/");
     }
-  });
+  }, [formData, setFormData]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -35,12 +35,13 @@ function Login() {
     try {
       const response = await axios.post(API_URL, userData);
       if (response.data) {
-        console.log(response.data);
         localStorage.setItem("user", JSON.stringify(response.data));
       }
     } catch (error) {
       console.log(error);
       toast.error("계정 정보를 확인해 주세요.");
+    } finally {
+      setFormData({ email: "", password: "" });
     }
   };
 

@@ -67,6 +67,13 @@ function Register() {
       console.log(error);
       toast.error("이미 계정이 존재합니다.");
       error1();
+    } finally {
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+      });
     }
   };
 
