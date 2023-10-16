@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./Login.module.css";
+import axios from "axios";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -27,8 +29,24 @@ function Login() {
     }));
   };
 
+  const loginFunc = async (userData) => {
+    const API_URL = "http://localhost:5000/api/users/login/";
+
+    try {
+      const response = await axios.post(API_URL, userData);
+      if (response.data) {
+        console.log(response.data);
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("계정 정보를 확인해 주세요.");
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+    loginFunc(formData);
   };
 
   const register = () => {
