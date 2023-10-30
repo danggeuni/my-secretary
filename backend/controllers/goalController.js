@@ -9,13 +9,6 @@ const Reply = require("../model/replyModel");
 // @access  Private
 const getGoals = asyncHandler(async (req, res) => {
   const goals = await Goal.find({ user: req.user.id });
-  // const replies = await Reply.find({ goals: goals });
-
-  // const result = {
-  //   goals: goals,
-  //   replies: replies,
-  // };
-
   res.status(200).json(goals);
 });
 
@@ -23,8 +16,22 @@ const getGoals = asyncHandler(async (req, res) => {
 // @route   POST /api/goals
 // @access  Private
 const setGoal = asyncHandler(async (req, res) => {
+  if (!req.body.todo) {
+    res.status(400);
+    throw new Error("투두가 없자나 ㅄ아");
+  }
+  if (!req.body.priority) {
+    res.status(400);
+    throw new Error("우선순위가 없자나 ㅄ아");
+  }
+  // if (!req.body.dueDate) {
+  //   res.status(400);
+  //   throw new Error("기한이 없자나 ㅄ아");
+  // }
+
   const goal = await Goal.create({
-    text: req.body.text,
+    todo: req.body.todo,
+    priority: req.body.priority,
     user: req.user.id,
   });
 

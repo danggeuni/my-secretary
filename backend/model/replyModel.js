@@ -7,7 +7,7 @@ const replySchema = mongoose.Schema(
       required: true,
       ref: "Goal",
     },
-    contents: {
+    reply: {
       type: String,
       required: [true, "Please add a text value"],
     },

@@ -7,6 +7,14 @@ const goalSchema = mongoose.Schema(
       type: String,
       required: [true, "Please add a text value"],
     },
+    priority: {
+      type: Number,
+      required: [true, "Please add a text value"],
+    },
+    // dueDate: {
+    //   type: Object,
+    //   required: [false, "Please add a text value"],
+    // },
   },
   {
     timestamps: true,
