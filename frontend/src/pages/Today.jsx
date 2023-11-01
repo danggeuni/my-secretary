@@ -9,17 +9,20 @@ import { toast } from "react-toastify";
 export default function Today() {
   const navigate = useNavigate();
 
-  const getUserData = localStorage.getItem("user");
-  const userData = JSON.parse(getUserData);
-  const token = userData.token;
+  const [getToken, setGetToken] = useState();
 
-  // local에 user 정보가 없을 경우 login 페이지로 이동합니다.
   useEffect(() => {
-    const localuser = localStorage.getItem("user");
-    if (!localuser) {
+    const getUserData = localStorage.getItem("user");
+    if (getUserData) {
+      const userData = JSON.parse(getUserData);
+      const userToken = userData.token;
+      setGetToken(userToken);
+    }
+
+    if (!getUserData) {
       navigate("/login");
     }
-  });
+  }, [getToken]);
 
   const [todoForm, setTodoForm] = useState({
     todo: "",
@@ -41,7 +44,7 @@ export default function Today() {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${getToken}`,
     },
   };
 
@@ -50,7 +53,7 @@ export default function Today() {
     try {
       const response = await axios.post(API_URL, todoData, config);
       if (response.data) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        // localStorage.setItem("user", JSON.stringify(response.data));
       }
     } catch (error) {
       console.error(error);

@@ -18,7 +18,7 @@ const getGoals = asyncHandler(async (req, res) => {
 const setGoal = asyncHandler(async (req, res) => {
   if (!req.body.todo) {
     res.status(400);
-    throw new Error("투두가 없자나 ㅄ아");
+    throw new Error("todo가 비어있습니다.");
   }
   if (!req.body.priority) {
     res.status(400);
