@@ -12,10 +12,12 @@ connectDB();
 const app = express();
 app.use(cors());
 
+// json의 자동화
 app.use(express.json());
+// req는 urlencoded로 받도록 하자
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/goals", require("./routes/goalRoutes"));
+// 사용할 모델의 경로를 지정해주자
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/todos", require("./routes/todoRoutes"));
 app.use("/api/comments", require("./routes/commentRoutes"));

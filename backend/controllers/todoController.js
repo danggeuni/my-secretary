@@ -1,18 +1,11 @@
 const asyncHandler = require("express-async-handler");
 
 const User = require("../model/userModel");
-// const Todo = require("../model/goalModel");
 const Todo = require("../model/todoModel");
-const Reply = require("../model/replyModel");
 
 // @desc    Get todos
 // @route   GET /api/todos
 // @access  Private
-const getGoals = asyncHandler(async (req, res) => {
-  const goals = await Todo.find({ user: req.user.id });
-  res.status(200).json(goals);
-});
-
 const getTodos = asyncHandler(async (req, res) => {
   const todos = await Todo.find({ user: req.user.id });
   res.status(200).json(todos);
@@ -32,10 +25,10 @@ const setTodo = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("priority가 비어있습니다.");
   }
-  // if (!req.body.dueDate) {
-  //   res.status(400);
-  //   throw new Error("dueDate가 비어있습니다.");
-  // }
+  if (!req.body.dueDate) {
+    res.status(400);
+    throw new Error("dueDate가 비어있습니다.");
+  }
 
   const todo = await Todo.create({
     todo: req.body.todo,

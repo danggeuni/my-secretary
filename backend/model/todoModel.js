@@ -14,10 +14,6 @@ const todoSchema = mongoose.Schema(
     dueDate: {
       type: Date,
     },
-    // dueDate: {
-    //   type: Object,
-    //   required: [false, "Please add a text value"],
-    // },
   },
   {
     timestamps: true,
