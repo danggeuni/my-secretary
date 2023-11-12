@@ -104,9 +104,7 @@ const deleteComment = asyncHandler(async (req, res) => {
     throw new Error("User not authorized");
   }
 
-  console.log(req.params.id);
-
-  await Comment.findOneAndDelete(req.params.id);
+  await Comment.findOneAndDelete({ _id: req.params.id });
 
   res.status(200).json({ id: req.params.id });
 });

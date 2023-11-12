@@ -11,17 +11,41 @@ export default function Today() {
 
   const [getToken, setGetToken] = useState();
 
+  const config = {
+    headers: {
+      Authorization: `Bearer ${getToken}`,
+    },
+  };
+
   useEffect(() => {
     const getUserData = localStorage.getItem("user");
     if (getUserData) {
       const userData = JSON.parse(getUserData);
       const userToken = userData.token;
       setGetToken(userToken);
+
+      localStorage.setItem("token", `${getToken}`);
     }
 
     if (!getUserData) {
       navigate("/login");
     }
+
+    setTimeout(() => {
+      const token = localStorage.getItem("token");
+
+      axios
+        .get("/api/todos", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            localStorage.setItem("data", JSON.stringify(response.data));
+          }
+        });
+    }, 1);
   }, [getToken]);
 
   const [todoForm, setTodoForm] = useState({
@@ -42,12 +66,9 @@ export default function Today() {
     todoFunc(todoForm);
   };
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${getToken}`,
-    },
-  };
+  const localData = localStorage.getItem("data");
 
+  // todo api 전달 함수
   const todoFunc = async (todoData) => {
     const API_URL = "/api/goals/";
     try {
@@ -60,6 +81,9 @@ export default function Today() {
       toast.error("잘못된 접근입니다.");
     }
   };
+
+  const data = localStorage.getItem("data");
+  const dataArray = JSON.parse(data);
 
   return (
     <div>
@@ -84,6 +108,11 @@ export default function Today() {
 
         <button>테스트버튼</button>
       </form>
+      <div>
+        {dataArray.map((item, index) => {
+          return <div key={index}>{item.todo}</div>;
+        })}
+      </div>
     </div>
   );
 }
